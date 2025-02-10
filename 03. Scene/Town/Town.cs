@@ -1,11 +1,11 @@
-﻿using ConsoleApp2._04._Manager;
+﻿using TextRPG_Maple._04._Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace TextRPG_Maple
 {
     internal class TownScene : IScene
     {
@@ -28,14 +28,16 @@ namespace ConsoleApp1
                 "1.상태 보기\n" +
                 "2.인벤토리\n" +
                 "3.상점\n" +
-                "4.스킬\n"
+                "4.휴식\n" +
+                "5.던전\n" +
+                "6.스킬\n" // 인벤토리 구현 후 인벤토리에서 관리
                 );
         }
 
         public void Update()
         {
             // 조건에 맞는 올바른 키를 입력할때 까지 반복
-            int input = InputManager.Instance.GetInput(1, 4);
+            int input = InputManager.Instance.GetInput(1, 6);
 
             //입력에 따른 실행
             switch (input)
@@ -50,7 +52,13 @@ namespace ConsoleApp1
                     //ShopScreen();
                     break;
                 case 4:
-                    //SkillScene();
+                    //RestScene();
+                    break;
+                case 5:
+                    SceneManager.Instance.EnterScene(SceneType.Dungeon);
+                    break;
+                case 6:
+                    SceneManager.Instance.EnterScene(SceneType.SkillScene);
                     break;
             }
         }

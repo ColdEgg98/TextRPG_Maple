@@ -1,20 +1,18 @@
-﻿using ConsoleApp1;
-using ConsoleApp2._04._Manager;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TextRPG_Maple._05._Usable.Skill;
+﻿using TextRPG_Maple._04._Manager;
 
 namespace TextRPG_Maple._03._Scene.SkillScene
 {
-    internal class SkillScene
+    internal class SkillScene : IScene
     {
         Player player;
 
         public void Enter()
         {
+            if (GameManager.player == null)
+            {
+                throw new InvalidOperationException("Player is not initialized.");
+            }
+
             player = GameManager.player;
         }
 
@@ -35,9 +33,12 @@ namespace TextRPG_Maple._03._Scene.SkillScene
             Console.WriteLine();
             Console.WriteLine("[스킬 목록]");
 
-            for (int i = 0; i < player.Skills.Count; i++)
+            if (player.Skills.Count == 0 || player.Skills == null)
+                InputManager.Instance.WriteLineColor("배운 스킬이 없습니다...", ConsoleColor.DarkGray);
+            else
             {
-                Console.WriteLine(player.Skills[i].UsableDisplay());
+                for (int i = 0; i < player.Skills.Count; i++)
+                    Console.WriteLine(player.Skills[i].UsableDisplay());
             }
 
             Console.WriteLine();
@@ -55,13 +56,12 @@ namespace TextRPG_Maple._03._Scene.SkillScene
             switch (input)
             {
                 case 1:
-                    SceneManager.Instance.EnterScene(SceneType.EquipSkillScene);
+                    //SceneManager.Instance.EnterScene(SceneType.EquipSkillScene);
                     break;
                 case 2:
-                    SceneManager.Instance.ExitScene();
+                    //SceneManager.Instance.ExitScene();
                     break;
                 case 0:
-                    SceneManager.Instance.ExitScene();
                     SceneManager.Instance.ExitScene();
                     break;
             }

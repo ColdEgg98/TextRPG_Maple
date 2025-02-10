@@ -1,11 +1,4 @@
-﻿using ConsoleApp1;
-using ConsoleApp2._04._Manager;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TextRPG_Maple._04._Manager;
 
 namespace TextRPG_Maple._05._Usable.Skill
 {

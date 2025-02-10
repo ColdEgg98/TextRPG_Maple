@@ -1,11 +1,4 @@
-﻿using ConsoleApp1;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TextRPG_Maple._05._Usable
+﻿namespace TextRPG_Maple._05._Usable
 {
     //enum ItemType
     //{
@@ -32,7 +25,7 @@ namespace TextRPG_Maple._05._Usable
             IsOwned = false;
         }
 
-        public string UsableDisplay()
+        public virtual string UsableDisplay()
         {
             string str = IsEquip ? "[E]" : "";
             str += $"{Name} | {GetTypeString()} | {Descrip}";

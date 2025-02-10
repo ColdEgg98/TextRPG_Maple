@@ -1,23 +1,13 @@
-﻿using ConsoleApp2._04._Manager;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Security;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using TextRPG_Maple._04._Manager;
 using TextRPG_Maple._05._Usable.Skill;
-using static System.Net.Mime.MediaTypeNames;
 
-namespace ConsoleApp1
+namespace TextRPG_Maple
 {
     internal class Player : GameObject
     {
         //public List<Item> Items { get; set; }
         public List<Skill> Skills { get; set; }
-        public string Class { get; set; } = "";
+        public string Class { get; set; }
         public bool IsAlive => Stat.Hp > 0;
         public int requiredExp { get; set; }
         public int EquipAtk { get; set; }
