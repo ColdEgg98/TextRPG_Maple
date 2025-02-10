@@ -9,7 +9,7 @@ namespace ConsoleApp1
         {
             // 모든 씬을 미리 생성하여 Dictionary에 저장
             var scenes = new Dictionary<SceneType, IScene>
-            {
+                {
                 { SceneType.Town, new TownScene() },
                 { SceneType.Store, new StoreScene() },
                 { SceneType.Start, new StartScene() },

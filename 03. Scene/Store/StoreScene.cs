@@ -21,13 +21,13 @@ namespace ConsoleApp1
         }
         private Pase pase = Pase.Intro;
         Player player;
-        private List<Item> itemList;
-        private List<Item> inventoryList;
+        private List<Item> itemList = new List<Item>();
+        private List<Item> inventoryList = new List<Item>();
         int nowMoney = 999;
         
         public void Enter()
         {
-            itemList = new List<Item>();
+            // player = 
             itemList = GetItemList();
             inventoryList = GetInvetoryList();
         }

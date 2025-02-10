@@ -10,7 +10,7 @@ namespace ConsoleApp1
 {
     internal class TitleScene : IScene
     {
-        private bool hasData = true;
+        private bool hasData = false;
         public void Enter()
         {
             // TODO : 데이터가 있는지 확인

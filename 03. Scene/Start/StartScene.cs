@@ -51,8 +51,8 @@ namespace ConsoleApp1
             #endregion
             if (endJobSetting)
             {
-                Console.WriteLine("환영합니다.");
-                Console.WriteLine("당신의 이름은 " + userName + "이고 직업은 " + userJob + "입니다.");
+                Console.WriteLine("환영합니다." + userName + "님");
+                Console.WriteLine("직업 : " + userJob + "로 시작합니다.");
             }
         }
 
