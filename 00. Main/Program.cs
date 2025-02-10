@@ -1,6 +1,7 @@
 ﻿using TextRPG_Maple._04._Manager;
 using System.ComponentModel;
 using System.Threading.Channels;
+using TextRPG_Maple._03._Scene.SkillScene;
 
 namespace TextRPG_Maple
 {
@@ -8,6 +9,8 @@ namespace TextRPG_Maple
     {
         static void Main(string[] args)
         {
+            GameManager.player = new Player("Name");
+
             // 사운드 매니저 사용 예제
             SoundManager.Instance.LoadSounds();
             SoundManager.Instance.PlaySound(SoundType.BGM, "aLIEz_Piano", true);
@@ -21,6 +24,7 @@ namespace TextRPG_Maple
                 { SceneType.Start, new StartScene() },
                 { SceneType.Title, new TitleScene() },
                 { SceneType.Dungeon, new DungeonScene()},
+                { SceneType.SkillScene, new SkillScene() }
             };
 
             SceneManager.Instance.SetSceneInfo(scenes);

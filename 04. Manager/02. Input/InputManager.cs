@@ -21,6 +21,20 @@ namespace TextRPG_Maple._04._Manager
             Console.Write(text);
         }
 
+        public void WriteColor(string text, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ResetColor();
+        }
+
+        public void WriteLineColor(string text, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
         public int GetInput(int min, int max)
         {
             int top = Console.CursorTop;

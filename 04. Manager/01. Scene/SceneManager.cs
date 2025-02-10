@@ -13,6 +13,8 @@ namespace TextRPG_Maple._04._Manager
         Start,
         Title,
         Store,
+        SkillScene,
+        EquipSkillScene,
         Dungeon,
         End
     }

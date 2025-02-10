@@ -29,14 +29,15 @@ namespace TextRPG_Maple
                 "2.인벤토리\n" +
                 "3.상점\n" +
                 "4.휴식\n" +
-                "5.던전\n\n"
+                "5.던전\n" +
+                "6.스킬\n" // 인벤토리 구현 후 인벤토리에서 관리
                 );
         }
 
         public void Update()
         {
             // 조건에 맞는 올바른 키를 입력할때 까지 반복
-            int input = InputManager.Instance.GetInput(1, 5);
+            int input = InputManager.Instance.GetInput(1, 6);
 
             //입력에 따른 실행
             switch (input)
@@ -52,10 +53,13 @@ namespace TextRPG_Maple
                     SceneManager.Instance.ChangeScene(SceneType.Store);
                     break;
                 case 4:
-                    //ShopScreen();
+                    //RestScene();
                     break;
                 case 5:
                     SceneManager.Instance.EnterScene(SceneType.Dungeon);
+                    break;
+                case 6:
+                    SceneManager.Instance.EnterScene(SceneType.SkillScene);
                     break;
             }
         }

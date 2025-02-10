@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TextRPG_Maple._04._Manager
+﻿namespace TextRPG_Maple._04._Manager
 {
     internal class GameManager
     {
@@ -19,6 +13,8 @@ namespace TextRPG_Maple._04._Manager
         //========================================================================= 
 
         //....
+
+        public static Player player;
 
         public void Run()
         {
