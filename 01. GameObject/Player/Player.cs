@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace ConsoleApp1
+namespace TextRPG_Maple
 {
     internal class Player : GameObject
     {
