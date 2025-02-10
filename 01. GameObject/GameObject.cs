@@ -1,11 +1,11 @@
-﻿using ConsoleApp2._01._GameObject.Monster;
+﻿using TextRPG_Maple._01._GameObject.Monster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace TextRPG_Maple
 {
     internal abstract class GameObject
     {
