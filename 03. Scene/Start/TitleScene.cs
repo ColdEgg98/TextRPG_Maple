@@ -1,12 +1,5 @@
-﻿using ConsoleApp1;
-using ConsoleApp2._04._Manager;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp1
+﻿using TextRPG_Maple._04._Manager;
+namespace TextRPG_Maple
 {
     internal class TitleScene : IScene
     {

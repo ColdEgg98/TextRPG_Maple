@@ -12,7 +12,7 @@ namespace TextRPG_Maple._04._Manager
         Town,
         Start,
         Title,
-        Store
+        Store,
         Dungeon,
         End
     }

@@ -19,8 +19,8 @@ namespace TextRPG_Maple
                 { SceneType.Town, new TownScene() },
                 { SceneType.Store, new StoreScene() },
                 { SceneType.Start, new StartScene() },
-                { SceneType.Title, new TitleScene() }
-                { SceneType.Dungeon, new DungeonScene() }
+                { SceneType.Title, new TitleScene() },
+                { SceneType.Dungeon, new DungeonScene()},
             };
 
             SceneManager.Instance.SetSceneInfo(scenes);
