@@ -1,4 +1,4 @@
-﻿using ConsoleApp1;
+﻿using TextRPG_Maple;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace ConsoleApp2._01._GameObject.Monster
+namespace TextRPG_Maple._01._GameObject.Monster
 {
     internal class Monster : GameObject
     {

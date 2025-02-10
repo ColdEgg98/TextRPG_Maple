@@ -1,21 +1,22 @@
-﻿using ConsoleApp1;
+﻿using TextRPG_Maple;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp2._04._Manager
+namespace TextRPG_Maple._04._Manager
 {
     public enum SceneType
     {
         Town,
+        Dungeon,
         End
     }
 
     internal class SceneManager
     {
-        private static SceneManager instance;
+        private static SceneManager? instance;
         public static SceneManager Instance => instance ??= new SceneManager();
 
         private Stack<IScene> sceneStack = new Stack<IScene>();

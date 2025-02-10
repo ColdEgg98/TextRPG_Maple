@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp2._04._Manager
+namespace TextRPG_Maple._04._Manager
 {
     internal class InputManager
     {
         //========================================================================= 
         // 매니저 초기화
         //========================================================================= 
-        private static InputManager instance;
+        private static InputManager? instance;
         public static InputManager Instance => instance ??= new InputManager();
 
+        public int ErrorLevel { get; set; }
 
         public void Write(string text)
         {
