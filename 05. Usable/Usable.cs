@@ -7,27 +7,24 @@ using System.Threading.Tasks;
 
 namespace TextRPG_Maple._05._Usable
 {
-    enum UsableType
-    {
-        Weapon,
-        Armor,
-        Skill
-    }
+    //enum ItemType
+    //{
+    //    Weapon,
+    //    Armor
+    //}
 
     internal abstract class Usable ()
     {
         public string Name { get; set; } = "";
-        public UsableType UsableType { get; }
         public string Descrip { get; set; } = "";
-        public int Value { get; set; } // 장비 능력치 혹은 계수
+        public float Value { get; set; } // 장비 능력치 혹은 계수
         public int Cost { get; set; } // 가격 혹은 소비 마나
         public bool IsEquip { get; set; }
         public bool IsOwned { get; set; }
 
-        public Usable(string name, UsableType type, int value, string descrip, int cost) : this()
+        public Usable(string name, float value, string descrip, int cost) : this()
         {
             Name = name;
-            UsableType = type;
             Value = value;
             Descrip = descrip;
             Cost = cost;
@@ -44,13 +41,7 @@ namespace TextRPG_Maple._05._Usable
 
         public string GetTypeString()
         {
-            return "";
-        }
-
-        public string GetPriceString()
-        {
-            string str = IsOwned ? "구매완료" : $"{Cost}";
-            return str;
+            return "미구현";
         }
     }
 }

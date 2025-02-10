@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,13 @@ namespace ConsoleApp2._04._Manager
         //========================================================================= 
 
         //....
+
+        public static Player player;
+
+        public Player GetPlayer(string name)
+        {
+            return player ??= new Player(name);
+        }
 
         public void Run()
         {

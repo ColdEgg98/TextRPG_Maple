@@ -27,6 +27,13 @@ namespace ConsoleApp2._04._Manager
             Console.ResetColor();
         }
 
+        public void WriteLineColor(string text, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
         public int GetInput(int min, int max)
         {
             while (true) //return이 되기 전까지 반복
