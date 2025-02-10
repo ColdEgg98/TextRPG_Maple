@@ -10,7 +10,9 @@ namespace ConsoleApp2._04._Manager
     public enum SceneType
     {
         Town,
-        End
+        Start,
+        Title,
+        Store
     }
 
     internal class SceneManager

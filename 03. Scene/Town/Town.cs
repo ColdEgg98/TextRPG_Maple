@@ -47,6 +47,7 @@ namespace ConsoleApp1
                     break;
                 case 3:
                     //ShopScreen();
+                    SceneManager.Instance.ChangeScene(SceneType.Store);
                     break;
             }
         }
