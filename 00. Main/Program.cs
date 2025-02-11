@@ -11,17 +11,16 @@ namespace TextRPG_Maple
     {
         static void Main(string[] args)
         {
-            // ì‚¬ìš´ë“œ ë§¤ë‹ˆì € ì‚¬ìš© ì˜ˆì œ
+            // »ç¿îµå ¸Å´ÏÀú »ç¿ë ¿¹Á¦
             SoundManager.Instance.LoadSounds();
             SoundManager.Instance.PlaySound(SoundType.BGM, "aLIEz_Piano", true);
             SoundManager.Instance.SetVolume(SoundType.BGM, 0.3f);
 
-            // í”Œë ˆì´ì–´ ì •ë³´ ì´ˆê¸°í™”
+            // °ÔÀÓ ¿ÀºêÁ§Æ® ¸Å´ÏÀú »ç¿ë ¿¹Á¦ - ÇÃ·¹ÀÌ¾î Á¤º¸ ÃÊ±âÈ­
             GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
-
             GameObject player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer");
 
-            // ëª¨ë“  ì”¬ì„ ë¯¸ë¦¬ ìƒì„±í•˜ì—¬ Dictionaryì— ì €ì¥
+            // ¸ğµç ¾ÀÀ» ¹Ì¸® »ı¼ºÇÏ¿© Dictionary¿¡ ÀúÀå
             var scenes = new Dictionary<SceneType, IScene>
                 {
                 { SceneType.Town, new TownScene() },
