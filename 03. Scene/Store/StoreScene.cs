@@ -20,8 +20,8 @@ namespace TextRPG_Maple
         public void Enter()
         {
             // player = 
-            itemList = GetItemList();
-            inventoryList = GetInvetoryList();
+            GetItemList();
+            GetInvetoryList();
         }
 
         public void Exit()
@@ -165,9 +165,9 @@ namespace TextRPG_Maple
             }
         }
         // 아이템 목록을 가져오는 함수
-        static List<Item> GetItemList()
+        void GetItemList()
         {
-            List<Item> items = new List<Item>
+            itemList = new List<Item>
             {
                 new Item("무한의 대검", ItemType.Weapon, 70, "설명 : 무한의 대검", 3700, false),
                 new Item("무한의 반지", ItemType.Armor, 40, "설명 : 무한의 대검", 500, false),
@@ -175,18 +175,18 @@ namespace TextRPG_Maple
                 new Item("무한의 장갑", ItemType.Weapon, 30, "설명 : 무한의 대검", 200, false),
                 new Item("무한의 신발", ItemType.Armor, 20, "설명 : 무한의 대검", 100, false)
             };
-            List<Item> items2 = items;
-            return items2;
         }
         // 아이템 목록을 가져오는 함수
-        static List<Item> GetInvetoryList()
+        void GetInvetoryList()
         {
-            List<Item> items = new List<Item>
+            inventoryList = new List<Item>
             {
-                new Item("무한의 대검", ItemType.Weapon, 20, "설명 : 무한의 대검", 100, false),
-                new Item("무한의 갑옷", ItemType.Armor, 20, "설명 : 무한의 갑옷", 100, false)
+                new Item("무한의 대검", ItemType.Weapon, 70, "설명 : 무한의 대검", 3700, false),
+                new Item("무한의 반지", ItemType.Armor, 40, "설명 : 무한의 대검", 500, false),
+                new Item("무한의 목걸이", ItemType.Armor, 25, "설명 : 무한의 대검", 300, false),
+                new Item("무한의 장갑", ItemType.Weapon, 30, "설명 : 무한의 대검", 200, false),
+                new Item("무한의 신발", ItemType.Armor, 20, "설명 : 무한의 대검", 100, false)
             };
-            return items;
         }
     }
 }
