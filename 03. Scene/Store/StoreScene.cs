@@ -64,7 +64,7 @@ namespace TextRPG_Maple
                 {
                     if (inventoryList != null && inventoryList.Any(item => item.Name == itemList[i].Name))
                     {
-                        InputManager.Instance.WriteLineColor($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {itemList[i].Name}  |  {itemList[i].Cost}G  |  {itemList[i].Descrip}  |  구매 완료", ConsoleColor.DarkGray);
+                        InputManager.Instance.WriteLineColor($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {itemList[i].Name} |  {itemList[i].GetTypeString()}  |  {itemList[i].Descrip}  |  구매 완료", ConsoleColor.DarkGray);
                     }
                     else
                         Console.WriteLine($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {itemList[i].UsableDisplay()}|  {itemList[i].GetPriceString()}G");
