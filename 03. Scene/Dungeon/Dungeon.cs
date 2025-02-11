@@ -35,7 +35,7 @@ namespace TextRPG_Maple
         public void Update()
         {
             // 조건에 맞는 올바른 키를 입력할때 까지 반복
-            int input = GameManager.Instance.GetInput(1, 3);
+            int input = GameManager.Instance.GetInput(0, 3);
 
             //입력에 따른 실행
             switch (input)
@@ -48,6 +48,9 @@ namespace TextRPG_Maple
                     break;
                 case 3:
                     //ShopScreen();
+                    break;
+                case 0:
+                    SceneManager.Instance.ExitScene();
                     break;
             }
         }
