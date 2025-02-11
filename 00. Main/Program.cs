@@ -4,6 +4,8 @@ using System.Threading.Channels;
 using System.Runtime.Serialization;
 using TextRPG_Maple._04._Manager._05._Object;
 using TextRPG_Maple._03._Scene.SkillScene;
+using System.Numerics;
+using TextRPG_Maple._05._Usable.Skill;
 
 namespace TextRPG_Maple
 {
@@ -17,8 +19,8 @@ namespace TextRPG_Maple
             SoundManager.Instance.SetVolume(SoundType.BGM, 0.3f);
 
             // 게임 오브젝트 매니저 사용 예제 - 플레이어 정보 초기화
-            //GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
-            //Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+            GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
+            Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
 
             // 모든 씬을 미리 생성하여 Dictionary에 저장
             var scenes = new Dictionary<SceneType, IScene>

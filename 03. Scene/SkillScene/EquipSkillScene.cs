@@ -4,24 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextRPG_Maple._04._Manager;
+using TextRPG_Maple._04._Manager._05._Object;
 using TextRPG_Maple._05._Usable.Skill;
 
 namespace TextRPG_Maple._03._Scene.SkillScene
 {
     internal class EquipSkillScene : IScene
     {
-        Player? player;
+        Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
 
         public void Enter()
-        { 
-            player = GameManager.Instance.player;
-            Console.WriteLine(player.Skills.Count); // 0 출력
+        {
+
         }
 
         public void Exit()
         {
-            player = null;
-            System.GC.Collect();
+
         }
 
         public void Render()

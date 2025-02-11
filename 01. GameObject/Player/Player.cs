@@ -1,4 +1,5 @@
 ﻿using TextRPG_Maple._04._Manager;
+using TextRPG_Maple._04._Manager._05._Object;
 using TextRPG_Maple._05._Usable.Skill;
 
 namespace TextRPG_Maple
@@ -113,7 +114,8 @@ namespace TextRPG_Maple
 
         public void AddSkill(Skill Skill)
         {
-            GameManager.Instance.player.Skills.Add(Skill);
+            Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+            player.Skills.Add(Skill);
         }
     }
 }
