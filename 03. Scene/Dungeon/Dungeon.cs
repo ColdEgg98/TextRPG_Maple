@@ -33,6 +33,7 @@ namespace TextRPG_Maple
             Console.WriteLine("1. 상태 보기");
             Console.WriteLine("2. 인벤토리");
             Console.WriteLine("3. 전투 시작");  // "전투 시작 : n층" 처럼 층수가 출력되어야 함. 기존 층수에 대한 정보가 존재. 
+            Console.WriteLine("0. 나가기");
             Console.WriteLine();
         }
 
@@ -49,6 +50,7 @@ namespace TextRPG_Maple
                     break;
                 case 2:
                     //InventoryScreen();
+                    SceneManager.Instance.EnterScene(SceneType.Inventory);
                     break;
                 case 3:
                     // 레벨에 따른 몬스터 정보를 여기서 삽입

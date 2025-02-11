@@ -1,11 +1,13 @@
 ﻿using TextRPG_Maple._04._Manager;
+using TextRPG_Maple._04._Manager._05._Object;
+using TextRPG_Maple._05._Usable.Item;
 using TextRPG_Maple._05._Usable.Skill;
 
 namespace TextRPG_Maple
 {
     internal class Player : GameObject
     {
-        //public List<Item> Items { get; set; }
+        public List<Item> Inventory { get; set; }
         public List<Skill> Skills { get; set; }
         public string Class { get; set; }
         public bool IsAlive => Stat.Hp > 0;
@@ -25,6 +27,7 @@ namespace TextRPG_Maple
             Stat.Gold = 1000;
             Stat.Exp = 0;
 
+            Inventory = new List<Item>();
             Skills = new List<Skill>();
             Class = "";
             requiredExp = 100;
@@ -32,6 +35,7 @@ namespace TextRPG_Maple
             EquipDef = 0;
         }
 
+        /// 전투
         public override void Attack(GameObject monster)
         {
             int damage = Math.Max(0, Stat.Atk + EquipAtk - monster.Stat.Def);
@@ -50,7 +54,7 @@ namespace TextRPG_Maple
 
         public void SkillAttack(GameObject moster, Skill skill)
         {
-            if (Stat.Mp >= skill.Cost)
+            if (Stat.Mp >= skill.Cost && skill.IsEquip)
             {
                 Stat.Mp -= skill.Cost;
 
@@ -64,7 +68,7 @@ namespace TextRPG_Maple
             }
             else
             {
-                Console.WriteLine("MP가 부족합니다.");
+                Console.WriteLine("마나가 부족하거나 장비 중이 아닙니다..");
             }
         }
 
@@ -95,6 +99,8 @@ namespace TextRPG_Maple
             Console.WriteLine("레벨업!");
             Console.WriteLine($"현재 레벨 : {Stat.Level}");
         }
+
+        /// 직업 & 스킬
         public void SetClass(int input)
         {
             switch (input)
@@ -108,6 +114,59 @@ namespace TextRPG_Maple
                 case 3:
                     Class = "마법사";
                     break;
+            }
+        }
+
+        public void AddSkill(Skill Skill)
+        {
+            Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+            player.Skills.Add(Skill);
+        }
+
+
+
+        /// 아이템
+        public void EquipItem(Item item)
+        {
+            if (item.IsEquip)
+            {
+                // 장비 빼기
+                UnEquip (item);
+            }
+            else
+            {
+                // 아이템 착용 & 사용
+                Equip(item);
+            }
+        }
+        private void Equip(Item item)
+        {
+            item.IsEquip = true;
+
+            if (item.ItemType == ItemType.Weapon)
+                EquipAtk += (int)item.Value;
+
+            else if (item.ItemType == ItemType.Armor)
+                EquipDef += (int)item.Value;
+
+            else
+            {
+                Stat.Hp += (int)item.Value;
+                Inventory.Remove(item);
+            }
+        }
+
+        private void UnEquip(Item item)
+        {
+            item.IsEquip = false;
+
+            if (item.ItemType == ItemType.Weapon)
+            {
+                EquipAtk -= (int)item.Value;
+            }
+            else if (item.ItemType == ItemType.Armor)
+            {
+                EquipDef -= (int)item.Value;
             }
         }
     }
