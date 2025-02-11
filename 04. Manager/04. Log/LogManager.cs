@@ -39,7 +39,7 @@ namespace TextRPG_Maple._04._Manager._04._Log
             {
                 
                 string logMessage = $"[{DateTime.Now}] [{logLevel}] {message}";
-                Console.WriteLine(logMessage); // 콘솔에도 출력
+                //Console.WriteLine(logMessage); // 콘솔에도 출력
                 File.AppendAllText(logFilePath, logMessage + Environment.NewLine); // 파일에도 기록, [ 동기 - 블로킹 ]으로 작동함.
             }
         }
