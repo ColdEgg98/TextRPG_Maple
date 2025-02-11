@@ -50,7 +50,7 @@ namespace TextRPG_Maple
 
         public void SkillAttack(GameObject moster, Skill skill)
         {
-            if (Stat.Mp >= skill.Cost)
+            if (Stat.Mp >= skill.Cost && skill.IsEquip)
             {
                 Stat.Mp -= skill.Cost;
 
@@ -64,7 +64,7 @@ namespace TextRPG_Maple
             }
             else
             {
-                Console.WriteLine("MP가 부족합니다.");
+                Console.WriteLine("마나가 부족하거나 장비 중이 아닙니다..");
             }
         }
 

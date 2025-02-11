@@ -9,7 +9,7 @@ namespace TextRPG_Maple
     {
         static void Main(string[] args)
         {
-            GameManager.player = new Player("Name");
+            GameManager.Instance.player = new Player("Name");
 
             // 사운드 매니저 사용 예제
             SoundManager.Instance.LoadSounds();

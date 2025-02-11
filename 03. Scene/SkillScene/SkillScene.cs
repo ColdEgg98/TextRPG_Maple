@@ -5,15 +5,16 @@ namespace TextRPG_Maple._03._Scene.SkillScene
 {
     internal class SkillScene : IScene
     {
-        Player? player;
+        Player player;
 
         public void Enter()
         {
             player = GameManager.Instance.player;
-            Console.WriteLine(player.Skills.Count); // 0 출력
 
+            //테스트용
+            player.AddSkill(Skill.Warrior_skillSet[0]);
             player.AddSkill(Skill.Warrior_skillSet[1]);
-            Console.WriteLine(player.Skills.Count);
+            player.AddSkill(Skill.Warrior_skillSet[2]);
         }
 
         public void Exit()
@@ -56,7 +57,8 @@ namespace TextRPG_Maple._03._Scene.SkillScene
             switch (input)
             {
                 case 1:
-                    SceneManager.Instance.EnterScene(SceneType.EquipSkillScene);
+                    if(player.Skills.Count != 0)
+                        SceneManager.Instance.EnterScene(SceneType.EquipSkillScene);
                     break;
                 case 2:
                     //SceneManager.Instance.ExitScene();
