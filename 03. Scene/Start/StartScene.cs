@@ -43,8 +43,8 @@ namespace TextRPG_Maple
             #endregion
             if (endJobSetting)
             {
-                Console.WriteLine("환영합니다." + userName + "님");
-                Console.WriteLine("직업 : " + userJob + "로 시작합니다.");
+                Console.WriteLine("환영합니다." + player.Name + "님");
+                Console.WriteLine("직업 : " + player.Class + "로 시작합니다.");
             }
         }
 
@@ -60,7 +60,9 @@ namespace TextRPG_Maple
             else if (!endJobSetting)
             {
                 userJob = GameManager.Instance.GetInput(1, 2);
-                //player = new Player(userName, userJob);
+                player = new Player(userName);
+                player.SetClass(userJob);
+                GameManager.Instance.SetPlayer(player);
                 endJobSetting = true;
             }
             else

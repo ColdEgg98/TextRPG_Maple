@@ -8,12 +8,12 @@ namespace TextRPG_Maple._03._Scene.SkillScene
 
         public void Enter()
         {
-            if (GameManager.player == null)
+            if (GameManager.Instance.player == null)
             {
                 throw new InvalidOperationException("Player is not initialized.");
             }
 
-            player = GameManager.player;
+            player = GameManager.Instance.player;
         }
 
         public void Exit()

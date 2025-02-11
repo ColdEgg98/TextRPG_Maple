@@ -21,7 +21,7 @@ namespace TextRPG_Maple._05._Usable.Skill
 
         public void SetSkillType()
         {
-            switch(GameManager.player.Class)
+            switch(GameManager.Instance.player.Class)
             {
                 case "전사":
                     //스킬타입을 워리어로

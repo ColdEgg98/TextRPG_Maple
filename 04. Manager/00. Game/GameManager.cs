@@ -14,7 +14,7 @@
 
         //....
 
-        public static Player player;
+        public Player player;
 
         public void Run()
         {
@@ -24,6 +24,10 @@
         public int GetInput(int min, int max)
         {
             return InputManager.Instance.GetInput(min, max);
+        }
+        public void SetPlayer(Player player)
+        {
+            this.player = player;
         }
     }
 }

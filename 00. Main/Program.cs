@@ -9,8 +9,6 @@ namespace TextRPG_Maple
     {
         static void Main(string[] args)
         {
-            GameManager.player = new Player("Name");
-
             // 사운드 매니저 사용 예제
             SoundManager.Instance.LoadSounds();
             SoundManager.Instance.PlaySound(SoundType.BGM, "aLIEz_Piano", true);
