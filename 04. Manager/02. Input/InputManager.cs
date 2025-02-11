@@ -49,6 +49,7 @@ namespace TextRPG_Maple._04._Manager
                     return input;
                 Console.SetCursorPosition(left, top);
                 Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요");
+                SoundManager.Instance.PlaySound(SoundType.Click, "Error");
                 Console.SetCursorPosition(left, top);
                 Thread.Sleep(500);
                 Console.Write(new string(' ', 37));
