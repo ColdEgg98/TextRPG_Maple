@@ -126,6 +126,9 @@ namespace TextRPG_Maple
                     {
                         //player.BuyItem(itemList[input]);
                         Console.WriteLine("\n구입에 성공했습니다.");
+                        // Sound
+                        SoundManager.Instance.PlaySound(SoundType.Click, "GetGold");
+                        // TODO: PLAYER BUY
                         nowMoney -= itemList[input].Price;
                         inventoryList.Add(itemList[input]);
                         Thread.Sleep(1000);
@@ -145,8 +148,10 @@ namespace TextRPG_Maple
                 else
                 {
                     input--;
-                    
-                    // 85%
+                    // TODO: PLAYER SELL
+                    // Sound
+                    SoundManager.Instance.PlaySound(SoundType.Click, "GetGold");
+                    // return 85%
                     nowMoney += itemList[input].Price * 85 / 100;
                     inventoryList.Remove(inventoryList[input]);
                     Console.WriteLine("\n판매에 성공했습니다.");

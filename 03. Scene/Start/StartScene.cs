@@ -1,4 +1,5 @@
 ﻿using TextRPG_Maple._04._Manager;
+using TextRPG_Maple._04._Manager._05._Object;
 namespace TextRPG_Maple
 {
     internal class StartScene : IScene
@@ -62,7 +63,7 @@ namespace TextRPG_Maple
                 userJob = GameManager.Instance.GetInput(1, 2);
                 player = new Player(userName);
                 player.SetClass(userJob);
-                GameManager.Instance.SetPlayer(player);
+                GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", player);
                 endJobSetting = true;
             }
             else
