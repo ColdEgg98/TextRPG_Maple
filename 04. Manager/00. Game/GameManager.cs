@@ -25,5 +25,9 @@
         {
             return InputManager.Instance.GetInput(min, max);
         }
+        public void SetPlayer(Player player)
+        {
+            this.player = player;
+        }
     }
 }

@@ -1,6 +1,8 @@
-ï»¿using TextRPG_Maple._04._Manager;
+using TextRPG_Maple._04._Manager;
 using System.ComponentModel;
 using System.Threading.Channels;
+using System.Runtime.Serialization;
+using TextRPG_Maple._04._Manager._05._Object;
 using TextRPG_Maple._03._Scene.SkillScene;
 
 namespace TextRPG_Maple
@@ -9,14 +11,16 @@ namespace TextRPG_Maple
     {
         static void Main(string[] args)
         {
-            GameManager.Instance.player = new Player("Name");
-
-            // ì‚¬ìš´ë“œ ë§¤ë‹ˆì € ì‚¬ìš© ì˜ˆì œ
+            // »ç¿îµå ¸Å´ÏÀú »ç¿ë ¿¹Á¦
             SoundManager.Instance.LoadSounds();
             SoundManager.Instance.PlaySound(SoundType.BGM, "aLIEz_Piano", true);
             SoundManager.Instance.SetVolume(SoundType.BGM, 0.3f);
 
-            // ëª¨ë“  ì”¬ì„ ë¯¸ë¦¬ ìƒì„±í•˜ì—¬ Dictionaryì— ì €ì¥
+            // °ÔÀÓ ¿ÀºêÁ§Æ® ¸Å´ÏÀú »ç¿ë ¿¹Á¦ - ÇÃ·¹ÀÌ¾î Á¤º¸ ÃÊ±âÈ­
+            //GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
+            //Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+
+            // ¸ğµç ¾ÀÀ» ¹Ì¸® »ı¼ºÇÏ¿© Dictionary¿¡ ÀúÀå
             var scenes = new Dictionary<SceneType, IScene>
                 {
                 { SceneType.Town, new TownScene() },
