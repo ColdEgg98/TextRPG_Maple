@@ -1,4 +1,6 @@
 ﻿using TextRPG_Maple._04._Manager;
+using TextRPG_Maple._04._Manager._05._Object;
+using TextRPG_Maple._05._Usable.Item;
 namespace TextRPG_Maple
 {
     internal class StoreScene : IScene
@@ -11,7 +13,6 @@ namespace TextRPG_Maple
             Sell
         }
         private Pase pase = Pase.Intro;
-        Player player;
         private List<Item> itemList = new List<Item>();
         private List<Item> inventoryList = new List<Item>();
         int nowMoney = 999;
@@ -30,6 +31,10 @@ namespace TextRPG_Maple
         // 기본 정보 출력
         public void Render()
         {
+            Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+            List<Item> inventoryList = player.Inventory;
+
+
             Console.Clear();
             Console.WriteLine("==== 상점 ====");
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.\n");
@@ -43,7 +48,7 @@ namespace TextRPG_Maple
             {
                 for (int i = 0; i < itemList.Count; i++)
                 {
-                    Console.Write($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {itemList[i].Name}  |  {itemList[i].Price}G  |  {itemList[i].Descript}");
+                    Console.Write($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {itemList[i].Name}  |  {itemList[i].Cost}G  |  {itemList[i].Descrip}");
                     if (inventoryList != null && inventoryList.Any(item => item.Name == itemList[i].Name))
                     {
                         Console.WriteLine("  |  구매 완료");
@@ -56,7 +61,7 @@ namespace TextRPG_Maple
             {
                 for (int i = 0; i < inventoryList.Count; i++)
                 {
-                    Console.WriteLine($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {inventoryList[i].Name}  |  {inventoryList[i].Price}G  |  {inventoryList[i].Descript}  ");
+                    Console.WriteLine($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {inventoryList[i].Name}  |  {inventoryList[i].Cost}G  |  {inventoryList[i].Descrip}  ");
                 }
             }
             // 선택지 정보 출력
@@ -112,7 +117,7 @@ namespace TextRPG_Maple
                 else
                 {
                     input--;
-                    if (nowMoney < itemList[input].Price)
+                    if (nowMoney < itemList[input].Cost)
                     {
                         Console.WriteLine("\n골드가 부족합니다.");
                         Thread.Sleep(1000);
@@ -126,7 +131,7 @@ namespace TextRPG_Maple
                     {
                         //player.BuyItem(itemList[input]);
                         Console.WriteLine("\n구입에 성공했습니다.");
-                        nowMoney -= itemList[input].Price;
+                        nowMoney -= itemList[input].Cost;
                         inventoryList.Add(itemList[input]);
                         Thread.Sleep(1000);
                     }
@@ -147,7 +152,7 @@ namespace TextRPG_Maple
                     input--;
                     
                     // 85%
-                    nowMoney += itemList[input].Price * 85 / 100;
+                    nowMoney += itemList[input].Cost * 85 / 100;
                     inventoryList.Remove(inventoryList[input]);
                     Console.WriteLine("\n판매에 성공했습니다.");
                     Thread.Sleep(1000);
@@ -155,40 +160,28 @@ namespace TextRPG_Maple
             }
         }
         // 아이템 목록을 가져오는 함수
-        List<Item> GetItemList()
+        static List<Item> GetItemList()
         {
             List<Item> items = new List<Item>
             {
-                new Item { Name = "무한의 대검", Price = 1000, isSell = false, Descript =  "설명하는글 : 무한의 대검" },
-                new Item { Name = "무한의 갑옷", Price = 800, isSell = false, Descript =  "설명하는글 : 무한의 갑옷" },
-                new Item { Name = "무한의 반지", Price = 500, isSell = false, Descript =  "설명하는글 : 무한의 반지" },
-                new Item { Name = "무한의 목걸이", Price = 300, isSell = false, Descript =  "설명하는글 : 무한의 목걸이" },
-                new Item { Name = "무한의 장갑", Price = 200, isSell = false, Descript =  "설명하는글 : 무한의 장갑" },
-                new Item { Name = "무한의 신발", Price = 100, isSell = false, Descript =  "설명하는글 : 무한의 신발" },
+                new Item("무한의 대검", ItemType.Weapon, 70, "설명 : 무한의 대검", 3700, false),
+                new Item("무한의 반지", ItemType.Armor, 40, "설명 : 무한의 대검", 500, false),
+                new Item("무한의 목걸이", ItemType.Armor, 25, "설명 : 무한의 대검", 300, false),
+                new Item("무한의 장갑", ItemType.Weapon, 30, "설명 : 무한의 대검", 200, false),
+                new Item("무한의 신발", ItemType.Armor, 20, "설명 : 무한의 대검", 100, false)
             };
             List<Item> items2 = items;
             return items2;
         }
         // 아이템 목록을 가져오는 함수
-        List<Item> GetInvetoryList()
+        static List<Item> GetInvetoryList()
         {
             List<Item> items = new List<Item>
             {
-                new Item { Name = "무한의 대검", Price = 1000, isSell = false, Descript =  "설명하는글 : 무한의 대검" },
-                new Item { Name = "무한의 갑옷", Price = 800, isSell = false, Descript =  "설명하는글 : 무한의 갑옷" },
+                new Item("무한의 대검", ItemType.Weapon, 20, "설명 : 무한의 대검", 100, false),
+                new Item("무한의 갑옷", ItemType.Armor, 20, "설명 : 무한의 갑옷", 100, false)
             };
             return items;
         }
-    }
-    // 임시 클래스
-    class Item
-    {
-        public string Name { get; set; }
-        public string Descript { get; set; }
-        public int Price { get; set; }
-        public Status Status { get; set; }
-        public int SellPrice { get; set; }
-        public bool isSell { get; set; }
-        public int Count { get; set; }
     }
 }

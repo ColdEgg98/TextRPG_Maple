@@ -55,10 +55,13 @@ namespace TextRPG_Maple._03._Scene.SkillScene
                     if (player.Skills.Count != 0)
                         SceneManager.Instance.EnterScene(SceneType.EquipSkillScene);
                     else
-                        InputManager.Instance.WriteLineColor("보유한 스킬이 없습니다...", ConsoleColor.DarkGray);
+                    {
+                        InputManager.Instance.WriteLineColor("\n보유한 스킬이 없습니다...", ConsoleColor.DarkGray);
+                        Thread.Sleep(600);
+                    }
                     break;
                 case 2:
-                    //SceneManager.Instance.ExitScene();
+                    SceneManager.Instance.EnterScene(SceneType.Inventory);
                     break;
                 case 0:
                     SceneManager.Instance.ExitScene();

@@ -50,6 +50,7 @@ namespace TextRPG_Maple
                     break;
                 case 2:
                     //InventoryScreen();
+                    SceneManager.Instance.EnterScene(SceneType.Inventory);
                     break;
                 case 3:
                     // 레벨에 따른 몬스터 정보를 여기서 삽입

@@ -29,8 +29,7 @@ namespace TextRPG_Maple
                 "2.인벤토리\n" +
                 "3.상점\n" +
                 "4.휴식\n" +
-                "5.던전\n" +
-                "6.스킬\n" // 인벤토리 구현 후 인벤토리에서 관리
+                "5.던전\n"
                 );
         }
 
@@ -46,7 +45,7 @@ namespace TextRPG_Maple
                     //StatusScreen();
                     break;
                 case 2:
-                    //InventoryScreen();
+                    SceneManager.Instance.EnterScene(SceneType.Inventory);
                     break;
                 case 3:
                     //ShopScreen();
@@ -57,9 +56,6 @@ namespace TextRPG_Maple
                     break;
                 case 5:
                     SceneManager.Instance.EnterScene(SceneType.Dungeon);
-                    break;
-                case 6:
-                    SceneManager.Instance.EnterScene(SceneType.SkillScene);
                     break;
             }
         }
