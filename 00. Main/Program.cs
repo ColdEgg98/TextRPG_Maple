@@ -1,8 +1,9 @@
-﻿using TextRPG_Maple._04._Manager;
+using TextRPG_Maple._04._Manager;
 using System.ComponentModel;
 using System.Threading.Channels;
 using System.Runtime.Serialization;
 using TextRPG_Maple._04._Manager._05._Object;
+using TextRPG_Maple._03._Scene.SkillScene;
 
 namespace TextRPG_Maple
 {
@@ -22,13 +23,17 @@ namespace TextRPG_Maple
 
             // 모든 씬을 미리 생성하여 Dictionary에 저장
             var scenes = new Dictionary<SceneType, IScene>
-            {
+                {
                 { SceneType.Town, new TownScene() },
-                { SceneType.Dungeon, new DungeonScene() }
+                { SceneType.Store, new StoreScene() },
+                { SceneType.Start, new StartScene() },
+                { SceneType.Title, new TitleScene() },
+                { SceneType.Dungeon, new DungeonScene()},
+                { SceneType.SkillScene, new SkillScene() }
             };
 
             SceneManager.Instance.SetSceneInfo(scenes);
-            SceneManager.Instance.EnterScene(SceneType.Town);
+            SceneManager.Instance.EnterScene(SceneType.Title);
 
             GameManager.Instance.Run();
         }

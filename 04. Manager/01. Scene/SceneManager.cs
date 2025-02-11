@@ -10,6 +10,11 @@ namespace TextRPG_Maple._04._Manager
     public enum SceneType
     {
         Town,
+        Start,
+        Title,
+        Store,
+        SkillScene,
+        EquipSkillScene,
         Dungeon,
         End
     }

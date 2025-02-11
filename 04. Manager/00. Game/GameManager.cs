@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TextRPG_Maple._04._Manager
+﻿namespace TextRPG_Maple._04._Manager
 {
     internal class GameManager
     {
@@ -20,6 +14,8 @@ namespace TextRPG_Maple._04._Manager
 
         //....
 
+        public Player player;
+
         public void Run()
         {
             SceneManager.Instance.RunCurrentScene();
@@ -28,6 +24,10 @@ namespace TextRPG_Maple._04._Manager
         public int GetInput(int min, int max)
         {
             return InputManager.Instance.GetInput(min, max);
+        }
+        public void SetPlayer(Player player)
+        {
+            this.player = player;
         }
     }
 }
