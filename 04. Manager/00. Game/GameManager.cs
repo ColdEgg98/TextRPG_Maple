@@ -14,7 +14,7 @@
 
         //....
 
-        public static Player player;
+        public Player player;
 
         public void Run()
         {

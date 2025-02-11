@@ -24,7 +24,8 @@ namespace TextRPG_Maple
                 { SceneType.Start, new StartScene() },
                 { SceneType.Title, new TitleScene() },
                 { SceneType.Dungeon, new DungeonScene()},
-                { SceneType.SkillScene, new SkillScene() }
+                { SceneType.SkillScene, new SkillScene() },
+                { SceneType.EquipSkillScene, new EquipSkillScene() }
             };
 
             SceneManager.Instance.SetSceneInfo(scenes);

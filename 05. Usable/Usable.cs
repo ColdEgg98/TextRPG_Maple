@@ -6,7 +6,7 @@
     //    Armor
     //}
 
-    internal abstract class Usable ()
+    internal abstract class Usable
     {
         public string Name { get; set; } = "";
         public string Descrip { get; set; } = "";
@@ -15,7 +15,7 @@
         public bool IsEquip { get; set; }
         public bool IsOwned { get; set; }
 
-        public Usable(string name, float value, string descrip, int cost) : this()
+        public Usable(string name, float value, string descrip, int cost)
         {
             Name = name;
             Value = value;
@@ -32,9 +32,6 @@
             return str;
         }
 
-        public string GetTypeString()
-        {
-            return "미구현";
-        }
+        public abstract string GetTypeString();
     }
 }

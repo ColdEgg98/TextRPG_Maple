@@ -110,5 +110,10 @@ namespace TextRPG_Maple
                     break;
             }
         }
+
+        public void AddSkill(Skill Skill)
+        {
+            GameManager.Instance.player.Skills.Add(Skill);
+        }
     }
 }
