@@ -40,11 +40,6 @@ namespace TextRPG_Maple
             SceneManager.Instance.SetSceneInfo(scenes);
             SceneManager.Instance.EnterScene(SceneType.Title);
 
-            //테스트용
-            player.AddSkill(Skill.Warrior_skillSet[0]);
-            player.AddSkill(Skill.Warrior_skillSet[1]);
-            player.AddSkill(Skill.Warrior_skillSet[2]);
-
             GameManager.Instance.Run();
         }
     }

@@ -6,7 +6,7 @@ namespace TextRPG_Maple._05._Usable.Skill
     enum SkillType
     {
         전사,
-        도적
+        도적,
     }
 
     internal class Skill : Usable
@@ -14,23 +14,30 @@ namespace TextRPG_Maple._05._Usable.Skill
         public SkillType SkillType { get; }
         public int NeedLv { get; set; }
 
+        // 테스트용 생성자
+        public Skill() : base("", 0, "", 0, false)
+        {
+
+        }
+
         public Skill(string name, int needLv, SkillType skillType, float value, string descrip, int cost, bool IsOwned) : base(name, value, descrip, cost, IsOwned)
         {
             SkillType = skillType;
             NeedLv = needLv;
         }
 
-        public void SetSkillType()
+        public List<Skill> SetSkillType(string strClass)
         {
-            Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
-            switch (player.Class)
+            switch (strClass)
             {
                 case "전사":
-                    break;
+                    return SetWarriorSkill();
                 case "도적":
-                    break;
+                    return SetThief_skillSet();
                 case "마법사":
-                    break;
+                    return SetWarriorSkill();
+                default:
+                    return null;
             }
         }
 
@@ -39,22 +46,26 @@ namespace TextRPG_Maple._05._Usable.Skill
             return SkillType.ToString();
         }
 
-
-
-
-        // 하드 코딩, 정적으로 만들어야 스택 오버플로우 미발생 << SKillType 리스트를 초기화 하면서 Skill 객체가 생성되고, Skill 객체들도 Type리스트를 만듦
-        public static List<Skill> Warrior_skillSet = new List<Skill>
+        public List<Skill> SetWarriorSkill()
         {
-            new Skill("슬래시 블러스트", 3, SkillType.전사, 2, "적에게 공격력의 2배만큼 피해를 입힙니다.", 10, false),
-            new Skill("브랜디쉬", 6, SkillType.전사, 2.5f, "적에게 공격력의 2.5배만큼 피해를 입힙니다.", 20, false),
-            new Skill("오라블레이드", 9, SkillType.전사, 3f, "계수 3배.", 0, false)
-        };
+            List<Skill> Warrior_skillSet = new List<Skill>();
 
-        public static List<Skill> Thief_skillSet = new List<Skill>
+            Warrior_skillSet.Add(new Skill("슬래시 블러스트", 3, SkillType.전사, 2, "Mp를 소비하여 주위의 적 다수를 동시에 공격한다.", 10, false));
+            Warrior_skillSet.Add(new Skill("브랜디쉬", 5, SkillType.전사, 2.8f, "눈 앞의 적 여러명을 두 번 연속 공격한다.", 16, false));
+            Warrior_skillSet.Add(new Skill("인사이징", 8, SkillType.전사, 4f, "정신을 집중하여 전방으로 검을 크게 내리긋는다. ", 36, false));
+
+            return Warrior_skillSet;
+        }
+
+        public List<Skill> SetThief_skillSet()
         {
-            new Skill("스킬명1", 3, SkillType.도적, 2, "적에게 공격력의 2배만큼 피해를 입힙니다.", 10, false),
-            new Skill("스킬명2", 6, SkillType.도적, 2.5f, "적에게 공격력의 2.5배만큼 피해를 입힙니다.", 20, false),
-            new Skill("스킬명3", 9, SkillType.도적, 0.5f, "살살 때립니다.", 0, false)
-        };
+            List<Skill> Thief_skillSet = new List<Skill>();
+
+            Thief_skillSet.Add(new Skill("럭키 세븐", 3, SkillType.도적, 1.1f, "행운을 담은 7개의 표창을 던진다.", 14, false));
+            Thief_skillSet.Add(new Skill("트리플 스로우", 6, SkillType.도적, 2.9f, "3개의 표창을 동시에 던진다.", 20, false));
+            Thief_skillSet.Add(new Skill("쇼다운 챌린지", 9, SkillType.도적, 7.8f, "살살 때립니다.", 50, false));
+
+            return Thief_skillSet;
+        }
     }
 }
