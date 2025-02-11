@@ -7,6 +7,7 @@ using TextRPG_Maple._03._Scene.SkillScene;
 using System.Numerics;
 using TextRPG_Maple._05._Usable.Skill;
 using TextRPG_Maple._03._Scene.Inventory;
+using TextRPG_Maple._05._Usable.Item;
 
 namespace TextRPG_Maple
 {
@@ -22,6 +23,10 @@ namespace TextRPG_Maple
             // 게임 오브젝트 매니저 사용 예제 - 플레이어 정보 초기화
             GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
             Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+
+            Item test = new Item("무한의 대검", ItemType.Weapon, 70, "설명 : 무한의 대검", 1000, false);
+            player.Inventory.Add(test);
+            player.EquipItem(test);
 
             // 모든 씬을 미리 생성하여 Dictionary에 저장
             var scenes = new Dictionary<SceneType, IScene>
