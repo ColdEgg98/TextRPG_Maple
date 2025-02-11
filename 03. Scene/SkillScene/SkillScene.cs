@@ -39,14 +39,15 @@ namespace TextRPG_Maple._03._Scene.SkillScene
 
             Console.WriteLine();
             Console.WriteLine("1. 장착 관리");
-            Console.WriteLine("2. 인벤토리");
             Console.WriteLine("0. 나가기");
+
+            Console.WriteLine($"클래스스킬 카운트 : {player.classSkill.Count}");
         }
 
         public void Update()
         {
             // 조건에 맞는 올바른 키를 입력할때 까지 반복
-            int input = InputManager.Instance.GetInput(0, 2);
+            int input = InputManager.Instance.GetInput(0, 1);
 
             //입력에 따른 실행
             switch (input)
@@ -59,9 +60,6 @@ namespace TextRPG_Maple._03._Scene.SkillScene
                         InputManager.Instance.WriteLineColor("\n보유한 스킬이 없습니다...", ConsoleColor.DarkGray);
                         Thread.Sleep(600);
                     }
-                    break;
-                case 2:
-                    SceneManager.Instance.EnterScene(SceneType.Inventory);
                     break;
                 case 0:
                     SceneManager.Instance.ExitScene();

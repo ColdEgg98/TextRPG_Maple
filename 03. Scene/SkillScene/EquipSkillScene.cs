@@ -18,6 +18,7 @@ namespace TextRPG_Maple._03._Scene.SkillScene
 
         public void Enter()
         {
+
         }
 
         public void Exit()
@@ -54,7 +55,6 @@ namespace TextRPG_Maple._03._Scene.SkillScene
         {
             // 조건에 맞는 올바른 키를 입력할때 까지 반복
             int input = InputManager.Instance.GetInput(0, player.Skills.Count);
-
 
             //입력에 따른 실행
             switch (input)

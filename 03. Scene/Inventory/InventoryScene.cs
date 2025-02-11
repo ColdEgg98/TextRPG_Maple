@@ -10,11 +10,10 @@ namespace TextRPG_Maple._03._Scene.Inventory
 {
     internal class InventoryScene : IScene
     {
-        Player player;
+        Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
 
         public void Enter()
         {
-            player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
         }
         public void Exit()
         {
@@ -22,7 +21,7 @@ namespace TextRPG_Maple._03._Scene.Inventory
         public void Render()
         {
             Console.Clear();
-            InputManager.Instance.WriteLineColor("인벤토리", ConsoleColor.DarkYellow);
+            InputManager.Instance.WriteLineColor("인벤토리", ConsoleColor.Yellow);
             Console.WriteLine("보유 중인 아아템과 스킬을 확인할 수 있습니다.");
             Console.WriteLine();
             Console.WriteLine("[아이템 목록]");
@@ -39,6 +38,15 @@ namespace TextRPG_Maple._03._Scene.Inventory
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
 
+            player.LevelUp();
+            player.LevelUp();
+            player.LevelUp();
+            player.LevelUp();
+            player.LevelUp();
+            player.LevelUp();
+            player.LevelUp();
+            player.LevelUp();
+            player.LevelUp();
         }
         public void Update()
         {

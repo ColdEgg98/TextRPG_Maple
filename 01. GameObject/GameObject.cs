@@ -26,7 +26,6 @@ namespace TextRPG_Maple
     internal class Status
     {
         //프로퍼티는 {get; set;}은 읽기+쓰기, {get;}은 읽기
-        public int Level { get; set; }
         public int Atk { get; set; }
         public int Def { get; set; }
         public int Gold { get; set; }

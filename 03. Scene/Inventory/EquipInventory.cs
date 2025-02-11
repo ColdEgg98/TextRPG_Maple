@@ -22,7 +22,7 @@ namespace TextRPG_Maple._03._Scene.Inventory
         public void Render()
         {
             Console.Clear();
-            InputManager.Instance.WriteLineColor("인벤토리 - 아이템 장착", ConsoleColor.DarkYellow);
+            InputManager.Instance.WriteLineColor("인벤토리 - 아이템 장착", ConsoleColor.Yellow);
             Console.WriteLine("아이템 번호를 눌러 탈착합니다.");
             Console.WriteLine();
             Console.WriteLine("[아이템 목록]");
