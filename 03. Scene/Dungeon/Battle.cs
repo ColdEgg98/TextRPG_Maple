@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using TextRPG_Maple._01._GameObject.Monster;
+using TextRPG_Maple._01._GameObject.Monster.Boss;
 using TextRPG_Maple._04._Manager;
 using TextRPG_Maple._04._Manager._04._Log;
 using TextRPG_Maple._04._Manager._05._Object;
@@ -21,12 +22,29 @@ namespace TextRPG_Maple._03._Scene.Dungeon
             for (int i = 0; i < monsters.Count; i++)
             {
                 var monster = monsters[i];
-                string status = monster.Stat.Hp > 0 ? "(선택 가능)" : "(죽음)";
-                // 1번부터
-                if(monster.Stat.Hp > 0)
-                    Console.WriteLine($"[{i+1}] {monster.Name} (HP: {monster.Stat.Hp}) {status}");
+                if (monster is Boss boss) // boss로 변환 성공하면 실행
+                {
+                    Console.WriteLine("======== BOSS =========");
+                    boss.BossSetUp();
+                    string status = boss.Stat.Hp > 0 ? "(선택 가능)" : "(죽음)";
+                    // 1번부터
+                    if (boss.Stat.Hp > 0)
+                    {
+                        Console.WriteLine($"[{i + 1}] {boss.Name} (HP: {boss.Stat.Hp}) {status}  {boss.Stat.Atk}");
+                        boss.DisplayBoss();
+                    }
+                    else
+                        InputManager.Instance.WriteLineColor($"[{i + 1}] {monster.Name} (HP: {boss.Stat.Hp}) {status}", ConsoleColor.DarkGray);
+                }
                 else
-                    InputManager.Instance.WriteLineColor($"[{i + 1}] {monster.Name} (HP: {monster.Stat.Hp}) {status}", ConsoleColor.DarkGray);
+                {
+                    string status = monster.Stat.Hp > 0 ? "(선택 가능)" : "(죽음)";
+                    // 1번부터
+                    if (monster.Stat.Hp > 0)
+                        Console.WriteLine($"[{i + 1}] {monster.Name} (HP: {monster.Stat.Hp}) {status}");
+                    else
+                        InputManager.Instance.WriteLineColor($"[{i + 1}] {monster.Name} (HP: {monster.Stat.Hp}) {status}", ConsoleColor.DarkGray);
+                }
             }
             Console.WriteLine("================");
         }
