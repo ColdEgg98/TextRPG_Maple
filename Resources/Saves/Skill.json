@@ -7,7 +7,7 @@
     "Descrip": "\uD589\uC6B4\uC744 \uB2F4\uC740 7\uAC1C\uC758 \uD45C\uCC3D\uC744 \uB358\uC9C4\uB2E4.",
     "Value": 1.1,
     "Cost": 14,
-    "IsEquip": false,
+    "IsEquip": true,
     "IsOwned": true
   },
   {
@@ -18,7 +18,7 @@
     "Descrip": "3\uAC1C\uC758 \uD45C\uCC3D\uC744 \uB3D9\uC2DC\uC5D0 \uB358\uC9C4\uB2E4.",
     "Value": 2.9,
     "Cost": 20,
-    "IsEquip": false,
+    "IsEquip": true,
     "IsOwned": true
   },
   {
@@ -29,7 +29,7 @@
     "Descrip": "\uC0B4\uC0B4 \uB54C\uB9BD\uB2C8\uB2E4.",
     "Value": 7.8,
     "Cost": 50,
-    "IsEquip": false,
+    "IsEquip": true,
     "IsOwned": true
   }
 ]

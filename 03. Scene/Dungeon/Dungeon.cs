@@ -57,9 +57,6 @@ namespace TextRPG_Maple
                     SceneManager.Instance.EnterScene(SceneType.Inventory);
                     break;
                 case 3:
-                    // 레벨에 따른 몬스터 정보를 여기서 삽입
-
-
                     Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
                     while (true)
                     {
@@ -75,11 +72,20 @@ namespace TextRPG_Maple
                         {
                             Floor++;
                         }
+
                         if (keepGoing == 1)
                         {
                             break;
                         }
                     }
+
+                    // 만약 Floor가 30층을 깨서 31이 된 경우.
+                    if(Floor == 31)
+                    {
+                        // 엔딩 씬으로 이동
+                        //SceneManager.Instance.ChangeScene(SceneType.엔딩씬);
+                    }
+
                     break;
                 case 0:
                     SceneManager.Instance.ExitScene();
@@ -88,33 +94,38 @@ namespace TextRPG_Maple
         }
 
 
+        // 던전에서 등장할 몬스터를 설정
         List<Monster> GetMonsters()
         {
-            // 던전에서 등장할 몬스터를 설정
-            // 난이도 관련되선 나중에 추가
-            //List<Monster> monsters = new List<Monster>();
-            //Monster? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린") as Monster;
-            //Monster? orc = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "오크") as Monster;
-
-            if (Floor == 1)
+            if ((Floor % 10) != 0)
             {
-                // 원본으로 부터 "늑대"객체를 찾아서 복제함
-                Monster? wolf = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
-                
-                monsters.Add(wolf);
+                // 랜덤한 숫자의 몬스터를 소환
+                Random rnd = new Random();
+                int count = rnd.Next(1, 5);
+
+                for (int i = 0; i < count; ++i)
+                {
+                    // 게임 오브젝트 매니저로부터 랜덤함 몬스터의 프로토타입 정보를 가져옴.
+                    Monster? monster = GameObjectManager.Instance.GetRandomPrototype(ObjectType.MONSTER) as Monster;
+                    if (monster != null)
+                    {
+                        // 몬스터를 원본으로부터 복제
+                        monster = monster.Clone() as Monster;
+
+                        // 층수에 따라 몬스터의 능력치와 보상을 증가.
+                        monster.AddAbility(Floor);
+
+                        // 몬스터 정보 추가
+                        monsters.Add(monster);
+                    }
+                }
             }
-            else if (Floor == 2)
+            // 10층 마다 보스 몬스터일 경우
+            else
             {
-                Monster? wolf = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
-                wolf.Name = "늑대 A";
-                monsters.Add(wolf);
 
-                wolf = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
-                wolf.Name = "늑대 B";
-                monsters.Add(wolf);
             }
 
-            //return monster
             return monsters;
         }
     }
