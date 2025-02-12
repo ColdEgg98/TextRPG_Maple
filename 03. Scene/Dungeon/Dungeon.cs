@@ -17,7 +17,7 @@ namespace TextRPG_Maple
 {
     internal class DungeonScene : IScene
     {
-        public static int Floor { get; set; } = 5;   // 층수
+        public static int Floor { get; set; } = 1;   // 층수
         List<Monster> monsters = new List<Monster>();
 
         public void Enter()
