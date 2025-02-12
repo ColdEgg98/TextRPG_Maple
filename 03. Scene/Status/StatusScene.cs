@@ -31,12 +31,12 @@ namespace TextRPG_Maple._03._Scene.StatusScene
 
             Console.WriteLine("LV. {0:D2}", player.Level);
             Console.WriteLine("{0} ( {1} )", player.Name, player.Class);
-            Console.WriteLine("공  격  력 : {0}", player.Stat.Atk);
-            Console.WriteLine("방  어  력 : {0}", player.Stat.Def);
-            Console.WriteLine("체 력 (HP) : {0}", player.Stat.Hp);
-            Console.WriteLine("마 력 (MP) : {0}", player.Stat.Mp);
+            Console.WriteLine("공 격 력 : {0}", player.Stat.Atk);
+            Console.WriteLine("방 어 력 : {0}", player.Stat.Def);
+            Console.WriteLine("체력(HP) : {0}", player.Stat.Hp); 
+            Console.WriteLine("마력(MP) : {0}", player.Stat.Mp);
             Console.WriteLine("");
-            Console.WriteLine("소  지  금 : {0} 메 소\n", player.Stat.Gold);
+            Console.WriteLine("소 지 금 : {0} G\n", player.Stat.Gold);
 
             Console.WriteLine("0. 나가기");
         }
@@ -49,7 +49,7 @@ namespace TextRPG_Maple._03._Scene.StatusScene
             switch (input)
             {
                 case 0:
-                    SceneManager.Instance.ChangeScene(SceneType.Town);
+                    SceneManager.Instance.ExitScene();
                     break;
             }
         }
