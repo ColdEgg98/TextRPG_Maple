@@ -62,8 +62,9 @@ namespace TextRPG_Maple
             else if (!endJobSetting)
             {
                 userJob = GameManager.Instance.GetInput(1, 2);
-                GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(userName));
+
                 player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+                player.Name = userName;
                 player.SetClass(userJob);
                 endJobSetting = true;
             }
