@@ -14,7 +14,7 @@ namespace TextRPG_Maple._03._Scene.Rest
     internal class RestScene : IScene
     {
         private Player? player;
-        int restgold = 200;
+        int restgold = 300;
 
         public void Enter()
         {
@@ -33,7 +33,7 @@ namespace TextRPG_Maple._03._Scene.Rest
             Console.Clear();
 
             InputManager.Instance.WriteLineColor("휴식하기", ConsoleColor.Yellow);
-            Console.WriteLine("{0} G를 지불하면 체력과 마력을 회복할 수 있습니다.\n", restgold);
+            Console.WriteLine("{0}G를 지불하면 체력과 마력을 회복할 수 있습니다.\n", restgold);
 
             Console.WriteLine("현재 체력(HP) : {0}", player.Stat.Hp);
             Console.WriteLine("현재 마력(MP) : {0}", player.Stat.Mp);
@@ -60,7 +60,6 @@ namespace TextRPG_Maple._03._Scene.Rest
                         player.Stat.Hp = player.Stat.MaxHp;
                         player.Stat.Mp = player.Stat.MaxMp;
                         player.Stat.Gold -= restgold;
-                        restgold += 50;
                         Console.WriteLine("\n휴식을 완료했습니다.");
                         Thread.Sleep(600);
                     }
