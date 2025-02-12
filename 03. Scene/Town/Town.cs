@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextRPG_Maple._04._Manager._05._Object;
 
 namespace TextRPG_Maple
 {
@@ -12,7 +13,13 @@ namespace TextRPG_Maple
         public void Enter()
         {
             SoundManager.Instance.StopSound(0);
+<<<<<<< Updated upstream
             SoundManager.Instance.PlaySound(SoundType.BGM, "MapleBGM", true);
+=======
+            SoundManager.Instance.PlaySound(SoundType.BGM, "townscene", true);
+            SoundManager.Instance.SetVolume(SoundType.BGM, 0.1f);
+
+>>>>>>> Stashed changes
         }
         public void Exit()
         {
@@ -36,6 +43,9 @@ namespace TextRPG_Maple
 
         public void Update()
         {
+            Player? player;
+            player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+
             // 조건에 맞는 올바른 키를 입력할때 까지 반복
             int input = InputManager.Instance.GetInput(1, 6);
 
@@ -59,6 +69,9 @@ namespace TextRPG_Maple
                 case 5:
                     SoundManager.Instance.PlaySound(SoundType.BGM, "Maplestory BGM - Missing You");
                     SceneManager.Instance.EnterScene(SceneType.Dungeon);
+                    break;
+                case 6:
+                    player.LevelUp();
                     break;
             }
         }

@@ -31,12 +31,14 @@ namespace TextRPG_Maple._03._Scene.StatusScene
 
             Console.WriteLine("LV. {0:D2}", player.Level);
             Console.WriteLine("{0} ( {1} )", player.Name, player.Class);
-            Console.WriteLine("공 격 력 : {0}", player.Stat.Atk);
-            Console.WriteLine("방 어 력 : {0}", player.Stat.Def);
-            Console.WriteLine("체력(HP) : {0}", player.Stat.Hp); 
-            Console.WriteLine("마력(MP) : {0}", player.Stat.Mp);
+            Console.WriteLine($"공 격 력 : {player.Stat.Atk} + {player.EquipAtk}");
+            Console.WriteLine($"방 어 력 : {player.Stat.Def} + {player.EquipDef}");
+            Console.WriteLine($"체력(HP) : {player.Stat.Hp} / {player.Stat.MaxHp}"); 
+            Console.WriteLine($"마력(MP) : {player.Stat.Mp} / {player.Stat.MaxMp}"); 
             Console.WriteLine("");
-            Console.WriteLine("소 지 금 : {0} G\n", player.Stat.Gold);
+            Console.Write("소지금 : ");
+            InputManager.Instance.WriteLineColor($"{player.Stat.Gold}", ConsoleColor.DarkYellow);
+            Console.WriteLine("");
 
             Console.WriteLine("0. 나가기");
         }

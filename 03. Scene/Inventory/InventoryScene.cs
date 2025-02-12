@@ -38,16 +38,6 @@ namespace TextRPG_Maple._03._Scene.Inventory
             Console.WriteLine("2. 스킬 확인");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
-
-            player.LevelUp();
-            player.LevelUp();
-            player.LevelUp();
-            player.LevelUp();
-            player.LevelUp();
-            player.LevelUp();
-            player.LevelUp();
-            player.LevelUp();
-            player.LevelUp();
         }
         public void Update()
         {
@@ -56,7 +46,7 @@ namespace TextRPG_Maple._03._Scene.Inventory
             switch (input)
             {
                 case 1:
-                    if (player.Skills.Count != 0)
+                    if (player.Inventory.Count != 0)
                         SceneManager.Instance.EnterScene(SceneType.EquipInventory);
                     else
                     {
