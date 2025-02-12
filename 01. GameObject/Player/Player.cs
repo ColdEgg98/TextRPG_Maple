@@ -49,6 +49,10 @@ namespace TextRPG_Maple
             EquipDef = 0;
             LevelUPEvent += LearnSkillEvent;
         }
+        public Player(Player other) : base(other.Name)
+        {
+
+        }
 
 /// 전투
         public override void Attack(GameObject monster)
@@ -224,6 +228,11 @@ namespace TextRPG_Maple
             {
                 EquipDef -= (int)item.Value;
             }
+        }
+
+        public override GameObject Clone()
+        {
+            return new Player(this);
         }
     }
 }
