@@ -32,7 +32,6 @@ namespace TextRPG_Maple._01._GameObject.Monster
         {
             int damage = Math.Max(0, Stat.Atk - obj.Stat.Def);
 
-            obj.TakeDamage(damage);
             Random rand = new Random();
             double value = rand.NextDouble();
             if (value < 0.1f) // 10% 확률로 회피
