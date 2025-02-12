@@ -152,7 +152,7 @@ namespace TextRPG_Maple
                         int heigth = Console.CursorTop;
                         // Sound
                         SoundManager.Instance.PlaySound(SoundType.Click, "GetGold");
-                        // TODO: PLAYER BUY
+                        // PLAYER BUY
                         player.Stat.Gold -= itemList[input].Cost * 85 / 100;
                         nowMoney -= itemList[input].Cost;
                         Thread.Sleep(500);
@@ -208,7 +208,7 @@ namespace TextRPG_Maple
                 new Item("무한의 대검", ItemType.Weapon, 70, "설명 : 무한의 대검", 1000, false),
                 new Item("무한의 반지", ItemType.Armor, 40, "설명 : 무한의 대검", 500, false),
                 new Item("무한의 목걸이", ItemType.Armor, 25, "설명 : 무한의 대검", 300, false),
-                new Item("무한의 장갑", ItemType.Weapon, 30, "설명 : 무한의 대검", 200, false),
+                new Item("무한의 단검", ItemType.Weapon, 30, "설명 : 무한의 대검", 200, false),
                 new Item("무한의 신발", ItemType.Armor, 20, "설명 : 무한의 대검", 100, false)
             ]);
             
