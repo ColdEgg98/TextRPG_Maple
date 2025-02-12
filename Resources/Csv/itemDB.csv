@@ -1,0 +1,7 @@
+﻿DataType,Name,Descrip,Value,Cost,IsEquip,IsOwned
+Item,무한의 대검,설명문-대검,70,100,False,False
+Item,무한의 직검,설명-직검,50,200,False,False
+Item,무한의 단검,설명-단검,30,200,False,False
+Item,무한의 반지,설명문-반지,40,500,False,False
+Item,무한의 목걸이,설명-목걸이,25,300,False,False
+Item,무한의 신발,설명-신발,20,100,False,False

@@ -16,19 +16,9 @@ namespace TextRPG_Maple._04._Manager._06._DB
         private static DBManager? instance;
         public static DBManager Instance => instance ??= new DBManager();
 
-        public DBManager()
-        {
-            // save 테스트 용도
-
-            //List<GameObject> monsters = new List<GameObject>();
-            //monsters.Add(new Monster("고블린", 50, 5, 2));
-            //monsters.Add(new Monster("오크", 80, 10, 5));
-            //monsters.Add(new Monster("늑대", 60, 7, 3));
-
-            //SaveToCSV("MonsterDB.csv", monsters);
-        }
-        
-        // 오브젝트 리스트를 CSV 파일로 저장, 이때 GameObject를 기준으로 저장함. 만약 다른 타입의 객체라면 관련 데이터를 
+        //=======================================================================================================================
+        // 오브젝트 리스트를 CSV 파일로 저장, 이때 GameObject를 기준으로 저장함. 만약 다른 타입의 객체라면 다른 방식 사용
+        //=======================================================================================================================
         public static void SaveToCSV(string fileName, List<GameObject> objects)
         {
             string projectRoot = AppDomain.CurrentDomain.BaseDirectory;
@@ -177,6 +167,126 @@ namespace TextRPG_Maple._04._Manager._06._DB
                 Object.Stat = status;
 
             return Object;
+        }
+
+
+        //=======================================================================================================================
+        // GameObject를 상속받은 객체가 아닌, 일반 객체들을 CSV 파일로 저장
+        //=======================================================================================================================
+        public static void SaveToCSV<T>(string fileName, List<T> objects)
+        {
+            string projectRoot = AppDomain.CurrentDomain.BaseDirectory;
+            string fileDirectory = Path.Combine(projectRoot, "..", "..", "..", "Resources", "Csv");
+
+            if (!Directory.Exists(fileDirectory))
+            {
+                Directory.CreateDirectory(fileDirectory);
+            }
+
+            string filePath = Path.Combine(fileDirectory, fileName);
+
+            using (var writer = new StreamWriter(filePath, false, new UTF8Encoding(true)))
+            {
+                if (objects.Count == 0) return;
+
+                var props = typeof(T).GetProperties().ToList();
+
+                writer.WriteLine("DataType," + string.Join(",", props.Select(p => p.Name)));
+
+                foreach (var obj in objects)
+                {
+                    List<string> values = new List<string>
+            {
+                obj.GetType().Name
+            };
+
+                    values.AddRange(props.Select(p =>
+                    {
+                        var value = p.GetValue(obj);
+                        if (p.PropertyType.IsEnum) // Enum 타입인 경우 int로 변환
+                        {
+                            return ((int)value).ToString();
+                        }
+                        return value?.ToString() ?? "";
+                    }));
+
+                    writer.WriteLine(string.Join(",", values));
+                }
+            }
+        }
+
+        public static List<T> LoadFromCSV<T>(string fileName) where T : class, new()
+        {
+            string projectRoot = AppDomain.CurrentDomain.BaseDirectory;
+            string fileDirectory = Path.Combine(projectRoot, "..", "..", "..", "Resources", "Csv");
+
+            if (!Directory.Exists(fileDirectory))
+            {
+                return null;
+            }
+
+            string filePath = Path.Combine(fileDirectory, fileName);
+
+            List<T> objects = new List<T>();
+
+            using (var reader = new StreamReader(filePath))
+            {
+                string headerLine = reader.ReadLine();
+                if (headerLine == null) return objects;
+
+                string[] headers = headerLine.Split(',');
+
+                while (!reader.EndOfStream)
+                {
+                    string[] values = reader.ReadLine().Split(',');
+
+                    string DataType = values[0];
+                    Dictionary<string, string> propertyDict = new Dictionary<string, string>();
+
+                    for (int i = 1; i < headers.Length; i++)
+                    {
+                        propertyDict[headers[i]] = values[i];
+                    }
+
+                    T obj = CreateObject<T>(DataType, propertyDict);
+                    if (obj != null)
+                    {
+                        objects.Add(obj);
+                    }
+                }
+            }
+
+            return objects;
+        }
+
+        private static T CreateObject<T>(string dataType, Dictionary<string, string> properties) where T : class, new()
+        {
+            Type? type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == dataType);
+
+            if (type == null)
+                return null;
+
+            T obj = new T();
+
+            foreach (var prop in properties)
+            {
+                PropertyInfo propertyInfo = type.GetProperty(prop.Key);
+                if (propertyInfo != null)
+                {
+                    object value;
+                    if (propertyInfo.PropertyType.IsEnum) // Enum 타입인 경우
+                    {
+                        value = Enum.ToObject(propertyInfo.PropertyType, int.Parse(prop.Value)); // int로 변환 후 Enum으로 캐스팅
+                    }
+                    else
+                    {
+                        value = Convert.ChangeType(prop.Value, propertyInfo.PropertyType);
+                    }
+                    propertyInfo.SetValue(obj, value);
+                }
+            }
+
+            return obj;
         }
     }
 }

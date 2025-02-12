@@ -19,9 +19,18 @@ namespace TextRPG_Maple._05._Usable.Item
 
     internal class Item : Usable
     {
+        public static List<Item> itemLists = new List<Item>();
+        static public void SetItemLists(List<Item> list) { itemLists = list; }
+
+
         public ItemType ItemType;
 
-        public Item(string name, ItemType itemType, float value, string descrip, int cost) : base(name, value, descrip, cost)
+        public Item() : base("", 0, "", 0, false)
+        {
+
+        }
+
+        public Item(string name, ItemType itemType, float value, string descrip, int cost, bool isOwned ) : base(name, value, descrip, cost, isOwned)
         {
             Name = name;
             ItemType = itemType;
