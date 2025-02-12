@@ -18,7 +18,7 @@ namespace TextRPG_Maple._03._Scene.Ending
         {
             endingcreadits = new List<string>()
                     {
-                        " ",
+                        "",
                         "3 조",
                         "Maple Text RPG",
                         "------------------------",
@@ -29,6 +29,7 @@ namespace TextRPG_Maple._03._Scene.Ending
                         "     : 김 효준",
                         "     : 오 우택",
                         "     : 정 성욱",
+                        "",
                         "------------------------",
                         "플레이 해 주셔서 감사드립니다!",
                         "",
