@@ -125,7 +125,6 @@ namespace TextRPG_Maple
             Stat.Exp += monster.Stat.Exp;
             Console.WriteLine($"{Stat.Gold}G 를 획득했습니다.");
             Console.WriteLine($"{Stat.Exp} 경험치를 획득했습니다.");
-            SoundManager.Instance.PlaySound(SoundType.BGM, "Final_Fantasy_Victory");
             if (Stat.Exp >= requiredExp)
                 LevelUp();
         }

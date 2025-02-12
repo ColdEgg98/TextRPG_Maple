@@ -11,7 +11,8 @@ namespace TextRPG_Maple
     {
         public void Enter()
         {
-
+            SoundManager.Instance.StopSound(0);
+            SoundManager.Instance.PlaySound(SoundType.BGM, "MapleBGM", true);
         }
         public void Exit()
         {
@@ -29,7 +30,7 @@ namespace TextRPG_Maple
                 "2.인벤토리\n" +
                 "3.상점\n" +
                 "4.휴식\n" +
-                "5.던전\n"
+                "5.던전\n\n"
                 );
         }
 
@@ -42,7 +43,8 @@ namespace TextRPG_Maple
             switch (input)
             {
                 case 1:
-                    //StatusScreen();
+                    //StatusScene();
+                    SceneManager.Instance.EnterScene(SceneType.StatusScene);
                     break;
                 case 2:
                     SceneManager.Instance.EnterScene(SceneType.Inventory);
@@ -55,6 +57,7 @@ namespace TextRPG_Maple
                     //RestScene();
                     break;
                 case 5:
+                    SoundManager.Instance.PlaySound(SoundType.BGM, "Maplestory BGM - Missing You");
                     SceneManager.Instance.EnterScene(SceneType.Dungeon);
                     break;
             }

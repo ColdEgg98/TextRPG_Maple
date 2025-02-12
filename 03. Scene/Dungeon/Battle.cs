@@ -81,19 +81,25 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                 Console.ReadKey();
             }
             // Result
-            Console.Clear();
+            Console.WriteLine();
             InputManager.Instance.WriteLineColor("전투 결과\n", ConsoleColor.DarkYellow);
             Console.WriteLine(player.IsAlive ? "승리!!" : "패배...");
             Console.WriteLine(player.IsAlive ? "전투에서 승리했습니다!" : "플레이어가 패배했습니다...");
             if (player.IsAlive)
             {
+                SoundManager.Instance.PlaySound(SoundType.BGM, "Final_Fantasy_Victory");
+                Thread.Sleep(2000);
                 Console.WriteLine("\n1. 계속 진행하기");
                 Console.WriteLine("0. 입구로 돌아가기");
                 int input = GameManager.Instance.GetInput(0, 1);
                 if (input == 0)
                     return 1;
                 else
+                {
+                    SoundManager.Instance.StopSound(0);
+                    SoundManager.Instance.PlaySound(SoundType.BGM, "Maplestory BGM - Missing You", true);
                     return 2;
+                }
             }
             else
             {
@@ -113,11 +119,6 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                 if (monsters[i].Stat.Hp > 0) monsterAlives++;
             }
 
-            if (monsterAlives == 0)
-            {
-                Console.WriteLine("모든 몬스터가 죽었습니다. 전투 종료!");
-                return;
-            }
             Console.WriteLine("1 ) 일반 공격");
             Console.WriteLine("2 ) 스킬");
             int act = GameManager.Instance.GetInput(1, 2);
@@ -138,7 +139,7 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                         continue;
                     }
 
-                    skillInput = GameManager.Instance.GetInput(1, player.Skills.Count);
+                    skillInput = GameManager.Instance.GetInput(1, player.Skills.Count, " ");
                     --skillInput;
                     if (!player.Skills[skillInput].IsEquip)
                     {
@@ -192,6 +193,8 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                 if (monsters[input].Stat.Hp <= 0)
                 {
                     Console.WriteLine($"{monsters[input].Name}을 처치했습니다!");
+                    player.Takeloot(monsters[input]);
+                    Thread.Sleep(500);
                 }
             }
         }
@@ -214,7 +217,5 @@ namespace TextRPG_Maple._03._Scene.Dungeon
             }
             Console.WriteLine("======================");
         }
-       
     }
-
 }
