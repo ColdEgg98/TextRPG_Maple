@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextRPG_Maple._01._GameObject.Monster;
+using TextRPG_Maple._04._Manager;
 using TextRPG_Maple._04._Manager._04._Log;
 using TextRPG_Maple._04._Manager._05._Object;
 

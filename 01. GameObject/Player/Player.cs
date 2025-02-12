@@ -58,6 +58,7 @@ namespace TextRPG_Maple
         public override void Attack(GameObject monster)
         {
             int damage = Math.Max(0, Stat.Atk + EquipAtk - monster.Stat.Def);
+            SoundManager.Instance.PlaySound(SoundType.Attack, "Player_Attack");
 
             monster.TakeDamage(damage);
         }
@@ -152,6 +153,7 @@ namespace TextRPG_Maple
                     this.AddSkill(skill);
                     Console.WriteLine("레벨업으로 스킬을 획득했습니다!");
                     Console.WriteLine($"스킬 획득! : {skill.Name}");
+                    SoundManager.Instance.PlaySound(SoundType.learnSkill, "LearnSkill");
                     Thread.Sleep(500);
 
                     break;

@@ -15,7 +15,7 @@ namespace TextRPG_Maple
         {
             // 사운드 매니저 사용 예제
             SoundManager.Instance.LoadSounds();
-            SoundManager.Instance.PlaySound(SoundType.BGM, "aLIEz_Piano", true);
+            SoundManager.Instance.PlaySound(SoundType.BGM, "MapleBGM", true);
             SoundManager.Instance.SetVolume(SoundType.BGM, 0.1f);
 
             // 플레이어 생성 예제

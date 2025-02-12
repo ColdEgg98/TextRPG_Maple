@@ -11,10 +11,7 @@ namespace TextRPG_Maple._01._GameObject.Monster
 {
     internal class Monster : GameObject
     {
-        public Monster() : base("")
-        {
-
-        }
+        public Monster() : base("") { }
         public Monster(string name, int hp, int attack, int defense, int exp, int gold) : base(name)
         {
             Stat.Hp = hp;

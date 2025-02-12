@@ -15,6 +15,8 @@ namespace TextRPG_Maple._04._Manager
     {
         BGM,
         Click,
+        learnSkill,
+        Attack,
         END
     }
 

@@ -23,7 +23,7 @@ namespace TextRPG_Maple._05._Usable.Skill
 
         public Skill(string name, int needLv, SkillType skillType, float value, string descrip, int cost, bool isAreaSkill) : base(name, value, descrip, cost)
         {
-            isAeraSkill = false;
+            isAeraSkill = isAreaSkill;
             SkillType = skillType;
             NeedLv = needLv;
         }
@@ -39,6 +39,8 @@ namespace TextRPG_Maple._05._Usable.Skill
                 case "마법사":
                     return SetWarriorSkill();
                 default:
+                    Console.WriteLine("예외가 발생했습니다.");
+                    Thread.Sleep(1000);
                     return null;
             }
         }
