@@ -42,16 +42,16 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                 Console.WriteLine("몬스터 목록: \n");
                 for (int i = 0; i < monsters.Count; i++)
                 {
-                    string status = monster.Stat.Hp > 0 ? "(선택 가능)" : "(죽음)";
+                    string status = monsters[i].Stat.Hp > 0 ? "(선택 가능)" : "(죽음)";
                     // 1번부터
-                    if (monster.Stat.Hp > 0)
+                    if (monsters[i].Stat.Hp > 0)
                     {
-                        Console.WriteLine($"[{i + 1}] {monster.Name} (HP: {monster.Stat.Hp}) {status}");
+                        Console.WriteLine($"[{i + 1}] {monsters[i].Name} (HP: {monsters[i].Stat.Hp}) {status}");
                         Console.WriteLine();
                     }
                     else
                     {
-                        InputManager.Instance.WriteLineColor($"[{i + 1}] {monster.Name} (HP: {monster.Stat.Hp}) {status}", ConsoleColor.DarkGray);
+                        InputManager.Instance.WriteLineColor($"[{i + 1}] {monsters[i].Name} (HP: {monsters[i].Stat.Hp}) {status}", ConsoleColor.DarkGray);
                         Console.WriteLine();
                     }
                 }
