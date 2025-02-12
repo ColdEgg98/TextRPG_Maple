@@ -10,10 +10,11 @@ namespace TextRPG_Maple._03._Scene.Inventory
 {
     internal class InventoryScene : IScene
     {
-        Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+        private Player? player;
 
         public void Enter()
         {
+            player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
         }
         public void Exit()
         {
@@ -38,6 +39,7 @@ namespace TextRPG_Maple._03._Scene.Inventory
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
 
+            // Test : 스킬 이벤트 체크
             player.LevelUp();
             player.LevelUp();
             player.LevelUp();
@@ -55,7 +57,7 @@ namespace TextRPG_Maple._03._Scene.Inventory
             switch (input)
             {
                 case 1:
-                    if (player.Skills.Count != 0)
+                    if (player.Inventory.Count != 0)
                         SceneManager.Instance.EnterScene(SceneType.EquipInventory);
                     else
                     {
