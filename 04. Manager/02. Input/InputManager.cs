@@ -33,14 +33,16 @@ namespace TextRPG_Maple._04._Manager
             Console.ResetColor();
         }
 
-        public int GetInput(int min, int max)
+        public int GetInput(int min, int max, string comment = "")
         {
             int top = Console.CursorTop;
             int left = Console.CursorLeft;
             while (true) //return이 되기 전까지 반복
             {
-                Console.Write("원하시는 행동을 입력해주세요.");
-
+                if(comment == "")
+                    Console.Write("원하시는 행동을 입력해주세요.");
+                else
+                    Console.Write(comment);
                 //int.TryParse는 int로 변환이 가능한지 bool값을 반환, 가능(true)할 경우 out int input으로 숫자도 반환
                 char key = Console.ReadKey(true).KeyChar;
                 if (int.TryParse(key.ToString(), out int input) && (input >= min) && (input <= max))

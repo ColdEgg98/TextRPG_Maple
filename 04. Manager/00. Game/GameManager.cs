@@ -23,5 +23,9 @@
         {
             return InputManager.Instance.GetInput(min, max);
         }
+        public int GetInput(int min, int max, string comment)
+        {
+            return InputManager.Instance.GetInput(min, max, comment);
+        }
     }
 }
