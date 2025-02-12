@@ -45,7 +45,7 @@ namespace TextRPG_Maple
             Stat = new Status();
 
             Level = 1;
-            Stat.Atk = 200;
+            Stat.Atk = 20;
             Stat.Def = 5;
             Stat.Hp = 1000;
             Stat.MaxHp = Stat.Hp;
