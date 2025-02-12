@@ -6,11 +6,11 @@ namespace TextRPG_Maple._03._Scene.SkillScene
 {
     internal class SkillScene : IScene
     {
-        Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+        private Player? player;
 
         public void Enter()
         {
-
+            player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
         }
 
         public void Exit()
@@ -29,19 +29,17 @@ namespace TextRPG_Maple._03._Scene.SkillScene
             Console.WriteLine();
             Console.WriteLine("[스킬 목록]");
 
-            if (player.Skills == null|| player.Skills.Count == 0)
+            if (player.Skills.Count == 0)
                 InputManager.Instance.WriteLineColor("배운 스킬이 없습니다...", ConsoleColor.DarkGray);
             else
             {
-                for (int i = 0; i < player.Skills.Count; i++) // 스택 오버플로우?
+                for (int i = 0; i < player.Skills.Count; i++)
                     Console.WriteLine(player.Skills[i].UsableDisplay());
             }
 
             Console.WriteLine();
             Console.WriteLine("1. 장착 관리");
             Console.WriteLine("0. 나가기");
-
-            Console.WriteLine($"클래스스킬 카운트 : {player.classSkill.Count}");
         }
 
         public void Update()

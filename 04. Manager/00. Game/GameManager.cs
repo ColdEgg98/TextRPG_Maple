@@ -14,8 +14,6 @@
 
         //....
 
-        public Player player;
-
         public void Run()
         {
             SceneManager.Instance.RunCurrentScene();
@@ -25,9 +23,9 @@
         {
             return InputManager.Instance.GetInput(min, max);
         }
-        public void SetPlayer(Player player)
+        public int GetInput(int min, int max, string comment)
         {
-            this.player = player;
+            return InputManager.Instance.GetInput(min, max, comment);
         }
     }
 }

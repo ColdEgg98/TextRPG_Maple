@@ -30,8 +30,10 @@ namespace TextRPG_Maple
 
         public Player(string name) : base(name)
         {
+            Stat = new Status();
+
             Level = 1;
-            Stat.Atk = 10;
+            Stat.Atk = 100;
             Stat.Def = 5;
             Stat.Hp = 100;
             Stat.MaxHp = Stat.Hp;
@@ -50,10 +52,16 @@ namespace TextRPG_Maple
             LevelUPEvent += LearnSkillEvent;
         }
 
+        public Player(Player other) : base(other.Name)
+        {
+            Stat = other.Stat.Clone();
+        }
+
 /// 전투
         public override void Attack(GameObject monster)
         {
             int damage = Math.Max(0, Stat.Atk + EquipAtk - monster.Stat.Def);
+            SoundManager.Instance.PlaySound(SoundType.Attack, "Player_Attack");
 
             monster.TakeDamage(damage);
         }
@@ -93,6 +101,7 @@ namespace TextRPG_Maple
             Stat.Exp += monster.Stat.Exp;
             Console.WriteLine($"{Stat.Gold}G 를 획득했습니다.");
             Console.WriteLine($"{Stat.Exp} 경험치를 획득했습니다.");
+            SoundManager.Instance.PlaySound(SoundType.BGM, "Final_Fantasy_Victory");
             if (Stat.Exp >= requiredExp)
                 LevelUp();
         }
@@ -114,15 +123,15 @@ namespace TextRPG_Maple
             Console.Write("현재 레벨 : ");
             InputManager.Instance.WriteLineColor($"{Level}", ConsoleColor.Yellow);
 
-            if ( Stat.Exp >= requiredExp)
+            if (Stat.Exp >= requiredExp)
                 LevelUp();
         }
 
-/// 직업 & 스킬
+        /// 직업 & 스킬
         public void SetClass(int input)
         {
             Skill skill = new Skill();
-            
+
             switch (input)
             {
                 case 1:
@@ -148,10 +157,21 @@ namespace TextRPG_Maple
                     this.AddSkill(skill);
                     Console.WriteLine("레벨업으로 스킬을 획득했습니다!");
                     Console.WriteLine($"스킬 획득! : {skill.Name}");
+                    SoundManager.Instance.PlaySound(SoundType.learnSkill, "LearnSkill");
                     Thread.Sleep(500);
 
                     break;
                 }
+            }
+        }
+
+        public void ShowSkill()
+        {
+            if (this.Skills.Count == 0)
+                InputManager.Instance.WriteLineColor("배운 스킬이 없습니다...", ConsoleColor.DarkGray);
+            for (int i = 0; i < this.Skills.Count; i++)
+            {
+                Console.WriteLine($"{i+1}. " + this.Skills[i].UsableDisplay());
             }
         }
 
@@ -162,13 +182,13 @@ namespace TextRPG_Maple
         }
 
 
-/// 아이템
+        /// 아이템
         public void EquipItem(Item item)
         {
             if (item.IsEquip)
             {
                 // 장비 빼기
-                UnEquip (item);
+                UnEquip(item);
             }
             else
             {
@@ -186,7 +206,6 @@ namespace TextRPG_Maple
                     if (Inventory[i].ItemType == ItemType.Weapon)
                     {
                         UnEquip(Inventory[i]);
-                        break;
                     }
                 }
                 EquipAtk += (int)item.Value;
@@ -200,7 +219,6 @@ namespace TextRPG_Maple
                     if (Inventory[i].ItemType == ItemType.Armor)
                     {
                         UnEquip(Inventory[i]);
-                        break;
                     }
                 }
                 EquipDef += (int)item.Value;
@@ -226,6 +244,11 @@ namespace TextRPG_Maple
             {
                 EquipDef -= (int)item.Value;
             }
+        }
+
+        public override GameObject Clone()
+        {
+            return new Player(this);
         }
     }
 }

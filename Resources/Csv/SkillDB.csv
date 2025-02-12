@@ -1,0 +1,7 @@
+﻿DataType,SkillType,NeedLv,Name,Descrip,Value,Cost,IsEquip,IsOwned
+Skill,0,3,슬래시 블러스트,Mp를 소비하여 주위의 적 다수를 동시에 공격한다.,2,10,False,False
+Skill,0,5,브랜디쉬,눈 앞의 적 여러명을 두 번 연속 공격한다.,2.8,16,False,False
+Skill,0,8,인사이징,정신을 집중하여 전방으로 검을 크게 내리긋는다. ,4,36,False,False
+Skill,1,3,럭키 세븐,행운을 담은 7개의 표창을 던진다.,1.1,14,False,False
+Skill,1,6,트리플 스로우,3개의 표창을 동시에 던진다.,2.9,20,False,False
+Skill,1,9,쇼다운 챌린지,살살 때립니다.,7.8,50,False,False

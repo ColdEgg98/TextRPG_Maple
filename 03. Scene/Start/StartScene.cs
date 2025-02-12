@@ -4,15 +4,15 @@ namespace TextRPG_Maple
 {
     internal class StartScene : IScene
     {
-        Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
-
+        //Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+        Player player;
         private bool endNameSetting = false;
         private bool endJobSetting = false;
         private string userName;
         private int userJob;
         public void Enter()
         {
-            // TODO : 데이터가 있는지 확인
+
         }
 
         public void Exit()
@@ -46,7 +46,7 @@ namespace TextRPG_Maple
             if (endJobSetting)
             {
                 Console.WriteLine("환영합니다." + player.Name + "님");
-                Console.WriteLine("직업 : " + player.Class + "로 시작합니다.");
+                //Console.WriteLine("직업 : " + player.Class + "로 시작합니다.");
             }
         }
 
@@ -62,8 +62,9 @@ namespace TextRPG_Maple
             else if (!endJobSetting)
             {
                 userJob = GameManager.Instance.GetInput(1, 2);
+                GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(userName));
+                player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
                 player.SetClass(userJob);
-                GameManager.Instance.SetPlayer(player);
                 endJobSetting = true;
             }
             else

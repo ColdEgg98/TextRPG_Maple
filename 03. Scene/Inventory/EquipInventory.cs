@@ -11,10 +11,11 @@ namespace TextRPG_Maple._03._Scene.Inventory
 {
     internal class EquipInventory : IScene
     {
-        Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+        private Player? player;
 
         public void Enter()
         {
+            player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
         }
         public void Exit()
         {
