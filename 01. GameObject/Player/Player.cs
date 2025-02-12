@@ -31,6 +31,10 @@ namespace TextRPG_Maple
             EquipAtk = 0;
             EquipDef = 0;
         }
+        public Player(Player other) : base(other.Name)
+        {
+
+        }
 
         public override void Attack(GameObject monster)
         {
@@ -109,6 +113,11 @@ namespace TextRPG_Maple
                     Class = "마법사";
                     break;
             }
+        }
+
+        public override GameObject Clone()
+        {
+            return new Player(this);
         }
     }
 }

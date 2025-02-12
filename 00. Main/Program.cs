@@ -4,6 +4,7 @@ using System.Threading.Channels;
 using System.Runtime.Serialization;
 using TextRPG_Maple._04._Manager._05._Object;
 using TextRPG_Maple._03._Scene.SkillScene;
+using TextRPG_Maple._04._Manager._06._DB;
 
 namespace TextRPG_Maple
 {
@@ -13,8 +14,18 @@ namespace TextRPG_Maple
         {
             // 사운드 매니저 사용 예제
             SoundManager.Instance.LoadSounds();
-            SoundManager.Instance.PlaySound(SoundType.BGM, "aLIEz_Piano", true);
-            SoundManager.Instance.SetVolume(SoundType.BGM, 0.3f);
+            //SoundManager.Instance.PlaySound(SoundType.BGM, "aLIEz_Piano", true);
+            //SoundManager.Instance.SetVolume(SoundType.BGM, 0.3f);
+
+            // DB로 부터 데이터 가져옴
+            List<GameObject> monsters = DBManager.LoadFromCSV("MonsterDB.csv");
+            foreach (GameObject monster in monsters)
+            {
+                GameObjectManager.Instance.AddPrototypeObject(ObjectType.MONSTER, monster.Name, monster);
+            }
+
+            GameObject? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린");
+
 
             // 게임 오브젝트 매니저 사용 예제 - 플레이어 정보 초기화
             //GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
