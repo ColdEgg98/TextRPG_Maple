@@ -49,12 +49,9 @@ namespace TextRPG_Maple
             EquipDef = 0;
             LevelUPEvent += LearnSkillEvent;
         }
-        public Player(Player other) : base(other.Name)
-        {
+        public Player(Player other) : base(other.Name) { }
 
-        }
-
-/// 전투
+        /// 전투
         public override void Attack(GameObject monster)
         {
             int damage = Math.Max(0, Stat.Atk + EquipAtk - monster.Stat.Def);
@@ -98,6 +95,7 @@ namespace TextRPG_Maple
             Stat.Exp += monster.Stat.Exp;
             Console.WriteLine($"{Stat.Gold}G 를 획득했습니다.");
             Console.WriteLine($"{Stat.Exp} 경험치를 획득했습니다.");
+            SoundManager.Instance.PlaySound(SoundType.BGM, "Final_Fantasy_Victory");
             if (Stat.Exp >= requiredExp)
                 LevelUp();
         }
@@ -119,15 +117,15 @@ namespace TextRPG_Maple
             Console.Write("현재 레벨 : ");
             InputManager.Instance.WriteLineColor($"{Level}", ConsoleColor.Yellow);
 
-            if ( Stat.Exp >= requiredExp)
+            if (Stat.Exp >= requiredExp)
                 LevelUp();
         }
 
-/// 직업 & 스킬
+        /// 직업 & 스킬
         public void SetClass(int input)
         {
             Skill skill = new Skill();
-            
+
             switch (input)
             {
                 case 1:
@@ -168,13 +166,13 @@ namespace TextRPG_Maple
         }
 
 
-/// 아이템
+        /// 아이템
         public void EquipItem(Item item)
         {
             if (item.IsEquip)
             {
                 // 장비 빼기
-                UnEquip (item);
+                UnEquip(item);
             }
             else
             {
@@ -191,7 +189,7 @@ namespace TextRPG_Maple
                 {
                     if (Inventory[i].ItemType == ItemType.Weapon)
                     {
-                        UnEquip(Inventory[i]);      
+                        UnEquip(Inventory[i]);
                     }
                 }
                 EquipAtk += (int)item.Value;

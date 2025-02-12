@@ -22,6 +22,7 @@ namespace TextRPG_Maple._03._Scene.Inventory
         public void Render()
         {
             Console.Clear();
+            InputManager.Instance.Write("\x1b[1m테스트 출력입니다!\n\x1b[0m");
             InputManager.Instance.WriteLineColor("인벤토리", ConsoleColor.Yellow);
             Console.WriteLine("보유 중인 아아템과 스킬을 확인할 수 있습니다.");
             Console.WriteLine();
@@ -49,6 +50,8 @@ namespace TextRPG_Maple._03._Scene.Inventory
             player.LevelUp();
             player.LevelUp();
             player.LevelUp();
+
+            InputManager.Instance.Write("레벨업 했습니다. 현재 레벨 : ");
         }
         public void Update()
         {

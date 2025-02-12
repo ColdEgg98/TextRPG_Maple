@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using TextRPG_Maple._01._GameObject.Monster;
@@ -15,7 +16,9 @@ namespace TextRPG_Maple._03._Scene.Dungeon
         public void ShowBattleStatus(Player player, List<Monster> monsters)
         {
             Console.WriteLine("==== 전투 시작 ====");
-            Console.WriteLine($"플레이어: {player.Name} (HP: {player.Stat.Hp})");
+            Console.Write($"플레이어: {player.Name}");
+            InputManager.Instance.WriteLineColor(DisplayHP(player.Stat.Hp, player.Stat.MaxHp), ConsoleColor.DarkRed);
+
             Console.WriteLine("몬스터 목록:");
             for (int i = 0; i < monsters.Count; i++)
             {
@@ -24,6 +27,16 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                 Console.WriteLine($"[{i}] {monster.Name} (HP: {monster.Stat.Hp}) {status}");
             }
             Console.WriteLine("================");
+        }
+
+        public string DisplayHP(int hp, int maxHp)
+        {
+            string hpstr;
+
+            if (hp <= maxHp * 0.2)
+                return hpstr = $" \x1b[5m{hp}\x1b[0m"; // 체력이 얼마 남지 않으면 깜빡임
+            else
+                return hpstr = $" (HP: {hp}";
         }
     }
 

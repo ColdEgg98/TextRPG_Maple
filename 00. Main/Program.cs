@@ -71,9 +71,12 @@ namespace TextRPG_Maple
             // 프로토타입으로 부터 객체를 복사
             GameObject? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린");
 
- 
-            // 모든 씬을 미리 생성하여 Dictionary에 저장
-            var scenes = new Dictionary<SceneType, IScene>
+            // ANSI Escape Code
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+                // 모든 씬을 미리 생성하여 Dictionary에 저장
+                var scenes = new Dictionary<SceneType, IScene>
                 {
                 { SceneType.Town, new TownScene() },
                 { SceneType.Store, new StoreScene() },

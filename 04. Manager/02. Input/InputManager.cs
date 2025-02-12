@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace TextRPG_Maple._04._Manager
 {
@@ -55,6 +53,35 @@ namespace TextRPG_Maple._04._Manager
                 Console.Write(new string(' ', 37));
                 Console.SetCursorPosition(left, top);
             }
+        }
+
+        //========================================================================= 
+        // ANSI Escape Code
+        //=========================================================================
+        public InputManager()
+        {
+            EnableAnsiEscapeCodes();
+        }
+
+        // Windows API 함수 선언
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern IntPtr GetStdHandle(int nStdHandle);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool GetConsoleMode(IntPtr hConsoleHandle, out uint lpMode);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint dwMode);
+
+        // 상수 정의
+        private const int STD_OUTPUT_HANDLE = -11;
+        private const uint ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
+
+        private static void EnableAnsiEscapeCodes()
+        {
+            var handle = GetStdHandle(STD_OUTPUT_HANDLE);
+            GetConsoleMode(handle, out uint mode);
+            SetConsoleMode(handle, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
         }
     }
 }
