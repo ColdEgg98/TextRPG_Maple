@@ -77,9 +77,6 @@ namespace TextRPG_Maple
             Item.SetItemLists(items);
 
 
-            // 프로토타입으로 부터 객체를 복사
-            GameObject? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린");
-
             // ANSI Escape Code
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                 Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -98,6 +95,7 @@ namespace TextRPG_Maple
                 { SceneType.Inventory, new InventoryScene() },
                 { SceneType.EquipInventory, new EquipInventory() },
             };
+
 
             // 플레이어 정보 생성
             GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
