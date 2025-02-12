@@ -9,15 +9,24 @@ using TextRPG_Maple._01._GameObject.Monster;
 using TextRPG_Maple._04._Manager._05._Object;
 using TextRPG_Maple._04._Manager._04._Log;
 using TextRPG_Maple._03._Scene.Dungeon;
+using TextRPG_Maple._04._Manager._06._DB;
 
 namespace TextRPG_Maple
 {
     internal class DungeonScene : IScene
     {
         public int Floor { get; }   // 층수
-        
+        int stage = 1;
         public void Enter()
         {
+            List<GameObject> monsters = DBManager.LoadFromCSV("MonsterDB.csv");
+            foreach (GameObject monster in monsters)
+            {
+                GameObjectManager.Instance.AddPrototypeObject(ObjectType.MONSTER, monster.Name, monster);
+            }
+
+            // 프로토타입으로 부터 객체를 복사
+            GameObject? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린");
         }
         public void Exit()
         {
@@ -31,7 +40,7 @@ namespace TextRPG_Maple
             Console.WriteLine();
             Console.WriteLine("1. 상태 보기");
             Console.WriteLine("2. 인벤토리");
-            Console.WriteLine("3. 전투 시작");  // "전투 시작 : n층" 처럼 층수가 출력되어야 함. 기존 층수에 대한 정보가 존재. 
+            Console.WriteLine($"3. 전투 시작 : {stage}층");  // "전투 시작 : n층" 처럼 층수가 출력되어야 함. 기존 층수에 대한 정보가 존재. 
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
         }
@@ -58,8 +67,18 @@ namespace TextRPG_Maple
                     Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
 
                     BattleView battleView = new BattleView();
-                    BattleController battleController = new BattleController(player, GetMonsters(), battleView);
-                    battleController.StartBattle();
+                    BattleController battleController = new BattleController(player, GetMonsters2(), battleView);
+                    int keepGoing = battleController.StartBattle();
+                    if (keepGoing > 0) // 1(clear and stop) or 2(clear and go)
+                    {
+                        stage++;
+                    }
+                    if (keepGoing == 2)
+                    {
+                        BattleView battleView2 = new BattleView();
+                        BattleController battleController2 = new BattleController(player, GetMonsters(), battleView2);
+                        battleController2.StartBattle();
+                    }
                     break;
                 case 0:
                     SceneManager.Instance.ExitScene();
@@ -72,8 +91,22 @@ namespace TextRPG_Maple
         {
             // 던전에서 등장할 몬스터를 설정
             // 난이도 관련되선 나중에 추가
-            return new List<Monster>();
-        }
+            Monster? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린") as Monster;
+            Monster? orc = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "오크") as Monster;
+            Monster? wolf = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
 
+            //return new List<Monster>();
+            return new List<Monster> { goblin,  wolf, orc };
+        }
+        List<Monster> GetMonsters2()
+        {
+            // 던전에서 등장할 몬스터를 설정
+            // 난이도 관련되선 나중에 추가
+            Monster? wolf2 = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
+            Monster? wolf3 = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
+            Monster? wolf4 = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
+            //return new List<Monster>();
+            return new List<Monster> { wolf2, wolf3, wolf4 };
+        }
     }
 }

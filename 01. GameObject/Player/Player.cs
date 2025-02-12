@@ -31,7 +31,7 @@ namespace TextRPG_Maple
         public Player(string name) : base(name)
         {
             Level = 1;
-            Stat.Atk = 10;
+            Stat.Atk = 100;
             Stat.Def = 5;
             Stat.Hp = 100;
             Stat.MaxHp = Stat.Hp;
