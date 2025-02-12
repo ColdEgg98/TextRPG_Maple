@@ -205,12 +205,14 @@ namespace TextRPG_Maple
             itemList.Clear();  // 기존 리스트를 초기화
             itemList.AddRange( // 새로운 아이템 추가
             [
-                new Item("무한의 대검", ItemType.Weapon, 70, "설명 : 무한의 대검", 1000, false),
-                new Item("무한의 반지", ItemType.Armor, 40, "설명 : 무한의 대검", 500, false),
-                new Item("무한의 목걸이", ItemType.Armor, 25, "설명 : 무한의 대검", 300, false),
-                new Item("무한의 단검", ItemType.Weapon, 30, "설명 : 무한의 대검", 200, false),
-                new Item("무한의 신발", ItemType.Armor, 20, "설명 : 무한의 대검", 100, false)
-            ]);
+                new Item("무한의 대검", ItemType.Weapon, 70, "설명문-대검", 100, false),
+                new Item("무한의 직검", ItemType.Weapon, 50, "설명-직검", 200, false),
+                new Item("무한의 단검", ItemType.Weapon, 30, "설명-단검", 200, false),
+                new Item("무한의 반지", ItemType.Armor, 40, "설명문-반지", 500, false),
+                new Item("무한의 목걸이", ItemType.Armor, 25, "설명-목걸이", 300, false),
+                new Item("무한의 신발", ItemType.Armor, 20, "설명-신발", 100, false),
+
+            ]); 
             
         }
         // 아이템 목록을 가져오는 함수
