@@ -18,35 +18,40 @@ namespace TextRPG_Maple
         private List<Item> itemList = new List<Item>();
         private List<Item> inventoryList = new List<Item>();
         int nowMoney = 999;
-        
+
         public void Enter()
         {
             // player = 
             GetItemList();
             GetInvetoryList();
+
+            SoundManager.Instance.StopSound(0);
+            SoundManager.Instance.PlaySound(SoundType.BGM, "townscene", true);
+            SoundManager.Instance.SetVolume(SoundType.BGM, 0.1f);
+        
         }
 
         public void Exit()
         {
-            
+
         }
         // 기본 정보 출력
         public void Render()
         {
             Console.Clear();
-            
+
             switch (pase)
             {
                 case Pase.Intro:
-                    InputManager.Instance.WriteLineColor("==== 상점 ====", ConsoleColor.Green);
+                    InputManager.Instance.WriteLineColor("상점", ConsoleColor.Yellow);
                     Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.\n");
                     break;
                 case Pase.Buy:
-                    InputManager.Instance.WriteLineColor("==== 상점 - 아이템 구매 ====", ConsoleColor.Green);
+                    InputManager.Instance.WriteLineColor("상점 - 아이템 구매", ConsoleColor.Yellow);
                     Console.WriteLine("원하는 아이템의 번호를 눌러 구매 할 수 있습니다.\n");
                     break;
                 case Pase.Sell:
-                    InputManager.Instance.WriteLineColor("==== 상점 - 아이템 판매 ====", ConsoleColor.Green);
+                    InputManager.Instance.WriteLineColor("상점 - 아이템 판매", ConsoleColor.Yellow);
                     Console.WriteLine("아이템을 판매하여 골드를 얻을 수 있습니다.\n");
                     break;
             }
@@ -64,10 +69,10 @@ namespace TextRPG_Maple
                     if (inventoryList != null && inventoryList.Any(item => item.Name == itemList[i].Name))
                     {
                         // 이미 소지중
-                        InputManager.Instance.WriteLineColor($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {itemList[i].Name} |  {itemList[i].GetTypeString()}  |  {itemList[i].Descrip}  |  구매 완료", ConsoleColor.DarkGray);
+                        InputManager.Instance.WriteLineColor($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {itemList[i].Name} |  {itemList[i].GetTypeString()}  |  {GetTypoName(itemList[i])} : {itemList[i].Value}  |    {itemList[i].Descrip}  |  구매 완료", ConsoleColor.DarkGray);
                     }
                     else
-                        Console.WriteLine($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {itemList[i].UsableDisplay()}|  {itemList[i].GetPriceString()}G");
+                        Console.WriteLine($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {itemList[i].UsableDisplay()}|  {GetTypoName(itemList[i])} : {itemList[i].Value}  |  {itemList[i].GetPriceString()}G");
                 }
             }
             // 판매 : 인벤토리
@@ -76,9 +81,9 @@ namespace TextRPG_Maple
                 for (int i = 0; i < inventoryList.Count; i++)
                 {
                     if (inventoryList[i].IsEquip)
-                        InputManager.Instance.WriteLineColor($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {inventoryList[i].UsableDisplay()}|  {inventoryList[i].GetPriceString()}G", ConsoleColor.Green);
+                        InputManager.Instance.WriteLineColor($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {inventoryList[i].UsableDisplay()}|  {GetTypoName(itemList[i])} : {itemList[i].Value}  |  {inventoryList[i].GetPriceString()}G", ConsoleColor.Green);
                     else
-                        Console.WriteLine($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {inventoryList[i].UsableDisplay()}|  {inventoryList[i].GetPriceString()}G");
+                        Console.WriteLine($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {inventoryList[i].UsableDisplay()}|  {GetTypoName(itemList[i])} : {itemList[i].Value}  |  {inventoryList[i].GetPriceString()}G");
                 }
             }
             // 선택지 정보 출력
@@ -112,7 +117,7 @@ namespace TextRPG_Maple
                 switch (input)
                 {
                     case 0:
-                        SceneManager.Instance.ChangeScene(SceneType.Town);
+                        SceneManager.Instance.ExitScene();
                         break;
                     case 1:
                         pase = Pase.Buy;
@@ -126,7 +131,7 @@ namespace TextRPG_Maple
             else if (pase == Pase.Buy)
             {
                 int input = GameManager.Instance.GetInput(0, itemList.Count);
-                if(input == 0)
+                if (input == 0)
                 {
                     pase = Pase.Intro;
                     return;
@@ -162,7 +167,7 @@ namespace TextRPG_Maple
                         Console.WriteLine("\n바로 장착하시겠습니까? \n1) 예 \n0) 아니오");
                         int select = GameManager.Instance.GetInput(0, 1);
                         if (select == 1)
-                        { 
+                        {
                             player.EquipItem(itemList[input]);
                             Console.WriteLine("\n 아이템을 장착하였습니다.");
                             Thread.Sleep(500);
@@ -212,15 +217,24 @@ namespace TextRPG_Maple
                 new Item("무한의 목걸이", ItemType.Armor, 25, "설명-목걸이", 300),
                 new Item("무한의 신발", ItemType.Armor, 20, "설명-신발", 100),
 
-            ]); 
-            
+            ]);
+
         }
         // 아이템 목록을 가져오는 함수
         void GetInvetoryList()
-        {            
+        {
             player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
             nowMoney = player.Stat.Gold;
             inventoryList = player.Inventory;
+        }
+        string GetTypoName(Item item)
+        {
+            if (item.ItemType == ItemType.Armor)
+                return "방어력";
+            else if (item.ItemType == ItemType.Weapon)
+                return "공격력";
+
+            return "";
         }
     }
 }

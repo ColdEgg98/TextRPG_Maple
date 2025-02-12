@@ -17,6 +17,7 @@ namespace TextRPG_Maple._04._Manager
         StatusScene,
         EquipSkillScene,
         EndingCreditsScene,
+        Rest,
         Dungeon,
         Inventory,
         EquipInventory,

@@ -9,7 +9,9 @@ using TextRPG_Maple._01._GameObject.Monster;
 using TextRPG_Maple._04._Manager._05._Object;
 using TextRPG_Maple._04._Manager._04._Log;
 using TextRPG_Maple._03._Scene.Dungeon;
+using TextRPG_Maple._01._GameObject.Monster.Boss;
 using TextRPG_Maple._04._Manager._06._DB;
+using System.Threading;
 
 namespace TextRPG_Maple
 {
@@ -20,7 +22,9 @@ namespace TextRPG_Maple
 
         public void Enter()
         {
-
+            SoundManager.Instance.StopSound(0);
+            SoundManager.Instance.PlaySound(SoundType.BGM, "Maplestory BGM - Missing You");
+            SoundManager.Instance.SetVolume(SoundType.BGM, 0.1f);
         }
 
         public void Exit()
@@ -74,7 +78,7 @@ namespace TextRPG_Maple
                             player.DungeonFloor = Floor;
                         }
 
-                        if (keepGoing == 1)
+                        if (keepGoing != 2)
                         {
                             break;
                         }
@@ -84,7 +88,7 @@ namespace TextRPG_Maple
                     if(Floor == 31)
                     {
                         // 엔딩 씬으로 이동
-                        //SceneManager.Instance.ChangeScene(SceneType.엔딩씬);
+                        SceneManager.Instance.ChangeScene(SceneType.EndingCreditsScene);
                     }
 
                     break;
@@ -98,7 +102,8 @@ namespace TextRPG_Maple
         // 던전에서 등장할 몬스터를 설정
         List<Monster> GetMonsters()
         {
-            if ((Floor % 10) != 0)
+            monsters.Clear();
+            if ((Floor % 5) != 0)
             {
                 // 랜덤한 숫자의 몬스터를 소환
                 Random rnd = new Random();
@@ -124,7 +129,18 @@ namespace TextRPG_Maple
             // 10층 마다 보스 몬스터일 경우
             else
             {
-
+                if (Floor == 5)
+                {
+                    Boss? boss = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.BOSS, "혼테일") as Boss;
+                    Boss b = boss.Clone() as Boss;
+                    monsters.Add(b);
+                }
+                else if (Floor == 10)
+                {
+                    Boss? boss = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.BOSS, "가디언 엔젤 슬라임") as Boss;
+                    boss = boss.Clone() as Boss;
+                    monsters.Add(boss);
+                }
             }
 
             return monsters;
