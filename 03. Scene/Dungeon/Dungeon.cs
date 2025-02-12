@@ -16,18 +16,13 @@ namespace TextRPG_Maple
     internal class DungeonScene : IScene
     {
         public int Floor { get; set; } = 1;   // 층수
-        List<string> nameList = new List<string>();
+        List<Monster> monsters = new List<Monster>();
+
         public void Enter()
         {
-            List<GameObject> monsters = DBManager.LoadFromCSV("MonsterDB.csv");
-            foreach (GameObject monster in monsters)
-            {
-                GameObjectManager.Instance.AddPrototypeObject(ObjectType.MONSTER, monster.Name, monster);
-            }
 
-            // 프로토타입으로 부터 객체를 복사
-            GameObject? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린");
         }
+
         public void Exit()
         {
            
@@ -71,8 +66,10 @@ namespace TextRPG_Maple
                         BattleView battleView = new BattleView();
                         BattleController battleController = new BattleController(player, GetMonsters(), battleView);
                         int keepGoing = battleController.StartBattle();
+
                         // 오보젝트 삭제
-                        DeleteMonster();
+                        monsters.Clear();
+
                         // 다음 단계 진행
                         if (keepGoing > 0) // 1(clear and stop) or 2(clear and go)
                         {
@@ -95,38 +92,30 @@ namespace TextRPG_Maple
         {
             // 던전에서 등장할 몬스터를 설정
             // 난이도 관련되선 나중에 추가
-            List<Monster> monsters = new List<Monster>();
-            Monster? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린") as Monster;
-            Monster? orc = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "오크") as Monster;
-            Monster? wolf = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
+            //List<Monster> monsters = new List<Monster>();
+            //Monster? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린") as Monster;
+            //Monster? orc = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "오크") as Monster;
 
             if (Floor == 1)
             {
-                Monster? wolf1 = GameObjectManager.Instance.GetGameObject(ObjectType.MONSTER, "늑대") as Monster;
-                monsters.Add(wolf1);
-                nameList.Add("늑대");
+                // 원본으로 부터 "늑대"객체를 찾아서 복제함
+                Monster? wolf = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
+
+                monsters.Add(wolf);
             }
             else if (Floor == 2)
-            { 
-                Monster? wolf1 = GameObjectManager.Instance.GetGameObject(ObjectType.MONSTER, "늑대 A") as Monster;
-                Monster? wolf2 = GameObjectManager.Instance.GetGameObject(ObjectType.MONSTER, "늑대 B") as Monster;
-                monsters.Add(wolf1);
-                monsters.Add(wolf2);
-                nameList.Add("늑대 A");
-                nameList.Add("늑대 B");
+            {
+                Monster? wolf = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
+                wolf.Name = "늑대 A";
+                monsters.Add(wolf);
+
+                wolf = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
+                wolf.Name = "늑대 B";
+                monsters.Add(wolf);
             }
 
             //return monster
             return monsters;
-        }
-        void DeleteMonster()
-        {
-            //public bool RemoveGameObject(ObjectType type, string name)
-            for (int i = 0; i < nameList.Count; i++)
-            {
-                GameObjectManager.Instance.RemoveGameObject(ObjectType.MONSTER, nameList[i]);
-            }
-            nameList.Clear();
         }
     }
 }
