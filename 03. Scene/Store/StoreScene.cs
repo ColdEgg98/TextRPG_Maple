@@ -38,15 +38,15 @@ namespace TextRPG_Maple
             switch (pase)
             {
                 case Pase.Intro:
-                    InputManager.Instance.WriteLineColor("==== 상점 ====", ConsoleColor.Green);
+                    InputManager.Instance.WriteLineColor("상점", ConsoleColor.Yellow);
                     Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.\n");
                     break;
                 case Pase.Buy:
-                    InputManager.Instance.WriteLineColor("==== 상점 - 아이템 구매 ====", ConsoleColor.Green);
+                    InputManager.Instance.WriteLineColor("상점 - 아이템 구매", ConsoleColor.Yellow);
                     Console.WriteLine("원하는 아이템의 번호를 눌러 구매 할 수 있습니다.\n");
                     break;
                 case Pase.Sell:
-                    InputManager.Instance.WriteLineColor("==== 상점 - 아이템 판매 ====", ConsoleColor.Green);
+                    InputManager.Instance.WriteLineColor("상점 - 아이템 판매", ConsoleColor.Yellow);
                     Console.WriteLine("아이템을 판매하여 골드를 얻을 수 있습니다.\n");
                     break;
             }
