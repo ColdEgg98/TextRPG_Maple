@@ -12,7 +12,8 @@ namespace TextRPG_Maple
         public void Enter()
         {
             SoundManager.Instance.StopSound(0);
-            SoundManager.Instance.PlaySound(SoundType.BGM, "MapleBGM", true);
+            SoundManager.Instance.PlaySound(SoundType.BGM, "townscene", true);
+            SoundManager.Instance.SetVolume(SoundType.BGM, 0.1f);
         }
         public void Exit()
         {
@@ -51,13 +52,12 @@ namespace TextRPG_Maple
                     break;
                 case 3:
                     //ShopScreen();
-                    SceneManager.Instance.ChangeScene(SceneType.Store);
+                    SceneManager.Instance.EnterScene(SceneType.Store);
                     break;
                 case 4:
-                    //RestScene();
+                    SceneManager.Instance.EnterScene(SceneType.Rest);
                     break;
                 case 5:
-                    SoundManager.Instance.PlaySound(SoundType.BGM, "Maplestory BGM - Missing You");
                     SceneManager.Instance.EnterScene(SceneType.Dungeon);
                     break;
             }
