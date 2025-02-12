@@ -11,6 +11,7 @@ namespace TextRPG_Maple._04._Manager._05._Object
     {
         PLAYER,
         MONSTER,
+        BOSS,
         EQUIPMENT,
         END
     }

@@ -34,7 +34,7 @@ namespace TextRPG_Maple._03._Scene.Dungeon
             string hpstr;
 
             if (hp <= maxHp * 0.2)
-                return hpstr = $" \x1b[5m{hp}\x1b[0m"; // 체력이 얼마 남지 않으면 깜빡임
+                return hpstr = $" \x1b[5m{hp}\x1b[0m"; // 체력이 얼마 남지 않으면 깜빡임 (ANSI EC)
             else
                 return hpstr = $" (HP: {hp}";
         }

@@ -10,11 +10,27 @@ namespace TextRPG_Maple._01._GameObject.Monster.Boss
     internal class Boss : Monster
     {
         public bool phase => Stat.Hp < Stat.MaxHp / 2;
+        public bool triggerEvent { get; set; }
+        public bool trigger
+        {
+            get => phase;
+            set
+            {
+                if (value && triggerEvent)
+                {
+                    Phase2Event?.Invoke();
+                    triggerEvent = false;
+                }
+            }
+        }
         public bool isBoss { get; set; } = true;
+
+        public event Action Phase2Event;
 
         public Boss(string name, int hp, int attack, int defense, int Exp, int Gold) : base(name, hp, attack, defense, Exp, Gold)
         {
-
+            triggerEvent = true;
+            Phase2Event += Boss2Phase;
         }
 
 
@@ -49,6 +65,13 @@ namespace TextRPG_Maple._01._GameObject.Monster.Boss
             Console.SetCursorPosition(left, top);
             Console.Write("□");
             left -= 2;
+        }
+
+        public void Boss2Phase()
+        {
+            Console.WriteLine($"{this.Name}이 화난 것 같다!");
+            this.Stat.Atk += (int)(this.Stat.Atk * 0.1f);
+            this.Stat.Def += (int)(this.Stat.Def * 0.1f);
         }
 
         #region BossSetUp
