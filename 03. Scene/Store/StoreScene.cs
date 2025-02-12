@@ -20,7 +20,7 @@ namespace TextRPG_Maple
         public void Enter()
         {
             // player = 
-            //itemList = GetItemList();
+            itemList = GetItemList();
             inventoryList = GetInvetoryList();
         }
 
@@ -160,29 +160,27 @@ namespace TextRPG_Maple
             }
         }
         // 아이템 목록을 가져오는 함수
-        static List<Item> GetItemList()
+        void GetItemList()
         {
-            //itemList.Clear();  // 기존 리스트를 초기화
-            //itemList.AddRange( // 새로운 아이템 추가
-            //[
-            //    new Item("무한의 대검", ItemType.Weapon, 70, "설명문-대검", 100),
-            //    new Item("무한의 직검", ItemType.Weapon, 50, "설명-직검", 200),
-            //    new Item("무한의 단검", ItemType.Weapon, 30, "설명-단검", 200),
-            //    new Item("무한의 반지", ItemType.Armor, 40, "설명문-반지", 500),
-            //    new Item("무한의 목걸이", ItemType.Armor, 25, "설명-목걸이", 300),
-            //    new Item("무한의 신발", ItemType.Armor, 20, "설명-신발", 100),
-            //]);
-            return new List<Item>();
+            itemList.Clear();  // 기존 리스트를 초기화
+            itemList.AddRange( // 새로운 아이템 추가
+            [
+                new Item("무한의 대검", ItemType.Weapon, 70, "설명문-대검", 100),
+                new Item("무한의 직검", ItemType.Weapon, 50, "설명-직검", 200),
+                new Item("무한의 단검", ItemType.Weapon, 30, "설명-단검", 200),
+                new Item("무한의 반지", ItemType.Armor, 40, "설명문-반지", 500),
+                new Item("무한의 목걸이", ItemType.Armor, 25, "설명-목걸이", 300),
+                new Item("무한의 신발", ItemType.Armor, 20, "설명-신발", 100),
+
+            ]); 
+            
         }
         // 아이템 목록을 가져오는 함수
-        static List<Item> GetInvetoryList()
-        {
-            List<Item> items = new List<Item>
-            {
-                new Item("무한의 대검", ItemType.Weapon, 20, "설명 : 무한의 대검", 100),
-                new Item("무한의 갑옷", ItemType.Armor, 20, "설명 : 무한의 갑옷", 100)
-            };
-            return items;
+        void GetInvetoryList()
+        {            
+            player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+            nowMoney = player.Stat.Gold;
+            inventoryList = player.Inventory;
         }
     }
 }

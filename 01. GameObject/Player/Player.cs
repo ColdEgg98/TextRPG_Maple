@@ -185,8 +185,7 @@ namespace TextRPG_Maple
                 {
                     if (Inventory[i].ItemType == ItemType.Weapon)
                     {
-                        UnEquip(Inventory[i]);
-                        break;
+                        UnEquip(Inventory[i]);      
                     }
                 }
                 EquipAtk += (int)item.Value;
@@ -200,7 +199,6 @@ namespace TextRPG_Maple
                     if (Inventory[i].ItemType == ItemType.Armor)
                     {
                         UnEquip(Inventory[i]);
-                        break;
                     }
                 }
                 EquipDef += (int)item.Value;
