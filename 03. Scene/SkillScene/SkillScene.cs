@@ -33,7 +33,7 @@ namespace TextRPG_Maple._03._Scene.SkillScene
                 InputManager.Instance.WriteLineColor("배운 스킬이 없습니다...", ConsoleColor.DarkGray);
             else
             {
-                for (int i = 0; i < player.Skills.Count; i++) // 스택 오버플로우?
+                for (int i = 0; i < player.Skills.Count; i++)
                     Console.WriteLine(player.Skills[i].UsableDisplay());
             }
 

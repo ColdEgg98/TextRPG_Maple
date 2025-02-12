@@ -51,9 +51,7 @@ namespace TextRPG_Maple
             EquipDef = 0;
             LevelUPEvent += LearnSkillEvent;
         }
-        public Player(Player other) : base(other.Name) { }
 
-        /// 전투
         public Player(Player other) : base(other.Name)
         {
             Stat = other.Stat.Clone();
@@ -173,7 +171,7 @@ namespace TextRPG_Maple
                 InputManager.Instance.WriteLineColor("배운 스킬이 없습니다...", ConsoleColor.DarkGray);
             for (int i = 0; i < this.Skills.Count; i++)
             {
-                Console.WriteLine(this.Skills[i + 1].UsableDisplay());
+                Console.WriteLine($"{i+1}. " + this.Skills[i].UsableDisplay());
             }
         }
 

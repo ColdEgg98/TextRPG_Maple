@@ -134,8 +134,14 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                 }
                 else if (act == 2)
                 {
-                    player.ShowSkill();
                     Console.WriteLine("\n\n사용할 스킬의 번호를 입력해주세요.");
+                    player.ShowSkill();
+                    if(player.Skills.Count == 0)
+                    {
+                        act = 1;
+                        continue;
+                    }
+
                     skillInput = GameManager.Instance.GetInput(1, player.Skills.Count);
                     --skillInput;
                     if (!player.Skills[skillInput].IsEquip)
