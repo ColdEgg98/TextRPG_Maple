@@ -72,14 +72,20 @@ namespace TextRPG_Maple._01._GameObject.Monster.Boss
             }
 
             float hpPer = (float)Stat.Hp / Stat.MaxHp * 20;
-
-            int left = Console.GetCursorPosition().Left - 2;
+            int left = Console.GetCursorPosition().Left;
             int top = Console.GetCursorPosition().Top;
 
+            for (int i = 0; i < 20-(int)hpPer; i++)
+            {
+                left -= 2;
+            }
+
             Console.SetCursorPosition(left, top);
-            Console.SetCursorPosition(left, top);
-            Console.Write("□");
-            left -= 2;
+            for (int i = 0; i < 20-(int)hpPer; i++)
+            {
+                Console.Write("□");
+            }
+            Console.WriteLine();
         }
 
         public void Boss2Phase()

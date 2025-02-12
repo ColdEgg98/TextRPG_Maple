@@ -17,7 +17,7 @@ namespace TextRPG_Maple
 {
     internal class DungeonScene : IScene
     {
-        public static int Floor { get; set; } = 1;   // 층수
+        public static int Floor { get; set; } = 10;   // 층수
         List<Monster> monsters = new List<Monster>();
 
         public void Enter()
@@ -29,7 +29,7 @@ namespace TextRPG_Maple
 
         public void Exit()
         {
-           
+
         }
 
         public void Render()
@@ -78,17 +78,16 @@ namespace TextRPG_Maple
                             player.DungeonFloor = Floor;
                         }
 
+                        if (Floor == 11)
+                        {
+                            // 엔딩 씬으로 이동
+                            SceneManager.Instance.ChangeScene(SceneType.EndingCreditsScene);
+                            break;
+                        }
                         if (keepGoing != 2)
                         {
                             break;
                         }
-                    }
-
-                    // 만약 Floor가 30층을 깨서 31이 된 경우.
-                    if(Floor == 31)
-                    {
-                        // 엔딩 씬으로 이동
-                        SceneManager.Instance.ChangeScene(SceneType.EndingCreditsScene);
                     }
 
                     break;

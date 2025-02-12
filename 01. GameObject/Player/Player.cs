@@ -230,27 +230,29 @@ namespace TextRPG_Maple
             {
                 for (int i = 0; i < Inventory.Count; i++) // 중복 부위의 장비 벗기
                 {
-                    if (Inventory[i].ItemType == ItemType.Weapon)
+                    if (Inventory[i].ItemType == ItemType.Weapon && Inventory[i].IsEquip)
                     {
                         UnEquip(Inventory[i]);
+                        break;
                     }
                 }
                 EquipAtk += (int)item.Value;
                 item.IsEquip = true;
             }
-
             else if (item.ItemType == ItemType.Armor)
             {
                 for (int i = 0; i < Inventory.Count; i++)
                 {
-                    if (Inventory[i].ItemType == ItemType.Armor)
+                    if (Inventory[i].ItemType == ItemType.Armor && Inventory[i].IsEquip)
                     {
                         UnEquip(Inventory[i]);
+                        break;
                     }
                 }
                 EquipDef += (int)item.Value;
                 item.IsEquip = true;
             }
+
 
             else
             {
