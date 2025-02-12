@@ -14,7 +14,7 @@ namespace TextRPG_Maple._03._Scene.Rest
     internal class RestScene : IScene
     {
         private Player? player;
-        int restgold = 500;
+        int restgold = 200;
 
         public void Enter()
         {
