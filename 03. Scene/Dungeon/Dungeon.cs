@@ -84,7 +84,7 @@ namespace TextRPG_Maple
                     if(Floor == 31)
                     {
                         // 엔딩 씬으로 이동
-                        //SceneManager.Instance.ChangeScene(SceneType.엔딩씬);
+                        SceneManager.Instance.ChangeScene(SceneType.EndingCreditsScene);
                     }
 
                     break;
