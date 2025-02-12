@@ -1,0 +1,110 @@
+using System.Numerics;
+using System;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+
+
+        class TextRPG
+        {
+            static void Main(string[] args)
+            {
+                RestScene();
+            }
+
+            static void RestScene()
+            {
+                Console.WriteLine("당신은 긴 여정 끝에 작은 숲 속의 오두막을 발견했습니다.");
+                Console.WriteLine("오두막은 오래된 나무로 지어져 있으며, 주변에는 평온한 자연의 소리가 가득합니다.");
+                Console.WriteLine("당신은 오두막에 들어서면서 안도의 한숨을 내쉽니다.\n");
+
+                Console.WriteLine("1. 오두막 안에 있는 난로를 피운다.");
+                Console.WriteLine("2. 오두막 밖에 있는 우물에서 물을 길어온다.");
+                Console.WriteLine("3. 침대에 눕는다.");
+
+                Console.Write("선택: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.WriteLine("\n난로를 피운 당신은 따뜻한 불길 앞에서 편안한 자리에 앉습니다.");
+                        Console.WriteLine("불꽃은 당신의 피로를 녹여주며, 마음을 안정시켜 줍니다.");
+                        Console.WriteLine("당신은 이 순간을 즐기며 잠시 생각에 잠깁니다.\n");
+
+                        Console.WriteLine("1. 난로 옆에서 저녁 식사를 한다.");
+                        Console.WriteLine("2. 난로의 따뜻함을 느끼며 책을 읽는다.");
+                        Console.WriteLine("3. 그냥 불을 바라보며 휴식을 취한다.");
+
+                        Console.Write("선택: ");
+                        choice = Console.ReadLine();
+                        if (choice == "1")
+                        {
+                            Console.WriteLine("\n당신은 저녁 식사를 하며 하루의 피로를 풀었습니다.");
+                        }
+                        else if (choice == "2")
+                        {
+                            Console.WriteLine("\n당신은 책을 읽으며 따뜻한 시간들을 보냈습니다.");
+                        }
+                        else if (choice == "3")
+                        {
+                            Console.WriteLine("\n당신은 불꽃을 바라보며 잠시 휴식을 취했습니다.");
+                        }
+                        break;
+
+                    case "2":
+                        Console.WriteLine("\n당신은 오두막 밖으로 나가 우물에서 시원한 물을 길어옵니다.");
+                        Console.WriteLine("맑은 물은 당신의 목을 적셔주며, 한결 개운한 기분이 듭니다.");
+                        Console.WriteLine("당신은 물 한 잔을 마시며 잠시 휴식을 취합니다.\n");
+
+                        Console.WriteLine("1. 물을 마시고 오두막으로 돌아간다.");
+                        Console.WriteLine("2. 주변을 둘러보며 산책을 한다.");
+                        Console.WriteLine("3. 우물가에 앉아 쉬면서 하늘을 바라본다.");
+
+                        Console.Write("선택: ");
+                        choice = Console.ReadLine();
+                        if (choice == "1")
+                        {
+                            Console.WriteLine("\n당신은 오두막으로 돌아와 휴식을 계속합니다.");
+                        }
+                        else if (choice == "2")
+                        {
+                            Console.WriteLine("\n당신은 주변을 산책하며 자연의 아름다움을 느꼈습니다.");
+                        }
+                        else if (choice == "3")
+                        {
+                            Console.WriteLine("\n당신은 우물가에 앉아 하늘을 바라보며 평화를 느꼈습니다.");
+                        }
+                        break;
+
+                    case "3":
+                        Console.WriteLine("\n당신은 오두막 안에 있는 부드러운 침대에 몸을 맡깁니다.");
+                        Console.WriteLine("피곤한 몸은 이내 안락한 침대의 품속에 빠져들며, 깊은 잠에 빠져듭니다.\n");
+
+                        Console.WriteLine("1. 꿈을 꾸며 잠이 든다.");
+                        Console.WriteLine("2. 잠깐 눈을 감고 쉬다가 일어난다.");
+                        Console.WriteLine("3. 깊은 잠에 빠져 완전히 휴식을 취한다.");
+
+                        Console.Write("선택: ");
+                        choice = Console.ReadLine();
+                        if (choice == "1")
+                        {
+                            Console.WriteLine("\n당신은 꿈을 꾸며 휴식을 취했습니다.");
+                        }
+                        else if (choice == "2")
+                        {
+                            Console.WriteLine("\n당신은 잠깐 쉬고 나서 다시 일어났습니다.");
+                        }
+                        else if (choice == "3")
+                        {
+                            Console.WriteLine("\n당신은 깊은 잠에 빠져 완전히 휴식을 취했습니다.");
+                        }
+                        break;
+                }
+            }
+
+        }
+    }
+}
