@@ -30,6 +30,8 @@ namespace TextRPG_Maple
 
         public event Action LevelUPEvent;
 
+        public int DungeonFloor { get; set; } = 1;
+
         public Player() : base("")
         {
             LevelUPEvent -= LearnSkillEvent;

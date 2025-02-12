@@ -77,17 +77,18 @@
   "EquipAtk": 0,
   "EquipDef": 0,
   "eventLv": 28,
+  "DungeonFloor": 3,
   "Name": "qwe",
   "Stat": {
     "Level": 0,
     "Atk": 145,
     "Def": 59,
-    "Gold": 2170,
+    "Gold": 3610,
     "Hp": 370,
     "MaxHp": 370,
-    "Mp": 171,
+    "Mp": 87,
     "MaxMp": 185,
-    "Exp": -37260,
+    "Exp": -36730,
     "Dex": 0,
     "Luc": 0
   }

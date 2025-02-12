@@ -83,6 +83,10 @@ namespace TextRPG_Maple
 
                     // 1. 플레이어 정보 불러오기
                     Player player = FileIOManager.LoadJson<Player>("Player");
+
+                    // 플레이어가 가지고 있는 던전 층수에 대한 정보를 던전씬에 대입
+                    DungeonScene.Floor = player.DungeonFloor;
+
                     if (player != null)
                     {
                         GameObjectManager.Instance.RemoveGameObject(ObjectType.PLAYER, "MainPlayer");
