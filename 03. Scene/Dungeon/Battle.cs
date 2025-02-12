@@ -19,7 +19,6 @@ namespace TextRPG_Maple._03._Scene.Dungeon
             var monster = monsters[0];
             if (monster is Boss boss) // boss로 변환 성공하면 실행
             {
-                boss.BossSetUp();
                 string status = boss.Stat.Hp > 0 ? "(선택 가능)" : "(죽음)";
                 // 1번부터
                 if (boss.Stat.Hp > 0)
@@ -94,6 +93,7 @@ namespace TextRPG_Maple._03._Scene.Dungeon
             var monster = monsters[0];
             if (monster is Boss boss) // boss로 변환 성공하면 실행
             {
+                boss.BossSetUp();
                 boss.SoundBoss();// 음악 실행
             }
             while (player.IsAlive && monsters.Count > 0)
