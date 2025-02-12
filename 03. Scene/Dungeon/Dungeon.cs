@@ -100,7 +100,7 @@ namespace TextRPG_Maple
             {
                 // 원본으로 부터 "늑대"객체를 찾아서 복제함
                 Monster? wolf = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
-
+                
                 monsters.Add(wolf);
             }
             else if (Floor == 2)

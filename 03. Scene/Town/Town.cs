@@ -11,7 +11,7 @@ namespace TextRPG_Maple
     {
         public void Enter()
         {
-
+            SoundManager.Instance.PlaySound(SoundType.BGM, "MapleBGM", true);
         }
         public void Exit()
         {
