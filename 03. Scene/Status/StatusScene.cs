@@ -44,15 +44,12 @@ namespace TextRPG_Maple._03._Scene.StatusScene
         public void Update()
         {
 
-            int input = GameManager.Instance.GetInput(0, 2);
+            int input = GameManager.Instance.GetInput(0, 0);
             
             switch (input)
             {
                 case 0:
                     SceneManager.Instance.ExitScene();
-                    break;
-                case 2:
-                    SceneManager.Instance.ChangeScene(SceneType.EndingCreditsScene);
                     break;
             }
         }
