@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using TextRPG_Maple._04._Manager._05._Object;
 using TextRPG_Maple._03._Scene.SkillScene;
 using TextRPG_Maple._04._Manager._06._DB;
+using TextRPG_Maple._03._Scene.Inventory;
 using TextRPG_Maple._04._Manager._04._Log;
 using TextRPG_Maple._04._Manager._07._FileIO;
 using TextRPG_Maple._03._Scene.Inventory;
