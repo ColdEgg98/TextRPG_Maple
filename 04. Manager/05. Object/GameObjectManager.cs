@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TextRPG_Maple._04._Manager._06._DB;
 
 namespace TextRPG_Maple._04._Manager._05._Object
@@ -88,6 +89,22 @@ namespace TextRPG_Maple._04._Manager._05._Object
                 cloneObject = cloneObject.Clone();
 
             return cloneObject;
+        }
+
+
+        public GameObject? GetRandomPrototype(ObjectType type)
+        {
+            GameObject? randomObject = null;
+            if (PrototypeObjects.ContainsKey(type) && PrototypeObjects[type].Count != 0)
+            {
+                Random rnd = new Random();
+                randomObject = PrototypeObjects[type].Values.ElementAt(rnd.Next(PrototypeObjects[type].Count));
+            }
+
+            if (randomObject != null)
+                randomObject = randomObject.Clone();
+
+            return randomObject;
         }
 
     }

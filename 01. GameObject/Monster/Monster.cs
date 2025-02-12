@@ -28,6 +28,18 @@ namespace TextRPG_Maple._01._GameObject.Monster
             Stat = other.Stat.Clone();
         }
 
+        public void AddAbility(int value)
+        {
+            Stat.Hp += value * 5;
+            Stat.MaxHp = Stat.Hp;
+
+            Stat.Atk += value * 2;
+            Stat.Def += value;
+
+            Stat.Exp += value * 20;
+            Stat.Gold += value * 100;
+        }
+
         public override void Attack(GameObject obj)
         {
             int damage = Math.Max(0, Stat.Atk - obj.Stat.Def);
