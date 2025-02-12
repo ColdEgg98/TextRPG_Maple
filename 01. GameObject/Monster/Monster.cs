@@ -15,13 +15,14 @@ namespace TextRPG_Maple._01._GameObject.Monster
         {
 
         }
-        public Monster(string name, int hp, int attack, int defense) : base(name)
+        public Monster(string name, int hp, int attack, int defense, int exp, int gold) : base(name)
         {
             Stat.Hp = hp;
             Stat.MaxHp = Stat.Hp;
             Stat.Atk = attack;
             Stat.Def = defense;
-            Stat.Exp = Exp;
+            Stat.Exp = exp;
+            Stat.Gold = gold;
         }
         public Monster(Monster other) : base(other.Name)
         {
