@@ -15,7 +15,6 @@ namespace TextRPG_Maple
         public GameObject(string name)
         {
             Name = name;
-            Stat = new Status();
         }
 
         public abstract void Attack(GameObject obj);
@@ -26,6 +25,7 @@ namespace TextRPG_Maple
     internal class Status
     {
         //프로퍼티는 {get; set;}은 읽기+쓰기, {get;}은 읽기
+        public int Level { get; set; }
         public int Atk { get; set; }
         public int Def { get; set; }
         public int Gold { get; set; }
@@ -36,5 +36,9 @@ namespace TextRPG_Maple
         public int Exp { get; set; }
         public int Dex { get; set; }
         public int Luc { get; set; }
+        public Status Clone()
+        {
+            return (Status)this.MemberwiseClone();
+        }
     }
 }

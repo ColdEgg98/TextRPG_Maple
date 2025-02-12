@@ -30,8 +30,10 @@ namespace TextRPG_Maple
 
         public Player(string name) : base(name)
         {
+            Stat = new Status();
+
             Level = 1;
-            Stat.Atk = 10;
+            Stat.Atk = 100;
             Stat.Def = 5;
             Stat.Hp = 100;
             Stat.MaxHp = Stat.Hp;
@@ -52,6 +54,12 @@ namespace TextRPG_Maple
         public Player(Player other) : base(other.Name) { }
 
         /// 전투
+        public Player(Player other) : base(other.Name)
+        {
+            Stat = other.Stat.Clone();
+        }
+
+/// 전투
         public override void Attack(GameObject monster)
         {
             int damage = Math.Max(0, Stat.Atk + EquipAtk - monster.Stat.Def);
@@ -156,6 +164,16 @@ namespace TextRPG_Maple
 
                     break;
                 }
+            }
+        }
+
+        public void ShowSkill()
+        {
+            if (this.Skills.Count == 0)
+                InputManager.Instance.WriteLineColor("배운 스킬이 없습니다...", ConsoleColor.DarkGray);
+            for (int i = 0; i < this.Skills.Count; i++)
+            {
+                Console.WriteLine(this.Skills[i + 1].UsableDisplay());
             }
         }
 
