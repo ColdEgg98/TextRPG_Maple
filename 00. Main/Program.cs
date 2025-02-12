@@ -8,7 +8,6 @@ using TextRPG_Maple._04._Manager._06._DB;
 using TextRPG_Maple._03._Scene.Inventory;
 using TextRPG_Maple._04._Manager._04._Log;
 using TextRPG_Maple._04._Manager._07._FileIO;
-using TextRPG_Maple._03._Scene.Inventory;
 using TextRPG_Maple._05._Usable.Skill;
 using TextRPG_Maple._05._Usable.Item;
 
@@ -35,7 +34,7 @@ namespace TextRPG_Maple
 
             // 사운드 매니저 사용 예제
             SoundManager.Instance.LoadSounds();
-            SoundManager.Instance.PlaySound(SoundType.BGM, "aLIEz_Piano", true);
+            SoundManager.Instance.PlaySound(SoundType.BGM, "MapleBGM", true);
             SoundManager.Instance.SetVolume(SoundType.BGM, 0.1f);
 
             // 플레이어 생성 예제
@@ -80,9 +79,12 @@ namespace TextRPG_Maple
             // 프로토타입으로 부터 객체를 복사
             GameObject? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린");
 
+            // ANSI Escape Code
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            // 모든 씬을 미리 생성하여 Dictionary에 저장
-            var scenes = new Dictionary<SceneType, IScene>
+                // 모든 씬을 미리 생성하여 Dictionary에 저장
+                var scenes = new Dictionary<SceneType, IScene>
                 {
                 { SceneType.Town, new TownScene() },
                 { SceneType.Store, new StoreScene() },

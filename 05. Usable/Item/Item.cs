@@ -25,15 +25,16 @@ namespace TextRPG_Maple._05._Usable.Item
 
         public ItemType ItemType;
 
-        public Item() : base("", 0, "", 0, false)
+        public Item() : base("", 0, "", 0)
         {
 
         }
 
-        public Item(string name, ItemType itemType, float value, string descrip, int cost, bool isOwned ) : base(name, value, descrip, cost, isOwned)
+        public Item(string name, ItemType itemType, float value, string descrip, int cost) : base(name, value, descrip, cost)
         {
             Name = name;
             ItemType = itemType;
+            IsOwned = false;
         }
 
         public override string GetTypeString()

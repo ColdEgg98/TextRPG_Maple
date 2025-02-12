@@ -11,14 +11,14 @@ namespace TextRPG_Maple._03._Scene.SkillScene
 {
     internal class EquipSkillScene : IScene
     {
-        Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+        private Player? player;
 
         int left;
         int top;
 
         public void Enter()
         {
-
+            player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
         }
 
         public void Exit()

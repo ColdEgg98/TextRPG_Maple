@@ -7,6 +7,7 @@ namespace TextRPG_Maple._05._Usable.Skill
     {
         전사,
         도적,
+        버프
     }
 
     internal class Skill : Usable
@@ -16,15 +17,16 @@ namespace TextRPG_Maple._05._Usable.Skill
 
         public SkillType SkillType { get; set; }
         public int NeedLv { get; set; }
+        public bool isAeraSkill { get; set; }
 
-        // 테스트용 생성자
-        public Skill() : base("", 0, "", 0, false)
+        public Skill() : base("", 0, "", 0)
         {
 
         }
 
-        public Skill(string name, int needLv, SkillType skillType, float value, string descrip, int cost, bool IsOwned) : base(name, value, descrip, cost, IsOwned)
+        public Skill(string name, int needLv, SkillType skillType, float value, string descrip, int cost, bool isAreaSkill) : base(name, value, descrip, cost)
         {
+            isAeraSkill = isAreaSkill;
             SkillType = skillType;
             NeedLv = needLv;
         }
@@ -40,6 +42,8 @@ namespace TextRPG_Maple._05._Usable.Skill
                 case "마법사":
                     return SetWarriorSkill();
                 default:
+                    Console.WriteLine("예외가 발생했습니다.");
+                    Thread.Sleep(1000);
                     return null;
             }
         }

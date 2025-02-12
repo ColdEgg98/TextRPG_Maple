@@ -24,7 +24,6 @@ namespace TextRPG_Maple
             // player = 
             GetItemList();
             GetInvetoryList();
-            
         }
 
         public void Exit()
@@ -64,6 +63,7 @@ namespace TextRPG_Maple
                 {
                     if (inventoryList != null && inventoryList.Any(item => item.Name == itemList[i].Name))
                     {
+                        // 이미 소지중
                         InputManager.Instance.WriteLineColor($"- {(pase != Pase.Intro ? $"{i + 1} " : "")} {itemList[i].Name} |  {itemList[i].GetTypeString()}  |  {itemList[i].Descrip}  |  구매 완료", ConsoleColor.DarkGray);
                     }
                     else
@@ -205,12 +205,12 @@ namespace TextRPG_Maple
             itemList.Clear();  // 기존 리스트를 초기화
             itemList.AddRange( // 새로운 아이템 추가
             [
-                new Item("무한의 대검", ItemType.Weapon, 70, "설명문-대검", 100, false),
-                new Item("무한의 직검", ItemType.Weapon, 50, "설명-직검", 200, false),
-                new Item("무한의 단검", ItemType.Weapon, 30, "설명-단검", 200, false),
-                new Item("무한의 반지", ItemType.Armor, 40, "설명문-반지", 500, false),
-                new Item("무한의 목걸이", ItemType.Armor, 25, "설명-목걸이", 300, false),
-                new Item("무한의 신발", ItemType.Armor, 20, "설명-신발", 100, false),
+                new Item("무한의 대검", ItemType.Weapon, 70, "설명문-대검", 100),
+                new Item("무한의 직검", ItemType.Weapon, 50, "설명-직검", 200),
+                new Item("무한의 단검", ItemType.Weapon, 30, "설명-단검", 200),
+                new Item("무한의 반지", ItemType.Armor, 40, "설명문-반지", 500),
+                new Item("무한의 목걸이", ItemType.Armor, 25, "설명-목걸이", 300),
+                new Item("무한의 신발", ItemType.Armor, 20, "설명-신발", 100),
 
             ]); 
             
