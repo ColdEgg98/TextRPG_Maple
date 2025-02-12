@@ -10,6 +10,7 @@ using TextRPG_Maple._04._Manager._04._Log;
 using TextRPG_Maple._04._Manager._07._FileIO;
 using TextRPG_Maple._05._Usable.Skill;
 using TextRPG_Maple._05._Usable.Item;
+using TextRPG_Maple._03._Scene.StatusScene;
 
 namespace TextRPG_Maple
 {
@@ -81,6 +82,7 @@ namespace TextRPG_Maple
                 { SceneType.Store, new StoreScene() },
                 { SceneType.Start, new StartScene() },
                 { SceneType.Title, new TitleScene() },
+                { SceneType.StatusScene, new StatusScene() },
                 { SceneType.Dungeon, new DungeonScene()},
                 { SceneType.SkillScene, new SkillScene() },
                 { SceneType.EquipSkillScene, new EquipSkillScene() },
