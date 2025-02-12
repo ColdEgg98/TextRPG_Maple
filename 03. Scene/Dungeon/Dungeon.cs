@@ -50,7 +50,7 @@ namespace TextRPG_Maple
             switch (input)
             {
                 case 1:
-                    //StatusScreen();
+                    SceneManager.Instance.EnterScene(SceneType.StatusScene);
                     break;
                 case 2:
                     //InventoryScreen();

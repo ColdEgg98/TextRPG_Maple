@@ -1,4 +1,5 @@
-﻿using TextRPG_Maple._04._Manager;
+﻿using System.Diagnostics;
+using TextRPG_Maple._04._Manager;
 using TextRPG_Maple._04._Manager._05._Object;
 using TextRPG_Maple._05._Usable.Item;
 using TextRPG_Maple._05._Usable.Skill;
@@ -33,7 +34,7 @@ namespace TextRPG_Maple
             Stat = new Status();
 
             Level = 1;
-            Stat.Atk = 100;
+            Stat.Atk = 10;
             Stat.Def = 5;
             Stat.Hp = 100;
             Stat.MaxHp = Stat.Hp;
@@ -61,9 +62,26 @@ namespace TextRPG_Maple
         public override void Attack(GameObject monster)
         {
             int damage = Math.Max(0, Stat.Atk + EquipAtk - monster.Stat.Def);
-            SoundManager.Instance.PlaySound(SoundType.Attack, "Player_Attack");
+            Random rand = new Random();
+            double value = rand.NextDouble(); 
 
-            monster.TakeDamage(damage);
+            if (value < 0.1f) // 10% 확률로 회피
+            {
+                SoundManager.Instance.PlaySound(SoundType.Attack, "Miss");
+                InputManager.Instance.WriteColor("하지만 빗나갔다!\n", ConsoleColor.DarkBlue);
+            }
+            else if (value < 0.85f) 
+            {
+                SoundManager.Instance.PlaySound(SoundType.Attack, "Player_Attack");
+                monster.TakeDamage(damage);
+            }
+            else // 10% 확률로 크리티컬
+            {
+                SoundManager.Instance.PlaySound(SoundType.Attack, "Critical");
+                InputManager.Instance.WriteColor("크리티컬! (Critical)", ConsoleColor.Red);
+                // 방어 무시 2배
+                monster.TakeDamage((Stat.Atk + EquipAtk) * 2);
+            }
         }
 
         public override void TakeDamage(int damage)

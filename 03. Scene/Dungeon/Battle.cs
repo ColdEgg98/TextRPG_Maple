@@ -129,13 +129,9 @@ namespace TextRPG_Maple._03._Scene.Dungeon
 
             while (true)
             {
-                if (act == 1)
+                if (act == 2)
                 {
-                    Console.WriteLine("\n\n공격 대상을 선택합니다. 공격할 몬스터의 번호를 입력해주세요");
-                }
-                else if (act == 2)
-                {
-                    Console.WriteLine("\n\n사용할 스킬의 번호를 입력해주세요.");
+                    Console.WriteLine("");
                     player.ShowSkill();
                     if(player.Skills.Count == 0)
                     {
@@ -160,7 +156,8 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                     }
                 }
 
-                input = GameManager.Instance.GetInput(1, monsters.Count);
+                Console.WriteLine("");
+                input = GameManager.Instance.GetInput(1, monsters.Count, " >>> 공격 대상을 선택해주세요: ");
                 input--;
                 if (monsters[input].Stat.Hp <= 0)
                 {
