@@ -25,7 +25,7 @@ namespace TextRPG_Maple._01._GameObject.Monster
         }
         public Monster(Monster other) : base(other.Name)
         {
-            Stat = other.Stat;
+            Stat = other.Stat.Clone();
         }
 
         public override void Attack(GameObject obj)

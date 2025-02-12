@@ -30,6 +30,8 @@ namespace TextRPG_Maple
 
         public Player(string name) : base(name)
         {
+            Stat = new Status();
+
             Level = 1;
             Stat.Atk = 100;
             Stat.Def = 5;
@@ -51,7 +53,7 @@ namespace TextRPG_Maple
         }
         public Player(Player other) : base(other.Name)
         {
-
+            Stat = other.Stat.Clone();
         }
 
 /// 전투
