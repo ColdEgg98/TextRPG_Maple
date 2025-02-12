@@ -1,25 +1,21 @@
 ﻿using TextRPG_Maple._04._Manager;
+using TextRPG_Maple._04._Manager._05._Object;
+using TextRPG_Maple._05._Usable.Skill;
 
 namespace TextRPG_Maple._03._Scene.SkillScene
 {
     internal class SkillScene : IScene
     {
-        Player player;
+        Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
 
         public void Enter()
         {
-            if (GameManager.Instance.player == null)
-            {
-                throw new InvalidOperationException("Player is not initialized.");
-            }
 
-            player = GameManager.Instance.player;
         }
 
         public void Exit()
         {
-            player = null;
-            System.GC.Collect();
+
         }
 
         public void Render()
@@ -33,33 +29,37 @@ namespace TextRPG_Maple._03._Scene.SkillScene
             Console.WriteLine();
             Console.WriteLine("[스킬 목록]");
 
-            if (player.Skills.Count == 0 || player.Skills == null)
+            if (player.Skills == null|| player.Skills.Count == 0)
                 InputManager.Instance.WriteLineColor("배운 스킬이 없습니다...", ConsoleColor.DarkGray);
             else
             {
-                for (int i = 0; i < player.Skills.Count; i++)
+                for (int i = 0; i < player.Skills.Count; i++) // 스택 오버플로우?
                     Console.WriteLine(player.Skills[i].UsableDisplay());
             }
 
             Console.WriteLine();
             Console.WriteLine("1. 장착 관리");
-            Console.WriteLine("2. 인벤토리");
             Console.WriteLine("0. 나가기");
+
+            Console.WriteLine($"클래스스킬 카운트 : {player.classSkill.Count}");
         }
 
         public void Update()
         {
             // 조건에 맞는 올바른 키를 입력할때 까지 반복
-            int input = InputManager.Instance.GetInput(0, 2);
+            int input = InputManager.Instance.GetInput(0, 1);
 
             //입력에 따른 실행
             switch (input)
             {
                 case 1:
-                    //SceneManager.Instance.EnterScene(SceneType.EquipSkillScene);
-                    break;
-                case 2:
-                    //SceneManager.Instance.ExitScene();
+                    if (player.Skills.Count != 0)
+                        SceneManager.Instance.EnterScene(SceneType.EquipSkillScene);
+                    else
+                    {
+                        InputManager.Instance.WriteLineColor("\n보유한 스킬이 없습니다...", ConsoleColor.DarkGray);
+                        Thread.Sleep(600);
+                    }
                     break;
                 case 0:
                     SceneManager.Instance.ExitScene();
