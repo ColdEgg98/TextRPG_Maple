@@ -4,10 +4,7 @@ using System.Threading.Channels;
 using System.Runtime.Serialization;
 using TextRPG_Maple._04._Manager._05._Object;
 using TextRPG_Maple._03._Scene.SkillScene;
-using System.Numerics;
-using TextRPG_Maple._05._Usable.Skill;
-using TextRPG_Maple._03._Scene.Inventory;
-using TextRPG_Maple._05._Usable.Item;
+using TextRPG_Maple._04._Manager._06._DB;
 
 namespace TextRPG_Maple
 {
@@ -15,17 +12,27 @@ namespace TextRPG_Maple
     {
         static void Main(string[] args)
         {
-            // ì‚¬ìš´ë“œ ë§¤ë‹ˆì € ì‚¬ìš© ì˜ˆì œ
+            // »ç¿îµå ¸Å´ÏÀú »ç¿ë ¿¹Á¦
             SoundManager.Instance.LoadSounds();
             SoundManager.Instance.PlaySound(SoundType.BGM, "aLIEz_Piano", true);
             SoundManager.Instance.SetVolume(SoundType.BGM, 0.1f);
 
-            // ê²Œì„ ì˜¤ë¸Œì íŠ¸ ë§¤ë‹ˆì € ì‚¬ìš© ì˜ˆì œ - í”Œë ˆì´ì–´ ì •ë³´ ì´ˆê¸°í™”
-            GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
-            Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
+            // ÇÃ·¹ÀÌ¾î »ı¼º ¿¹Á¦
+            //GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
+            //Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
 
+            // DB »ç¿ë ¿¹Á¦ - Monster
+            List<GameObject> monsters = DBManager.LoadFromCSV("MonsterDB.csv");
+            foreach (GameObject monster in monsters)
+            {
+                GameObjectManager.Instance.AddPrototypeObject(ObjectType.MONSTER, monster.Name, monster);
+            }
 
-            // ëª¨ë“  ì”¬ì„ ë¯¸ë¦¬ ìƒì„±í•˜ì—¬ Dictionaryì— ì €ì¥
+            // ÇÁ·ÎÅäÅ¸ÀÔÀ¸·Î ºÎÅÍ °´Ã¼¸¦ º¹»ç
+            GameObject? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "°íºí¸°");
+
+ 
+            // ¸ğµç ¾ÀÀ» ¹Ì¸® »ı¼ºÇÏ¿© Dictionary¿¡ ÀúÀå
             var scenes = new Dictionary<SceneType, IScene>
                 {
                 { SceneType.Town, new TownScene() },

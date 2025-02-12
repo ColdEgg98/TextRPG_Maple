@@ -9,7 +9,7 @@ namespace TextRPG_Maple
 {
     internal abstract class GameObject
     {
-        public string Name;
+        public string Name { get; set; } = "";
         public Status Stat { get; set; }
         
         public GameObject(string name)
@@ -19,8 +19,8 @@ namespace TextRPG_Maple
         }
 
         public abstract void Attack(GameObject obj);
-
         public abstract void TakeDamage(int damage);
+        public abstract GameObject Clone();
     }
 
     internal class Status

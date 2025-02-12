@@ -5,12 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Collections;
 
 namespace TextRPG_Maple._01._GameObject.Monster
 {
     internal class Monster : GameObject
     {
-        public Monster(string name, int hp, int attack, int defense, int Exp, int Gold) : base(name)
+        public Monster() : base("")
+        {
+
+        }
+        public Monster(string name, int hp, int attack, int defense) : base(name)
         {
             Stat.Hp = hp;
             Stat.MaxHp = Stat.Hp;
@@ -18,12 +23,21 @@ namespace TextRPG_Maple._01._GameObject.Monster
             Stat.Def = defense;
             Stat.Exp = Exp;
         }
+        public Monster(Monster other) : base(other.Name)
+        {
+            Stat = other.Stat;
+        }
 
         public override void Attack(GameObject obj)
         {
             int damage = Math.Max(0, Stat.Atk - obj.Stat.Def);
 
             obj.TakeDamage(damage);
+        }
+
+        public override GameObject Clone()
+        {
+            return new Monster(this);
         }
 
         public override void TakeDamage(int damage)
