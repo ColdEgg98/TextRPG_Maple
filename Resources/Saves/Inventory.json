@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "Name": "\uBB34\uD55C\uC758 \uB300\uAC80",
+    "Descrip": "\uC124\uBA85\uBB38-\uB300\uAC80",
+    "Value": 70,
+    "Cost": 100,
+    "IsEquip": false,
+    "IsOwned": false
+  },
+  {
+    "Name": "\uBB34\uD55C\uC758 \uC9C1\uAC80",
+    "Descrip": "\uC124\uBA85-\uC9C1\uAC80",
+    "Value": 50,
+    "Cost": 200,
+    "IsEquip": true,
+    "IsOwned": false
+  },
+  {
+    "Name": "\uBB34\uD55C\uC758 \uBAA9\uAC78\uC774",
+    "Descrip": "\uC124\uBA85-\uBAA9\uAC78\uC774",
+    "Value": 25,
+    "Cost": 300,
+    "IsEquip": false,
+    "IsOwned": false
+  }
+]

@@ -20,6 +20,15 @@ namespace TextRPG_Maple
             //==============================================================================================================================
             // 게임 관련 초기화 작업
             //==============================================================================================================================
+            LoadGameInfo();
+
+            GameManager.Instance.Run();
+        }
+
+
+
+        static void LoadGameInfo()
+        {
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
 
 
@@ -88,10 +97,11 @@ namespace TextRPG_Maple
                 { SceneType.EquipInventory, new EquipInventory() },
             };
 
+            // 플레이어 정보 생성
+            GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
+
             SceneManager.Instance.SetSceneInfo(scenes);
             SceneManager.Instance.EnterScene(SceneType.Title);
-
-            GameManager.Instance.Run();
         }
 
         static void OnProcessExit(object sender, EventArgs e)
@@ -107,9 +117,14 @@ namespace TextRPG_Maple
                 Player? p = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
 
                 // 사용 예제
-                if(p != null )
+                if (p != null)
                 {
+                    // 플레이어 인벤토리, 스킬, class 스킬 정보 저장
+                    FileIOManager.SaveJson(p, "Player");
                     FileIOManager.SaveJson(p.Inventory, "Inventory");
+                    FileIOManager.SaveJson(p.Skills, "Skill");
+                    FileIOManager.SaveJson(p.classSkill, "ClassSkill");
+                    FileIOManager.SaveJson(p.Stat, "Status");
                 }
 
                 LogManager.Instance.Log(LogLevel.DEBUG, "\n프로세스 종료 전에 데이터 완료!");

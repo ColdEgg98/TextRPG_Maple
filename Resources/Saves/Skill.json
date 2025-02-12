@@ -1,0 +1,32 @@
+[
+  {
+    "SkillType": 0,
+    "NeedLv": 3,
+    "Name": "\uC2AC\uB798\uC2DC \uBE14\uB7EC\uC2A4\uD2B8",
+    "Descrip": "Mp\uB97C \uC18C\uBE44\uD558\uC5EC \uC8FC\uC704\uC758 \uC801 \uB2E4\uC218\uB97C \uB3D9\uC2DC\uC5D0 \uACF5\uACA9\uD55C\uB2E4.",
+    "Value": 2,
+    "Cost": 10,
+    "IsEquip": false,
+    "IsOwned": true
+  },
+  {
+    "SkillType": 0,
+    "NeedLv": 5,
+    "Name": "\uBE0C\uB79C\uB514\uC26C",
+    "Descrip": "\uB208 \uC55E\uC758 \uC801 \uC5EC\uB7EC\uBA85\uC744 \uB450 \uBC88 \uC5F0\uC18D \uACF5\uACA9\uD55C\uB2E4.",
+    "Value": 2.8,
+    "Cost": 16,
+    "IsEquip": false,
+    "IsOwned": true
+  },
+  {
+    "SkillType": 0,
+    "NeedLv": 8,
+    "Name": "\uC778\uC0AC\uC774\uC9D5",
+    "Descrip": "\uC815\uC2E0\uC744 \uC9D1\uC911\uD558\uC5EC \uC804\uBC29\uC73C\uB85C \uAC80\uC744 \uD06C\uAC8C \uB0B4\uB9AC\uAE0B\uB294\uB2E4. ",
+    "Value": 4,
+    "Cost": 36,
+    "IsEquip": false,
+    "IsOwned": true
+  }
+]
