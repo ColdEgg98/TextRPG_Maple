@@ -15,7 +15,7 @@ namespace TextRPG_Maple
 {
     internal class DungeonScene : IScene
     {
-        public int Floor { get; set; } = 1;   // 층수
+        public static int Floor { get; set; } = 1;   // 층수
         List<Monster> monsters = new List<Monster>();
 
         public void Enter()
@@ -71,6 +71,7 @@ namespace TextRPG_Maple
                         if (keepGoing > 0) // 1(clear and stop) or 2(clear and go)
                         {
                             Floor++;
+                            player.DungeonFloor = Floor;
                         }
 
                         if (keepGoing == 1)

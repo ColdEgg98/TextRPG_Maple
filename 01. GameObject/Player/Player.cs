@@ -9,6 +9,8 @@ namespace TextRPG_Maple
 {
     internal class Player : GameObject
     {
+        static Random rand = new Random();
+
         public int Level { get; set; }
         public List<Item> Inventory { get; set; }
         public List<Skill> Skills { get; set; }
@@ -29,6 +31,8 @@ namespace TextRPG_Maple
         }
 
         public event Action LevelUPEvent;
+
+        public int DungeonFloor { get; set; } = 1;
 
         public Player() : base("")
         {
@@ -69,7 +73,6 @@ namespace TextRPG_Maple
         public override void Attack(GameObject monster)
         {
             int damage = Math.Max(0, Stat.Atk + EquipAtk - monster.Stat.Def);
-            Random rand = new Random();
             double value = rand.NextDouble();
 
             if (value < 0.1f) // 10% È®·ü·Î È¸ÇÇ
@@ -124,8 +127,8 @@ namespace TextRPG_Maple
         {
             Stat.Gold += monster.Stat.Gold;
             Stat.Exp += monster.Stat.Exp;
-            Console.WriteLine($"{Stat.Gold}G ¸¦ È¹µæÇß½À´Ï´Ù.");
-            Console.WriteLine($"{Stat.Exp} °æÇèÄ¡¸¦ È¹µæÇß½À´Ï´Ù.");
+            Console.WriteLine($"{monster.Stat.Gold}G ¸¦ È¹µæÇß½À´Ï´Ù.");
+            Console.WriteLine($"{monster.Stat.Exp} °æÇèÄ¡¸¦ È¹µæÇß½À´Ï´Ù.");
             if (Stat.Exp >= requiredExp)
                 LevelUp();
         }

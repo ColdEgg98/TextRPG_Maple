@@ -11,6 +11,7 @@ using TextRPG_Maple._04._Manager._07._FileIO;
 using TextRPG_Maple._05._Usable.Skill;
 using TextRPG_Maple._05._Usable.Item;
 using TextRPG_Maple._03._Scene.StatusScene;
+using TextRPG_Maple._03._Scene.Ending;
 
 namespace TextRPG_Maple
 {
@@ -77,9 +78,6 @@ namespace TextRPG_Maple
             Item.SetItemLists(items);
 
 
-            // 프로토타입으로 부터 객체를 복사
-            GameObject? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린");
-
             // ANSI Escape Code
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                 Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -93,11 +91,13 @@ namespace TextRPG_Maple
                 { SceneType.Title, new TitleScene() },
                 { SceneType.StatusScene, new StatusScene() },
                 { SceneType.Dungeon, new DungeonScene()},
+                {SceneType.EndingCreditsScene, new EndingCreditsScene()},
                 { SceneType.SkillScene, new SkillScene() },
                 { SceneType.EquipSkillScene, new EquipSkillScene() },
                 { SceneType.Inventory, new InventoryScene() },
                 { SceneType.EquipInventory, new EquipInventory() },
             };
+
 
             // 플레이어 정보 생성
             GameObjectManager.Instance.AddGameObject(ObjectType.PLAYER, "MainPlayer", new Player(""));
