@@ -13,6 +13,8 @@ namespace TextRPG_Maple._01._GameObject.Monster
 {
     internal class Monster : GameObject
     {
+        static Random rand = new Random();
+
         public Monster() : base("") { }
         public Monster(string name, int hp, int attack, int defense, int exp, int gold) : base(name)
         {
@@ -42,9 +44,6 @@ namespace TextRPG_Maple._01._GameObject.Monster
 
         public override void Attack(GameObject obj)
         {
-            int damage = Math.Max(0, Stat.Atk - obj.Stat.Def);
-
-            Random rand = new Random();
             double value = rand.NextDouble();
             if (value < 0.1f) // 10% 확률로 회피
             {
@@ -53,6 +52,7 @@ namespace TextRPG_Maple._01._GameObject.Monster
             }
             else if (value < 0.85f)
             {
+                int damage = Math.Max(0, Stat.Atk - obj.Stat.Def);
                 obj.TakeDamage(damage);
             }
             //else // 10% 확률로 크리티컬
