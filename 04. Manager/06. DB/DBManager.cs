@@ -17,9 +17,9 @@ namespace TextRPG_Maple._04._Manager._06._DB
         // !!!임의로 값을 넣어둠. 나중에 CSV로 교체할 예정
         private Dictionary<string, MonsterData> monsterData = new Dictionary<string, MonsterData>
         {
-            { "고블린", new MonsterData("고블린", 50, 5, 2) },
-            { "오크", new MonsterData("오크", 80, 10, 5) },
-            { "늑대", new MonsterData("늑대", 60, 7, 3) }
+            { "고블린", new MonsterData("고블린", 50, 5, 2, 10, 30) },
+            { "오크", new MonsterData("오크", 80, 10, 5, 20, 50) },
+            { "늑대", new MonsterData("늑대", 60, 7, 3, 30, 70) }
         };
 
         public MonsterData? GetMonsterData(string name)

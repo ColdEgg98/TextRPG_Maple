@@ -34,5 +34,7 @@ namespace TextRPG_Maple
         public int Mp { get; set; }
         public int MaxMp { get; set; }
         public int Exp { get; set; }
+        public int Dex { get; set; }
+        public int Luc { get; set; }
     }
 }

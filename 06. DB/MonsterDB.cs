@@ -14,13 +14,17 @@ namespace TextRPG_Maple._06._DB
         public int HP { get; }
         public int Attack { get; }
         public int Defense { get; }
+        public int Exp { get; }
+        public int Gold { get; }
 
-        public MonsterData(string name, int hp, int attack, int defense)
+        public MonsterData(string name, int hp, int attack, int defense, int exp, int gold)
         {
             Name = name;
             HP = hp;
             Attack = attack;
             Defense = defense;
+            Exp = exp;
+            Gold = gold;
         }
     }
 
@@ -35,7 +39,7 @@ namespace TextRPG_Maple._06._DB
                 return null;
             }
 
-            return new Monster(data.Name, data.HP, data.Attack, data.Defense);
+            return new Monster(data.Name, data.HP, data.Attack, data.Defense, data.Exp, data.Gold);
         }
     }
 }

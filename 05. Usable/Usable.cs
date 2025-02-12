@@ -15,7 +15,7 @@
         public bool IsEquip { get; set; }
         public bool IsOwned { get; set; }
 
-        public Usable(string name, float value, string descrip, int cost, bool IsOwned)
+        public Usable(string name, float value, string descrip, int cost)
         {
             Name = name;
             Value = value;
