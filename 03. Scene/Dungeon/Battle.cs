@@ -111,7 +111,10 @@ namespace TextRPG_Maple._03._Scene.Dungeon
             Console.WriteLine("2 ) 스킬");
             int act = GameManager.Instance.GetInput(1, 2);
             int input;
-            // 스킬은 선택창 띄우기
+            int skillInput = 0;
+
+            // 
+
             while (true)
             {
                 if (act == 1)
@@ -120,9 +123,25 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                 }
                 else if (act == 2)
                 {
-                    Console.WriteLine("\n\n스킬 대상을 선택합니다. 공격할 몬스터의 번호를 입력해주세요");
+                    player.ShowSkill();
+                    Console.WriteLine("\n\n사용할 스킬의 번호를 입력해주세요.");
+                    skillInput = GameManager.Instance.GetInput(1, player.Skills.Count);
+                    --skillInput;
+                    if (!player.Skills[skillInput].IsEquip)
+                    {
+                        InputManager.Instance.WriteLineColor("해당 스킬은 미장착 되어있습니다..", ConsoleColor.DarkGray);
+                        bool isAllSkillflase = true;
+                        for (int i = 0; player.Skills.Count > i; i++)
+                        {
+                            if (player.Skills[i].IsEquip)
+                                isAllSkillflase = false;
+                        }
+                        if (isAllSkillflase)
+                            act = 1;
+                        continue;
+                    }
                 }
-                
+
                 input = GameManager.Instance.GetInput(1, monsters.Count);
                 input--;
                 if (monsters[input].Stat.Hp <= 0)
@@ -149,8 +168,12 @@ namespace TextRPG_Maple._03._Scene.Dungeon
             {
                 // 몬스터 공격
                 Console.WriteLine("플레이어의 공격!");
-                player.Attack(monsters[input]);
+                if (act == 1)
+                    player.Attack(monsters[input]);
+                else if (act == 2)
+                    player.SkillAttack(monsters[input], player.Skills[skillInput]);
                 Thread.Sleep(300);
+
                 // 몬스터가 죽으면 처리
                 if (monsters[input].Stat.Hp <= 0)
                 {

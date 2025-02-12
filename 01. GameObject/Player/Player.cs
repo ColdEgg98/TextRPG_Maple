@@ -159,6 +159,16 @@ namespace TextRPG_Maple
             }
         }
 
+        public void ShowSkill()
+        {
+            if (this.Skills.Count == 0)
+                InputManager.Instance.WriteLineColor("배운 스킬이 없습니다...", ConsoleColor.DarkGray);
+            for (int i = 0; i < this.Skills.Count; i++)
+            {
+                Console.WriteLine(this.Skills[i + 1].UsableDisplay());
+            }
+        }
+
         private void AddSkill(Skill Skill)
         {
             Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;

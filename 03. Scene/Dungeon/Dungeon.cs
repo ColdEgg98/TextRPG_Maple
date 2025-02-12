@@ -15,8 +15,8 @@ namespace TextRPG_Maple
 {
     internal class DungeonScene : IScene
     {
-        public int Floor { get; }   // 층수
-        int stage = 1;
+        public int Floor { get; set; } = 1;   // 층수
+        List<string> nameList = new List<string>();
         public void Enter()
         {
             List<GameObject> monsters = DBManager.LoadFromCSV("MonsterDB.csv");
@@ -30,6 +30,7 @@ namespace TextRPG_Maple
         }
         public void Exit()
         {
+           
         }
 
         public void Render()
@@ -40,7 +41,7 @@ namespace TextRPG_Maple
             Console.WriteLine();
             Console.WriteLine("1. 상태 보기");
             Console.WriteLine("2. 인벤토리");
-            Console.WriteLine($"3. 전투 시작 : {stage}층");  // "전투 시작 : n층" 처럼 층수가 출력되어야 함. 기존 층수에 대한 정보가 존재. 
+            Console.WriteLine($"3. 전투 시작 : {Floor}층");  // "전투 시작 : n층" 처럼 층수가 출력되어야 함. 기존 층수에 대한 정보가 존재. 
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
         }
@@ -65,19 +66,22 @@ namespace TextRPG_Maple
 
 
                     Player? player = GameObjectManager.Instance.GetGameObject(ObjectType.PLAYER, "MainPlayer") as Player;
-
-                    BattleView battleView = new BattleView();
-                    BattleController battleController = new BattleController(player, GetMonsters2(), battleView);
-                    int keepGoing = battleController.StartBattle();
-                    if (keepGoing > 0) // 1(clear and stop) or 2(clear and go)
+                    while (true)
                     {
-                        stage++;
-                    }
-                    if (keepGoing == 2)
-                    {
-                        BattleView battleView2 = new BattleView();
-                        BattleController battleController2 = new BattleController(player, GetMonsters(), battleView2);
-                        battleController2.StartBattle();
+                        BattleView battleView = new BattleView();
+                        BattleController battleController = new BattleController(player, GetMonsters(), battleView);
+                        int keepGoing = battleController.StartBattle();
+                        // 오보젝트 삭제
+                        DeleteMonster();
+                        // 다음 단계 진행
+                        if (keepGoing > 0) // 1(clear and stop) or 2(clear and go)
+                        {
+                            Floor++;
+                        }
+                        if (keepGoing == 1)
+                        {
+                            break;
+                        }
                     }
                     break;
                 case 0:
@@ -91,22 +95,38 @@ namespace TextRPG_Maple
         {
             // 던전에서 등장할 몬스터를 설정
             // 난이도 관련되선 나중에 추가
+            List<Monster> monsters = new List<Monster>();
             Monster? goblin = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "고블린") as Monster;
             Monster? orc = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "오크") as Monster;
             Monster? wolf = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
 
-            //return new List<Monster>();
-            return new List<Monster> { goblin,  wolf, orc };
+            if (Floor == 1)
+            {
+                Monster? wolf1 = GameObjectManager.Instance.GetGameObject(ObjectType.MONSTER, "늑대") as Monster;
+                monsters.Add(wolf1);
+                nameList.Add("늑대");
+            }
+            else if (Floor == 2)
+            { 
+                Monster? wolf1 = GameObjectManager.Instance.GetGameObject(ObjectType.MONSTER, "늑대 A") as Monster;
+                Monster? wolf2 = GameObjectManager.Instance.GetGameObject(ObjectType.MONSTER, "늑대 B") as Monster;
+                monsters.Add(wolf1);
+                monsters.Add(wolf2);
+                nameList.Add("늑대 A");
+                nameList.Add("늑대 B");
+            }
+
+            //return monster
+            return monsters;
         }
-        List<Monster> GetMonsters2()
+        void DeleteMonster()
         {
-            // 던전에서 등장할 몬스터를 설정
-            // 난이도 관련되선 나중에 추가
-            Monster? wolf2 = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
-            Monster? wolf3 = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
-            Monster? wolf4 = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.MONSTER, "늑대") as Monster;
-            //return new List<Monster>();
-            return new List<Monster> { wolf2, wolf3, wolf4 };
+            //public bool RemoveGameObject(ObjectType type, string name)
+            for (int i = 0; i < nameList.Count; i++)
+            {
+                GameObjectManager.Instance.RemoveGameObject(ObjectType.MONSTER, nameList[i]);
+            }
+            nameList.Clear();
         }
     }
 }
