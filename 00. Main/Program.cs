@@ -49,6 +49,12 @@ namespace TextRPG_Maple
             {
                 GameObjectManager.Instance.AddPrototypeObject(ObjectType.MONSTER, monster.Name, monster);
             }
+            // Boss
+            List<GameObject> bossess = DBManager.LoadFromCSV("BossDB.csv");
+            foreach (GameObject boss in bossess)
+            {
+                GameObjectManager.Instance.AddPrototypeObject(ObjectType.BOSS, boss.Name, boss);
+            }
 
             // DB 사용 예제 - Skill
             //List<Skill> skillList = new List<Skill>();
