@@ -1,5 +1,5 @@
 {
-  "Level": 10,
+  "Level": 28,
   "Inventory": [],
   "Skills": [
     {
@@ -10,7 +10,7 @@
       "Descrip": "\uD589\uC6B4\uC744 \uB2F4\uC740 7\uAC1C\uC758 \uD45C\uCC3D\uC744 \uB358\uC9C4\uB2E4.",
       "Value": 1.1,
       "Cost": 14,
-      "IsEquip": false,
+      "IsEquip": true,
       "IsOwned": true
     },
     {
@@ -21,7 +21,7 @@
       "Descrip": "3\uAC1C\uC758 \uD45C\uCC3D\uC744 \uB3D9\uC2DC\uC5D0 \uB358\uC9C4\uB2E4.",
       "Value": 2.9,
       "Cost": 20,
-      "IsEquip": false,
+      "IsEquip": true,
       "IsOwned": true
     },
     {
@@ -32,7 +32,7 @@
       "Descrip": "\uC0B4\uC0B4 \uB54C\uB9BD\uB2C8\uB2E4.",
       "Value": 7.8,
       "Cost": 50,
-      "IsEquip": false,
+      "IsEquip": true,
       "IsOwned": true
     }
   ],
@@ -73,21 +73,21 @@
   ],
   "Class": "\uB3C4\uC801",
   "IsAlive": true,
-  "requiredExp": 1000,
+  "requiredExp": 2800,
   "EquipAtk": 0,
   "EquipDef": 0,
-  "eventLv": 10,
+  "eventLv": 28,
   "Name": "qwe",
   "Stat": {
     "Level": 0,
-    "Atk": 55,
-    "Def": 23,
-    "Gold": 1000,
-    "Hp": 190,
-    "MaxHp": 190,
-    "Mp": 95,
-    "MaxMp": 95,
-    "Exp": -4500,
+    "Atk": 145,
+    "Def": 59,
+    "Gold": 2170,
+    "Hp": 370,
+    "MaxHp": 370,
+    "Mp": 171,
+    "MaxMp": 185,
+    "Exp": -37260,
     "Dex": 0,
     "Luc": 0
   }
