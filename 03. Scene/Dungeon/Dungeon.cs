@@ -100,6 +100,7 @@ namespace TextRPG_Maple
         // 던전에서 등장할 몬스터를 설정
         List<Monster> GetMonsters()
         {
+            monsters.Clear();
             if ((Floor % 5) != 0)
             {
                 // 랜덤한 숫자의 몬스터를 소환
@@ -129,14 +130,15 @@ namespace TextRPG_Maple
                 if (Floor == 5)
                 {
                     Boss? boss = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.BOSS, "혼테일") as Boss;
-                    monsters.Add(boss);
+                    Boss b = boss.Clone() as Boss;
+                    monsters.Add(b);
                 }
                 else if (Floor == 10)
                 {
                     Boss? boss = GameObjectManager.Instance.ClonePrototypeObject(ObjectType.BOSS, "가디언 엔젤 슬라임") as Boss;
+                    boss = boss.Clone() as Boss;
                     monsters.Add(boss);
                 }
-
             }
 
             return monsters;

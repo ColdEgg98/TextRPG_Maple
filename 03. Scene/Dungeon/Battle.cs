@@ -16,34 +16,45 @@ namespace TextRPG_Maple._03._Scene.Dungeon
     {
         public void ShowBattleStatus(Player player, List<Monster> monsters)
         {
-            Console.WriteLine("==== 전투 시작 ====");
-            Console.WriteLine($"플레이어: {player.Name} (HP: {player.Stat.Hp} / MP : {player.Stat.Mp})\n");
-            Console.WriteLine("몬스터 목록:");
-            for (int i = 0; i < monsters.Count; i++)
+            var monster = monsters[0];
+            if (monster is Boss boss) // boss로 변환 성공하면 실행
             {
-                var monster = monsters[i];
-                if (monster is Boss boss) // boss로 변환 성공하면 실행
+                boss.BossSetUp();
+                string status = boss.Stat.Hp > 0 ? "(선택 가능)" : "(죽음)";
+                // 1번부터
+                if (boss.Stat.Hp > 0)
                 {
-                    Console.WriteLine("======== BOSS =========");
-                    boss.BossSetUp();
-                    string status = boss.Stat.Hp > 0 ? "(선택 가능)" : "(죽음)";
-                    // 1번부터
-                    if (boss.Stat.Hp > 0)
-                    {
-                        Console.WriteLine($"[{i + 1}] {boss.Name} (HP: {boss.Stat.Hp}) {status}  {boss.Stat.Atk}");
-                        boss.DisplayBoss();
-                    }
-                    else
-                        InputManager.Instance.WriteLineColor($"[{i + 1}] {monster.Name} (HP: {boss.Stat.Hp}) {status}", ConsoleColor.DarkGray);
+                    // 아트 출력
+                    boss.DisplayBoss();
+                    Console.WriteLine("==== 전투 시작 ====");
+                    Console.WriteLine($"플레이어: {player.Name} (HP: {player.Stat.Hp} / MP : {player.Stat.Mp})\n");
+                    Console.WriteLine("몬스터 목록:");
+                    Console.WriteLine($"[1] {boss.Name} (HP: {boss.Stat.Hp}) {status}");
+                    boss.RenderBossHP();
                 }
                 else
+                    InputManager.Instance.WriteLineColor($"[1] {boss.Name} (HP: {boss.Stat.Hp}) {status}", ConsoleColor.DarkGray);
+            }
+            // 일반 전투
+            else
+            {
+                Console.WriteLine("==== 전투 시작 ====");
+                Console.WriteLine($"플레이어: {player.Name} (HP: {player.Stat.Hp} / MP : {player.Stat.Mp})\n");
+                Console.WriteLine("몬스터 목록: \n");
+                for (int i = 0; i < monsters.Count; i++)
                 {
                     string status = monster.Stat.Hp > 0 ? "(선택 가능)" : "(죽음)";
                     // 1번부터
                     if (monster.Stat.Hp > 0)
+                    {
                         Console.WriteLine($"[{i + 1}] {monster.Name} (HP: {monster.Stat.Hp}) {status}");
+                        Console.WriteLine();
+                    }
                     else
+                    {
                         InputManager.Instance.WriteLineColor($"[{i + 1}] {monster.Name} (HP: {monster.Stat.Hp}) {status}", ConsoleColor.DarkGray);
+                        Console.WriteLine();
+                    }
                 }
             }
             Console.WriteLine("================");
@@ -80,7 +91,11 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                 LogManager.Instance.Log(LogLevel.ERROR, "DungeonScene::Fight(), 플레이어가 존재하지 않음");
                 return -1;
             }
-
+            var monster = monsters[0];
+            if (monster is Boss boss) // boss로 변환 성공하면 실행
+            {
+                boss.SoundBoss();// 음악 실행
+            }
             while (player.IsAlive && monsters.Count > 0)
             {
                 Console.Clear();

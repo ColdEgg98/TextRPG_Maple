@@ -26,13 +26,12 @@ namespace TextRPG_Maple._01._GameObject.Monster.Boss
         public bool isBoss { get; set; } = true;
 
         public event Action Phase2Event;
-
         public Boss(string name, int hp, int attack, int defense, int Exp, int Gold) : base(name, hp, attack, defense, Exp, Gold)
         {
             triggerEvent = true;
             Phase2Event += Boss2Phase;
         }
-
+       
 
         public void DisplayBoss()
         {
@@ -40,14 +39,26 @@ namespace TextRPG_Maple._01._GameObject.Monster.Boss
             {
                 case "마노":
                     Display_Mano();
-                    SoundManager.Instance.PlaySound(SoundType.BGM, "GuardianAngelSlime", true);
                     break;
                 case "혼테일":
                     Display_Horntail();
-                    SoundManager.Instance.PlaySound(SoundType.BGM, "HornTail", true);
                     break;
                 case "가디언 엔젤 슬라임":
                     Display_Guardian_Angel_Slime();
+                    break;
+            }
+        }
+        public void SoundBoss()
+        {
+            switch (Name)
+            {
+                case "마노":
+                    SoundManager.Instance.PlaySound(SoundType.BGM, "GuardianAngelSlime", true);
+                    break;
+                case "혼테일":
+                    SoundManager.Instance.PlaySound(SoundType.BGM, "HornTail", true);
+                    break;
+                case "가디언 엔젤 슬라임":
                     SoundManager.Instance.PlaySound(SoundType.BGM, "GuardianAngelSlime", true);
                     break;
             }
@@ -76,6 +87,14 @@ namespace TextRPG_Maple._01._GameObject.Monster.Boss
             Console.WriteLine($"{this.Name}이 화난 것 같다!");
             this.Stat.Atk += (int)(this.Stat.Atk * 0.1f);
             this.Stat.Def += (int)(this.Stat.Def * 0.1f);
+        }
+        public override void TakeDamage(int damage)
+        {
+            Stat.Hp -= damage;
+            if (Stat.Hp < 0)
+                Stat.Hp = 0;
+
+            Console.WriteLine($"{Name}이(가) {damage}만큼 피해를 입었습니다! (남은 HP: {Stat.Hp})");
         }
 
         #region BossSetUp
@@ -129,7 +148,8 @@ namespace TextRPG_Maple._01._GameObject.Monster.Boss
         public Boss() : base() { }
         public Boss(Boss other) : base()
         {
-            Stat = other.Stat;
+            Stat = other.Stat.Clone();
+            Name = other.Name;
         }
         public override GameObject Clone()
         {
