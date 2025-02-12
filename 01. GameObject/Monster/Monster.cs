@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Collections;
+using System.Threading;
+using TextRPG_Maple._04._Manager;
 
 namespace TextRPG_Maple._01._GameObject.Monster
 {
@@ -31,6 +33,24 @@ namespace TextRPG_Maple._01._GameObject.Monster
             int damage = Math.Max(0, Stat.Atk - obj.Stat.Def);
 
             obj.TakeDamage(damage);
+            Random rand = new Random();
+            double value = rand.NextDouble();
+            if (value < 0.1f) // 10% 확률로 회피
+            {
+                SoundManager.Instance.PlaySound(SoundType.Attack, "Miss");
+                InputManager.Instance.WriteColor("하지만 빗나갔다!\n", ConsoleColor.DarkBlue);
+            }
+            else if (value < 0.85f)
+            {
+                obj.TakeDamage(damage);
+            }
+            //else // 10% 확률로 크리티컬
+            //{
+            //    SoundManager.Instance.PlaySound(SoundType.Attack, "Critical");
+            //    InputManager.Instance.WriteColor("크리티컬! (Critical)", ConsoleColor.Red);
+            //    // 방어 무시 2배
+            //    obj.TakeDamage(damage * 2);
+            //}
         }
 
         public override GameObject Clone()
