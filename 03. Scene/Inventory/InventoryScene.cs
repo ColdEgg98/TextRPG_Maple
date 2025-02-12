@@ -10,7 +10,7 @@ namespace TextRPG_Maple._03._Scene.Inventory
 {
     internal class InventoryScene : IScene
     {
-        private Player? player;
+        Player? player;
 
         public void Enter()
         {
@@ -22,25 +22,23 @@ namespace TextRPG_Maple._03._Scene.Inventory
         public void Render()
         {
             Console.Clear();
-            InputManager.Instance.Write("\x1b[1mí…ŒìŠ¤íŠ¸ ì¶œë ¥ì…ë‹ˆë‹¤!\n\x1b[0m");
-            InputManager.Instance.WriteLineColor("ì¸ë²¤í† ë¦¬", ConsoleColor.Yellow);
-            Console.WriteLine("ë³´ìœ  ì¤‘ì¸ ì•„ì•„í…œê³¼ ìŠ¤í‚¬ì„ í™•ì¸í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
+            InputManager.Instance.WriteLineColor("ÀÎº¥Åä¸®", ConsoleColor.Yellow);
+            Console.WriteLine("º¸À¯ ÁßÀÎ ¾Æ¾ÆÅÛ°ú ½ºÅ³À» È®ÀÎÇÒ ¼ö ÀÖ½À´Ï´Ù.");
             Console.WriteLine();
-            Console.WriteLine("[ì•„ì´í…œ ëª©ë¡]");
+            Console.WriteLine("[¾ÆÀÌÅÛ ¸ñ·Ï]");
 
-            // inventoryì— ìˆëŠ” itemë“¤ì— ëŒ€í•œ ì¶œë ¥
+            // inventory¿¡ ÀÖ´Â itemµé¿¡ ´ëÇÑ Ãâ·Â
             for (int i = 0; i < player.Inventory.Count; i++)
             {
                 Console.WriteLine(player.Inventory[i].UsableDisplay());
             }
 
             Console.WriteLine();
-            Console.WriteLine("1. ì¥ì°© ê´€ë¦¬");
-            Console.WriteLine("2. ìŠ¤í‚¬ í™•ì¸");
-            Console.WriteLine("0. ë‚˜ê°€ê¸°");
+            Console.WriteLine("1. ÀåÂø °ü¸®");
+            Console.WriteLine("2. ½ºÅ³ È®ÀÎ");
+            Console.WriteLine("0. ³ª°¡±â");
             Console.WriteLine();
 
-            // Test : ìŠ¤í‚¬ ì´ë²¤íŠ¸ ì²´í¬
             player.LevelUp();
             player.LevelUp();
             player.LevelUp();
@@ -50,8 +48,6 @@ namespace TextRPG_Maple._03._Scene.Inventory
             player.LevelUp();
             player.LevelUp();
             player.LevelUp();
-
-            InputManager.Instance.Write("ë ˆë²¨ì—… í–ˆìŠµë‹ˆë‹¤. í˜„ì¬ ë ˆë²¨ : ");
         }
         public void Update()
         {
@@ -60,11 +56,11 @@ namespace TextRPG_Maple._03._Scene.Inventory
             switch (input)
             {
                 case 1:
-                    if (player.Inventory.Count != 0)
+                    if (player.Skills.Count != 0)
                         SceneManager.Instance.EnterScene(SceneType.EquipInventory);
                     else
                     {
-                        InputManager.Instance.WriteLineColor("\në³´ìœ í•œ ì•„ì´í…œì´ ì—†ìŠµë‹ˆë‹¤...", ConsoleColor.DarkGray);
+                        InputManager.Instance.WriteLineColor("\nº¸À¯ÇÑ ¾ÆÀÌÅÛÀÌ ¾ø½À´Ï´Ù...", ConsoleColor.DarkGray);
                         Thread.Sleep(600);
                     }
                     break;

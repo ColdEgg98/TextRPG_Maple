@@ -10,6 +10,14 @@ namespace TextRPG_Maple
     internal class Player : GameObject
     {
         public int Level { get; set; }
+        public List<Item> Inventory { get; set; }
+        public List<Skill> Skills { get; set; }
+        public List<Skill> classSkill { get; set; }
+        public string Class { get; set; }
+        public bool IsAlive => Stat.Hp > 0;
+        public int requiredExp { get; set; }
+        public int EquipAtk { get; set; }
+        public int EquipDef { get; set; }
         public int eventLv
         {
             get => Level;
@@ -19,20 +27,13 @@ namespace TextRPG_Maple
                 LevelUPEvent?.Invoke();
             }
         }
-        public List<Item> Inventory { get; set; }
-        public List<Skill> Skills { get; set; }
-        public List<Skill> classSkill { get; set; }
-        public string Class { get; set; }
-        public bool IsAlive => Stat.Hp > 0;
-        public int requiredExp { get; set; }
-        public int EquipAtk { get; set; }
-        public int EquipDef { get; set; }
 
         public event Action LevelUPEvent;
 
         public Player() : base("")
         {
-            
+            LevelUPEvent -= LearnSkillEvent;
+            LevelUPEvent += LearnSkillEvent;
         }
 
         public Player(string name) : base(name)
@@ -64,28 +65,28 @@ namespace TextRPG_Maple
             Stat = other.Stat.Clone();
         }
 
-/// ì „íˆ¬
+        /// ÀüÅõ
         public override void Attack(GameObject monster)
         {
             int damage = Math.Max(0, Stat.Atk + EquipAtk - monster.Stat.Def);
             Random rand = new Random();
-            double value = rand.NextDouble(); 
+            double value = rand.NextDouble();
 
-            if (value < 0.1f) // 10% í™•ë¥ ë¡œ íšŒí”¼
+            if (value < 0.1f) // 10% È®·ü·Î È¸ÇÇ
             {
                 SoundManager.Instance.PlaySound(SoundType.Attack, "Miss");
-                InputManager.Instance.WriteColor("í•˜ì§€ë§Œ ë¹—ë‚˜ê°”ë‹¤!\n", ConsoleColor.DarkBlue);
+                InputManager.Instance.WriteColor("ÇÏÁö¸¸ ºø³ª°¬´Ù!\n", ConsoleColor.DarkBlue);
             }
-            else if (value < 0.85f) 
+            else if (value < 0.85f)
             {
                 SoundManager.Instance.PlaySound(SoundType.Attack, "Player_Attack");
                 monster.TakeDamage(damage);
             }
-            else // 10% í™•ë¥ ë¡œ í¬ë¦¬í‹°ì»¬
+            else // 10% È®·ü·Î Å©¸®Æ¼ÄÃ
             {
                 SoundManager.Instance.PlaySound(SoundType.Attack, "Critical");
-                InputManager.Instance.WriteColor("í¬ë¦¬í‹°ì»¬! (Critical)", ConsoleColor.Red);
-                // ë°©ì–´ ë¬´ì‹œ 2ë°°
+                InputManager.Instance.WriteColor("Å©¸®Æ¼ÄÃ! (Critical)", ConsoleColor.Red);
+                // ¹æ¾î ¹«½Ã 2¹è
                 monster.TakeDamage((Stat.Atk + EquipAtk) * 2);
             }
         }
@@ -96,7 +97,7 @@ namespace TextRPG_Maple
             if (Stat.Hp < 0)
                 Stat.Hp = 0;
 
-            Console.WriteLine($"{Name}ì´(ê°€) {damage}ë§Œí¼ í”¼í•´ë¥¼ ì…ì—ˆìŠµë‹ˆë‹¤! (ë‚¨ì€ HP: {Stat.Hp})");
+            Console.WriteLine($"{Name}ÀÌ(°¡) {damage}¸¸Å­ ÇÇÇØ¸¦ ÀÔ¾ú½À´Ï´Ù! (³²Àº HP: {Stat.Hp})");
         }
 
         public void SkillAttack(GameObject moster, Skill skill)
@@ -107,15 +108,15 @@ namespace TextRPG_Maple
 
                 int damage = Math.Max(0, (int)((Stat.Atk + EquipAtk) * skill.Value - moster.Stat.Def));
 
-                Console.Write($"{Name}ì´(ê°€)");
+                Console.Write($"{Name}ÀÌ(°¡)");
                 InputManager.Instance.WriteColor($"{skill.Name}", ConsoleColor.DarkYellow);
-                Console.WriteLine($"ìŠ¤í‚¬ì„(ë¥¼) ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤! (ë‚¨ì€ MP: {Stat.Mp}/{Stat.MaxMp}");
+                Console.WriteLine($"½ºÅ³À»(¸¦) »ç¿ëÇß½À´Ï´Ù! (³²Àº MP: {Stat.Mp}/{Stat.MaxMp}");
 
                 moster.TakeDamage(damage);
             }
             else
             {
-                Console.WriteLine("ë§ˆë‚˜ê°€ ë¶€ì¡±í•˜ê±°ë‚˜ ì¥ë¹„ ì¤‘ì´ ì•„ë‹™ë‹ˆë‹¤..");
+                Console.WriteLine("¸¶³ª°¡ ºÎÁ·ÇÏ°Å³ª Àåºñ ÁßÀÌ ¾Æ´Õ´Ï´Ù..");
             }
         }
 
@@ -123,8 +124,8 @@ namespace TextRPG_Maple
         {
             Stat.Gold += monster.Stat.Gold;
             Stat.Exp += monster.Stat.Exp;
-            Console.WriteLine($"{Stat.Gold}G ë¥¼ íšë“í–ˆìŠµë‹ˆë‹¤.");
-            Console.WriteLine($"{Stat.Exp} ê²½í—˜ì¹˜ë¥¼ íšë“í–ˆìŠµë‹ˆë‹¤.");
+            Console.WriteLine($"{Stat.Gold}G ¸¦ È¹µæÇß½À´Ï´Ù.");
+            Console.WriteLine($"{Stat.Exp} °æÇèÄ¡¸¦ È¹µæÇß½À´Ï´Ù.");
             if (Stat.Exp >= requiredExp)
                 LevelUp();
         }
@@ -142,15 +143,15 @@ namespace TextRPG_Maple
             Stat.Atk += 5;
             Stat.Def += 2;
 
-            Console.WriteLine("ë ˆë²¨ì—…!");
-            Console.Write("í˜„ì¬ ë ˆë²¨ : ");
+            Console.WriteLine("·¹º§¾÷!");
+            Console.Write("ÇöÀç ·¹º§ : ");
             InputManager.Instance.WriteLineColor($"{Level}", ConsoleColor.Yellow);
 
             if (Stat.Exp >= requiredExp)
                 LevelUp();
         }
 
-        /// ì§ì—… & ìŠ¤í‚¬
+        /// Á÷¾÷ & ½ºÅ³
         public void SetClass(int input)
         {
             Skill skill = new Skill();
@@ -158,13 +159,13 @@ namespace TextRPG_Maple
             switch (input)
             {
                 case 1:
-                    Class = "ì „ì‚¬";
+                    Class = "Àü»ç";
                     break;
                 case 2:
-                    Class = "ë„ì ";
+                    Class = "µµÀû";
                     break;
                 case 3:
-                    Class = "ë§ˆë²•ì‚¬";
+                    Class = "¸¶¹ı»ç";
                     break;
             }
             classSkill = skill.SetSkillType(this.Class);
@@ -178,8 +179,8 @@ namespace TextRPG_Maple
                 {
                     skill.IsOwned = true;
                     this.AddSkill(skill);
-                    Console.WriteLine("ë ˆë²¨ì—…ìœ¼ë¡œ ìŠ¤í‚¬ì„ íšë“í–ˆìŠµë‹ˆë‹¤!");
-                    Console.WriteLine($"ìŠ¤í‚¬ íšë“! : {skill.Name}");
+                    Console.WriteLine("·¹º§¾÷À¸·Î ½ºÅ³À» È¹µæÇß½À´Ï´Ù!");
+                    Console.WriteLine($"½ºÅ³ È¹µæ! : {skill.Name}");
                     SoundManager.Instance.PlaySound(SoundType.learnSkill, "LearnSkill");
                     Thread.Sleep(500);
 
@@ -191,10 +192,10 @@ namespace TextRPG_Maple
         public void ShowSkill()
         {
             if (this.Skills.Count == 0)
-                InputManager.Instance.WriteLineColor("ë°°ìš´ ìŠ¤í‚¬ì´ ì—†ìŠµë‹ˆë‹¤...", ConsoleColor.DarkGray);
+                InputManager.Instance.WriteLineColor("¹è¿î ½ºÅ³ÀÌ ¾ø½À´Ï´Ù...", ConsoleColor.DarkGray);
             for (int i = 0; i < this.Skills.Count; i++)
             {
-                Console.WriteLine($"{i+1}. " + this.Skills[i].UsableDisplay());
+                Console.WriteLine($"{i + 1}. " + this.Skills[i].UsableDisplay());
             }
         }
 
@@ -205,17 +206,17 @@ namespace TextRPG_Maple
         }
 
 
-        /// ì•„ì´í…œ
+        /// ¾ÆÀÌÅÛ
         public void EquipItem(Item item)
         {
             if (item.IsEquip)
             {
-                // ì¥ë¹„ ë¹¼ê¸°
+                // Àåºñ »©±â
                 UnEquip(item);
             }
             else
             {
-                // ì•„ì´í…œ ì°©ìš© & ì‚¬ìš©
+                // ¾ÆÀÌÅÛ Âø¿ë & »ç¿ë
                 Equip(item);
             }
         }
@@ -224,7 +225,7 @@ namespace TextRPG_Maple
         {
             if (item.ItemType == ItemType.Weapon)
             {
-                for (int i = 0; i < Inventory.Count; i++) // ì¤‘ë³µ ë¶€ìœ„ì˜ ì¥ë¹„ ë²—ê¸°
+                for (int i = 0; i < Inventory.Count; i++) // Áßº¹ ºÎÀ§ÀÇ Àåºñ ¹ş±â
                 {
                     if (Inventory[i].ItemType == ItemType.Weapon)
                     {
