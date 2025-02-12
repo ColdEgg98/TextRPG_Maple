@@ -24,9 +24,9 @@ namespace TextRPG_Maple._03._Scene.StatusScene
         {
             Console.Clear();
 
+            InputManager.Instance.WriteLineColor("상태 보기", ConsoleColor.Yellow);
             Console.WriteLine(
-            "상태 보기\n" +
-            "캐릭터의 정보가 표시됩니다.\n\n"
+            "\n캐릭터의 정보가 표시됩니다.\n\n"
             );
 
             Console.WriteLine("LV. {0:D2}", player.Level);
