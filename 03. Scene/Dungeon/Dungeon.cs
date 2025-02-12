@@ -22,7 +22,9 @@ namespace TextRPG_Maple
 
         public void Enter()
         {
-
+            SoundManager.Instance.StopSound(0);
+            SoundManager.Instance.PlaySound(SoundType.BGM, "Maplestory BGM - Missing You");
+            SoundManager.Instance.SetVolume(SoundType.BGM, 0.1f);
         }
 
         public void Exit()

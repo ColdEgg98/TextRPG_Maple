@@ -24,6 +24,11 @@ namespace TextRPG_Maple
             // player = 
             GetItemList();
             GetInvetoryList();
+
+            SoundManager.Instance.StopSound(0);
+            SoundManager.Instance.PlaySound(SoundType.BGM, "townscene", true);
+            SoundManager.Instance.SetVolume(SoundType.BGM, 0.1f);
+        
         }
 
         public void Exit()
@@ -112,7 +117,7 @@ namespace TextRPG_Maple
                 switch (input)
                 {
                     case 0:
-                        SceneManager.Instance.ChangeScene(SceneType.Town);
+                        SceneManager.Instance.ExitScene();
                         break;
                     case 1:
                         pase = Pase.Buy;
