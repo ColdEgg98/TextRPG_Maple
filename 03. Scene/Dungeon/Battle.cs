@@ -95,7 +95,11 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                 if (input == 0)
                     return 1;
                 else
+                {
+                    SoundManager.Instance.StopSound(0);
+                    SoundManager.Instance.PlaySound(SoundType.BGM, "Maplestory BGM - Missing You", true);
                     return 2;
+                }
             }
             else
             {
@@ -139,7 +143,7 @@ namespace TextRPG_Maple._03._Scene.Dungeon
                         continue;
                     }
 
-                    skillInput = GameManager.Instance.GetInput(1, player.Skills.Count);
+                    skillInput = GameManager.Instance.GetInput(1, player.Skills.Count, " ");
                     --skillInput;
                     if (!player.Skills[skillInput].IsEquip)
                     {
@@ -216,7 +220,5 @@ namespace TextRPG_Maple._03._Scene.Dungeon
             }
             Console.WriteLine("======================");
         }
-       
     }
-
 }

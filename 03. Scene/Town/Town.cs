@@ -11,6 +11,7 @@ namespace TextRPG_Maple
     {
         public void Enter()
         {
+            SoundManager.Instance.StopSound(0);
             SoundManager.Instance.PlaySound(SoundType.BGM, "MapleBGM", true);
         }
         public void Exit()
@@ -55,6 +56,7 @@ namespace TextRPG_Maple
                     //RestScene();
                     break;
                 case 5:
+                    SoundManager.Instance.PlaySound(SoundType.BGM, "Maplestory BGM - Missing You");
                     SceneManager.Instance.EnterScene(SceneType.Dungeon);
                     break;
             }
